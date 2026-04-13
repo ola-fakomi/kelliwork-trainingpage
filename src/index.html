@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KelliWorks Accounting Firm — Patricia Montan Training Hub</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../config/supabase-config.js"></script>
+  <style>
+    /* ─── RESET & BASE ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:      #1B2A4A;
+      --teal:      #2E86AB;
+      --teal-lt:   #D5E8F0;
+      --gold:      #F4A261;
+      --gold-lt:   #FFF3CD;
+      --green:     #28A745;
+      --green-lt:  #D4EDDA;
+      --red:       #DC3545;
+      --red-lt:    #F8D7DA;
+      --gray:      #F5F5F5;
+      --dark:      #2C2C2C;
+      --mid:       #666666;
+      --white:     #FFFFFF;
+      --shadow:    0 2px 12px rgba(0,0,0,0.10);
+      --radius:    10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #EEF3F8;
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* ─── TOP BAR ───────────────────────────────────────────────────── */
+    .topbar {
+      background: linear-gradient(135deg, #152238 0%, var(--navy) 60%, #1e3a5f 100%);
+      color: white;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+      min-height: 62px;
+      border-bottom: 3px solid var(--gold);
+    }
+    .topbar-left { display:flex; align-items:center; gap:14px; }
+    .topbar-kw-badge {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      border-radius: 6px;
+      padding: 5px 10px;
+      line-height: 1;
+    }
+    .topbar-brand { font-size: 17px; font-weight: 700; letter-spacing: 0.3px; line-height:1.2; }
+    .topbar-brand span { color: var(--gold); }
+    .topbar-tagline { font-size: 10px; color: #8BBAD4; letter-spacing: 0.5px; text-transform: uppercase; margin-top:2px; }
+    .topbar-meta { font-size: 13px; color: #A8C4D8; }
+    .topbar-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .topbar-progress-bar {
+      width: 160px;
+      height: 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .topbar-progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+    .topbar-pct { font-weight: 700; color: var(--gold); min-width: 36px; text-align: right; }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────────── */
+    .layout { display: flex; min-height: calc(100vh - 56px); }
+
+    /* ─── SIDEBAR ───────────────────────────────────────────────────── */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--navy);
+      padding: 24px 0 40px;
+      position: sticky;
+      top: 56px;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+    .sidebar-title {
+      padding: 0 20px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #A8C4D8;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 8px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      cursor: pointer;
+      color: #C8D8E8;
+      font-size: 14px;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+      text-decoration: none;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
+    .nav-item.active {
+      background: rgba(46,134,171,0.25);
+      color: white;
+      border-left-color: var(--teal);
+      font-weight: 600;
+    }
+    .nav-item .nav-emoji { font-size: 16px; }
+    .nav-day-badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.1);
+      color: #A8C4D8;
+      border-radius: 99px;
+      font-size: 10px;
+      padding: 1px 7px;
+      font-weight: 700;
+    }
+    .nav-item.active .nav-day-badge {
+      background: var(--teal);
+      color: white;
+    }
+    .nav-check {
+      margin-left: auto;
+      color: var(--green);
+      font-size: 14px;
+      display: none;
+    }
+    .nav-item.day-complete .nav-check { display: block; }
+    .nav-item.day-complete .nav-day-badge { display: none; }
+
+    .sidebar-section {
+      padding: 16px 20px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(168,196,216,0.6);
+      margin-top: 8px;
+    }
+
+    /* ─── MAIN CONTENT ──────────────────────────────────────────────── */
+    .main { flex: 1; padding: 32px; max-width: 900px; }
+
+    /* ─── DAY PANEL ─────────────────────────────────────────────────── */
+    .day-panel { display: none; }
+    .day-panel.active { display: block; }
+
+    /* ─── DAY HERO ──────────────────────────────────────────────────── */
+    .day-hero {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .day-hero.today { background: linear-gradient(135deg, #1B2A4A 0%, #2E4A7A 100%); }
+    .day-hero-left .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+    }
+    .day-hero-left h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+    }
+    .day-hero-left .date {
+      font-size: 14px;
+      color: #A8C4D8;
+      margin-top: 6px;
+    }
+    .day-hero-left .subtitle {
+      font-size: 14px;
+      color: #A8C4D8;
+      margin-top: 4px;
+      font-style: italic;
+    }
+    .day-hero-right { text-align: center; flex-shrink: 0; }
+    .day-hero-emoji { font-size: 52px; line-height: 1; }
+    .day-progress-ring { position: relative; width: 72px; height: 72px; margin: 0 auto; }
+    .day-progress-ring svg { transform: rotate(-90deg); }
+    .day-progress-ring .ring-bg { stroke: rgba(255,255,255,0.15); }
+    .day-progress-ring .ring-fill {
+      stroke: var(--gold);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .ring-pct {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* ─── MODULE CARD ───────────────────────────────────────────────── */
+    .module-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .module-header {
+      background: var(--teal);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .module-header h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: white;
+      flex: 1;
+    }
+    .module-header .module-icon { font-size: 20px; }
+    .module-complete-badge {
+      background: var(--green);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      display: none;
+    }
+    .module-card.complete .module-complete-badge { display: block; }
+    .module-card.complete .module-header { background: var(--green); }
+    .module-body { padding: 20px; }
+    .module-desc {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* ─── LOOM SLOT ─────────────────────────────────────────────────── */
+    .loom-slot {
+      background: var(--teal-lt);
+      border: 2px dashed var(--teal);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .loom-slot.has-video {
+      background: #EBF5FB;
+      border-style: solid;
+      border-color: var(--teal);
+    }
+    .loom-play {
+      width: 44px;
+      height: 44px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .loom-play:hover { transform: scale(1.1); background: var(--navy); }
+    .loom-play.pending { background: #AAC4D0; cursor: default; }
+    .loom-play.pending:hover { transform: none; background: #AAC4D0; }
+    .loom-info { flex: 1; }
+    .loom-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+    .loom-status {
+      font-size: 12px;
+      color: var(--teal);
+      font-style: italic;
+    }
+    .loom-status.pending { color: #888; }
+    /* EASY LOOM EDIT HINT */
+    .loom-edit-hint {
+      font-size: 10px;
+      color: #AAA;
+      margin-top: 4px;
+      font-family: monospace;
+    }
+
+    /* ─── CHECKLIST ─────────────────────────────────────────────────── */
+    .checklist { list-style: none; margin: 14px 0 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F0F0F0;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li:hover { background: #FAFAFA; margin: 0 -20px; padding: 8px 20px; }
+    .checklist input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+    .checklist label {
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.4;
+      cursor: pointer;
+      flex: 1;
+    }
+    .checklist input:checked + label {
+      text-decoration: line-through;
+      color: #AAA;
+    }
+
+    /* ─── ALERT BOXES ───────────────────────────────────────────────── */
+    .alert {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      font-size: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+    .alert.warning { background: var(--gold-lt); border-left: 4px solid var(--gold); color: #856404; }
+    .alert.danger  { background: var(--red-lt);  border-left: 4px solid var(--red);  color: #721C24; }
+    .alert.info    { background: var(--teal-lt); border-left: 4px solid var(--teal); color: #0C5460; }
+    .alert.success { background: var(--green-lt); border-left: 4px solid var(--green); color: #155724; }
+    .alert strong { font-weight: 700; }
+
+    /* ─── ESCALATION TABLE ──────────────────────────────────────────── */
+    .escalation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 14px 0;
+    }
+    .esc-col { border-radius: 8px; overflow: hidden; }
+    .esc-header {
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .esc-header.green { background: var(--green-lt); color: #155724; }
+    .esc-header.red   { background: var(--red-lt);   color: #721C24; }
+    .esc-list { list-style: none; padding: 0; }
+    .esc-list li {
+      padding: 8px 14px;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      line-height: 1.4;
+    }
+    .esc-list.green li { background: #F0FBF2; color: #155724; }
+    .esc-list.red   li { background: #FFF5F5; color: #721C24; }
+    .esc-list li:last-child { border-bottom: none; }
+    .esc-list li::before { content: "• "; font-weight: 700; }
+
+    /* ─── RULE CARDS ────────────────────────────────────────────────── */
+    .rule-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--gray);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .rule-num {
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 800;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .rule-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .rule-body p { font-size: 13px; color: var(--mid); line-height: 1.4; }
+
+    /* ─── TECH TABLE ────────────────────────────────────────────────── */
+    .tech-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 14px 0; }
+    .tech-table th {
+      background: var(--navy);
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .tech-table td { padding: 10px 14px; border-bottom: 1px solid #EEE; vertical-align: top; }
+    .tech-table tr:last-child td { border-bottom: none; }
+    .tech-table tr:nth-child(even) td { background: #FAFAFA; }
+    .tech-name { font-weight: 700; color: var(--teal); }
+
+    /* ─── QUESTION BOX ──────────────────────────────────────────────── */
+    .question-box {
+      background: var(--gold-lt);
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 20px;
+    }
+    .question-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #856404;
+      margin-bottom: 8px;
+    }
+    .question-box textarea {
+      width: 100%;
+      border: 1px solid #DDD;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 72px;
+      background: white;
+    }
+    .question-box textarea:focus { outline: none; border-color: var(--teal); }
+    .question-box .qbox-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-teal  { background: var(--teal); color: white; }
+    .btn-navy  { background: var(--navy); color: white; }
+    .btn-ghost { background: transparent; border: 1.5px solid var(--teal); color: var(--teal); }
+    .qbox-hint { font-size: 12px; color: #AAA; margin-left: auto; }
+    .q-saved-msg {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+      display: none;
+      margin-left: 8px;
+    }
+
+    /* ─── PROGRESS SUMMARY CARD ─────────────────────────────────────── */
+    .progress-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .progress-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--navy); }
+    .day-progress-list { list-style: none; }
+    .day-progress-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F0F0F0;
+      font-size: 14px;
+    }
+    .day-progress-list li:last-child { border-bottom: none; }
+    .dpl-name { width: 110px; font-weight: 600; color: var(--navy); }
+    .dpl-bar-wrap { flex: 1; height: 8px; background: #EEE; border-radius: 99px; overflow: hidden; }
+    .dpl-bar { height: 100%; background: var(--teal); border-radius: 99px; transition: width 0.4s; }
+    .dpl-pct { width: 36px; text-align: right; font-size: 12px; font-weight: 700; color: var(--mid); }
+
+    /* ─── WEEK 2 LOCKED ─────────────────────────────────────────────── */
+    .locked-banner {
+      background: var(--teal-lt);
+      border: 2px dashed var(--teal);
+      border-radius: var(--radius);
+      padding: 40px;
+      text-align: center;
+    }
+    .locked-banner .lock-icon { font-size: 48px; margin-bottom: 12px; }
+    .locked-banner h2 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .locked-banner p { font-size: 14px; color: var(--mid); max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+    /* ─── WEEK OVERVIEW ─────────────────────────────────────────────── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 0 0 24px;
+    }
+    .week-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-top: 4px solid var(--teal);
+      text-align: center;
+    }
+    .week-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
+    .week-card.today-card { border-top-color: var(--gold); }
+    .week-card .wc-emoji { font-size: 26px; margin-bottom: 6px; }
+    .week-card .wc-day { font-size: 13px; font-weight: 700; color: var(--navy); }
+    .week-card .wc-date { font-size: 11px; color: var(--mid); margin-bottom: 8px; }
+    .week-card .wc-bar-wrap { height: 6px; background: #EEE; border-radius: 99px; overflow: hidden; }
+    .week-card .wc-bar { height: 100%; background: var(--teal); border-radius: 99px; transition: width 0.4s; }
+    .week-card.today-card .wc-bar { background: var(--gold); }
+    .week-card .wc-pct { font-size: 11px; font-weight: 700; color: var(--mid); margin-top: 4px; }
+
+    /* ─── SAVE BAR ──────────────────────────────────────────────────── */
+    .save-bar {
+      background: #1a3a5c;
+      padding: 8px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: #A8C4D8;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .save-bar strong { color: white; }
+    .save-btn {
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .save-btn:hover { opacity: 0.85; }
+    .save-btn-export { background: var(--teal); color: white; }
+    .save-btn-import { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #A8C4D8; }
+    .save-btn-reset  { background: transparent; border: 1.5px solid rgba(220,53,69,0.4); color: #F09098; }
+    .save-status { margin-left: auto; font-size: 12px; color: var(--gold); font-weight: 600; opacity: 0; transition: opacity 0.5s; }
+    .save-status.show { opacity: 1; }
+    #importFile { display: none; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { padding: 16px; }
+      .week-grid { grid-template-columns: 1fr 1fr; }
+      .escalation-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-kw-badge">KW</div>
+    <div>
+      <div class="topbar-brand">Kelli<span>Works</span> &nbsp;·&nbsp; Training Hub</div>
+      <div class="topbar-tagline">KelliWorks Accounting Firm LLC</div>
+    </div>
+  </div>
+  <div class="topbar-meta">Patricia Montan &nbsp;·&nbsp; Accounting Operations Liaison &nbsp;·&nbsp; Start: April 14, 2026</div>
+  <div class="topbar-progress">
+    <span style="color:#A8C4D8; font-size:12px;">Overall</span>
+    <div class="topbar-progress-bar"><div class="topbar-progress-fill" id="topProgressFill" style="width:0%"></div></div>
+    <span class="topbar-pct" id="topProgressPct">0%</span>
+  </div>
+</div>
+
+<!-- SAVE BAR -->
+<div class="save-bar">
+  <strong>Progress Tracker</strong>
+  <span>·</span>
+  <span>Save your progress as a backup file and reload it on any device or browser.</span>
+  <button class="save-btn save-btn-export" onclick="exportProgress()">⬇ Download Progress</button>
+  <label class="save-btn save-btn-import" style="cursor:pointer;">
+    ⬆ Load Progress
+    <input type="file" id="importFile" accept=".json" onchange="importProgress(event)">
+  </label>
+  <button class="save-btn save-btn-reset" onclick="resetProgress()">↺ Reset All</button>
+  <span class="save-status" id="saveStatus"></span>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-title">Week 1 Training</div>
+    <a class="nav-item active" onclick="showDay('overview')" href="#">
+      <span class="nav-emoji">🏠</span> Overview
+    </a>
+    <a class="nav-item" onclick="showDay('mon')" href="#">
+      <span class="nav-emoji">🌟</span> Monday
+      <span class="nav-day-badge">Apr 14</span>
+      <span class="nav-check">✓</span>
+    </a>
+    <a class="nav-item" onclick="showDay('tue')" href="#">
+      <span class="nav-emoji">💬</span> Tuesday
+      <span class="nav-day-badge">Apr 15</span>
+      <span class="nav-check">✓</span>
+    </a>
+    <a class="nav-item" onclick="showDay('wed')" href="#">
+      <span class="nav-emoji">📊</span> Wednesday
+      <span class="nav-day-badge">Apr 16</span>
+      <span class="nav-check">✓</span>
+    </a>
+    <a class="nav-item" onclick="showDay('thu')" href="#">
+      <span class="nav-emoji">💰</span> Thursday
+      <span class="nav-day-badge">Apr 17</span>
+      <span class="nav-check">✓</span>
+    </a>
+    <a class="nav-item" onclick="showDay('fri')" href="#">
+      <span class="nav-emoji">🏛️</span> Friday
+      <span class="nav-day-badge">Apr 18</span>
+      <span class="nav-check">✓</span>
+    </a>
+    <div class="sidebar-section">Coming Up</div>
+    <a class="nav-item" onclick="showDay('week2')" href="#">
+      <span class="nav-emoji">🗄️</span> Week 2
+      <span class="nav-day-badge">Apr 21+</span>
+    </a>
+    <div style="padding: 24px 20px 0; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 16px;">
+      <div style="font-size:11px; color:#A8C4D8; margin-bottom:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Quick Links</div>
+      <a href="mailto:kelli@kelliworks.com" style="display:block; color:#A8C4D8; font-size:13px; padding:4px 0; text-decoration:none;">📧 Email Kelli</a>
+      <a href="#" style="display:block; color:#A8C4D8; font-size:13px; padding:4px 0; text-decoration:none;">💬 Slack Kelli</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════════════════ OVERVIEW -->
+    <div class="day-panel active" id="panel-overview">
+
+      <div class="day-hero today">
+        <div class="day-hero-left">
+          <div class="tag">★ Week 1 Starts Today</div>
+          <h1>Welcome, Patricia! 👋</h1>
+          <div class="date">April 14–18, 2026 · Remote · 9AM–5PM EST</div>
+          <div class="subtitle">Your complete training roadmap for your first week at KelliWorks</div>
+        </div>
+        <div class="day-hero-right">
+          <div style="font-size:48px;">🚀</div>
+        </div>
+      </div>
+
+      <!-- MEET THE TEAM -->
+      <div class="module-card" style="margin-bottom:24px;">
+        <div class="module-header" style="background: var(--navy);">
+          <span class="module-icon">🤝</span>
+          <h2>Meet the Team You'll Work With Daily</h2>
+        </div>
+        <div class="module-body">
+          <p class="module-desc" style="margin-bottom:18px;">You'll meet everyone in the daily 1-hour huddle. Here's who's who and how you fit in together.</p>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+
+            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--gold);">
+              <div style="font-size:22px; margin-bottom:6px;">👑</div>
+              <div style="font-weight:700; font-size:15px; color:var(--navy);">Kelli Lewis</div>
+              <div style="font-size:12px; color:var(--teal); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Founder & CEO — Your Direct Report</div>
+              <div style="font-size:13px; color:#555; line-height:1.5;">Leads the daily team huddle. Reviews and approves all sensitive client communications, payroll, and state/IRS matters. Reach her on <strong>Slack first</strong>, always.</div>
+            </div>
+
+            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--teal);">
+              <div style="font-size:22px; margin-bottom:6px;">🗂️</div>
+              <div style="font-weight:700; font-size:15px; color:var(--navy);">Tim (Admin KelliWorks)</div>
+              <div style="font-size:12px; color:var(--teal); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Operations Admin — Your Day-to-Day Teammate</div>
+              <div style="font-size:13px; color:#555; line-height:1.5;">Tim is your closest operational partner. He manages Asana tasks, email flow, meeting prep, and sends daily EOD recaps to Kelli. He's in every huddle. Loop him in when you need coordination help — and he'll loop you in too.</div>
+            </div>
+
+            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid #7E57C2;">
+              <div style="font-size:22px; margin-bottom:6px;">📒</div>
+              <div style="font-weight:700; font-size:15px; color:var(--navy);">Rangan (Bookkeeper)</div>
+              <div style="font-size:12px; color:#7E57C2; font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Lead Bookkeeper</div>
+              <div style="font-size:13px; color:#555; line-height:1.5;">Handles QBO reconciliations and bookkeeping across client files. You'll work alongside him on month-end tasks. Note: Rangan typically signs off at 1PM EST — plan your QBO questions accordingly.</div>
+            </div>
+
+            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--green);">
+              <div style="font-size:22px; margin-bottom:6px;">📊</div>
+              <div style="font-weight:700; font-size:15px; color:var(--navy);">Sagar (Bookkeeping Team)</div>
+              <div style="font-size:12px; color:var(--green); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Bookkeeping Team</div>
+              <div style="font-size:13px; color:#555; line-height:1.5;">Supports bookkeeping and client communication alongside Rangan. If you have QBO questions that need a second set of eyes, he's a resource. For client-facing communications — those route through you and Kelli.</div>
+            </div>
+
+          </div>
+
+          <div class="alert info" style="margin-top:18px;">
+            <span class="alert-icon">📋</span>
+            <div><strong>Your Daily Rhythm:</strong> Each day ends with a short EOD update you'll post in your dedicated Slack channel (Kelli is setting it up). Think of it like Tim's daily recap — what you handled, what's pending, any flags for Kelli. This keeps everyone aligned without extra meetings.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK GRID -->
+      <div class="week-grid">
+        <div class="week-card today-card" onclick="showDay('mon')">
+          <div class="wc-emoji">🌟</div>
+          <div class="wc-day">Monday ★</div>
+          <div class="wc-date">April 14</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-mon" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-mon-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('tue')">
+          <div class="wc-emoji">💬</div>
+          <div class="wc-day">Tuesday</div>
+          <div class="wc-date">April 15</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-tue" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-tue-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('wed')">
+          <div class="wc-emoji">📊</div>
+          <div class="wc-day">Wednesday</div>
+          <div class="wc-date">April 16</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-wed" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-wed-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('thu')">
+          <div class="wc-emoji">💰</div>
+          <div class="wc-day">Thursday</div>
+          <div class="wc-date">April 17</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-thu" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-thu-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('fri')">
+          <div class="wc-emoji">🏛️</div>
+          <div class="wc-day">Friday</div>
+          <div class="wc-date">April 18</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-fri" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-fri-pct">0%</div>
+        </div>
+      </div>
+
+      <!-- THE 5 NON-NEGOTIABLES -->
+      <div class="module-card">
+        <div class="module-header">
+          <span class="module-icon">⚡</span>
+          <h2>The 5 Core Commitments — How We Do Things at KelliWorks</h2>
+        </div>
+        <div class="module-body">
+          <p class="module-desc" style="margin-bottom:20px;">These aren't restrictions — they're the habits that make you great at this role. Own them from Day 1.</p>
+          <div class="rule-card">
+            <div class="rule-num">1</div>
+            <div class="rule-body">
+              <h4>Be the client's voice — own the inbox</h4>
+              <p>Clients hired KelliWorks because they trust us. Reply within 2 hours, even if it's just "Got it — I'm on this." Put yourself in their shoes every time. Explain everything clearly. Assume they don't know what we know.</p>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-num">2</div>
+            <div class="rule-body">
+              <h4>Asana is your compass — use it daily</h4>
+              <p>Your tasks live in Asana. Check your My Tasks every morning and update immediately after every huddle. If something is blocking your core work, say so — don't let it snowball. When your tasks are clear, the whole team stays on track.</p>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-num">3</div>
+            <div class="rule-body">
+              <h4>Draft → Share → Send (for anything sensitive)</h4>
+              <p>For payroll runs, IRS/state notices, and any response you're unsure about — draft it first, drop it in Slack for Kelli's eyes, then send. This is how we protect the client and each other. It's not about asking permission — it's about doing it right.</p>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-num">4</div>
+            <div class="rule-body">
+              <h4>Leave a clean trail — always</h4>
+              <p>Every reconciliation adjustment, every change, every note — document it in QBO and Asana. Clean books and clear notes are your signature. When in doubt, over-document. This is how we catch mistakes before they become problems.</p>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-num">5</div>
+            <div class="rule-body">
+              <h4>We move together — communicate early and often</h4>
+              <p>You're part of a team. Slack Kelli when you're unsure — over-communication is always welcome here, never wrong. Share updates, flag blockers, and ask questions freely. Talk things through with the team before going solo on something new. The team wins together.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ MONDAY -->
+    <div class="day-panel" id="panel-mon">
+      <div class="day-hero today">
+        <div class="day-hero-left">
+          <div class="tag">★ Today — Day 1</div>
+          <h1>🌟 Monday, April 14</h1>
+          <div class="subtitle">Welcome · Client Roster · Email Management · Tech Stack Setup</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-mon" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-mon-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1A: Welcome -->
+      <div class="module-card" id="mod-mon-welcome">
+        <div class="module-header">
+          <span class="module-icon">👋</span>
+          <h2>1A — Welcome to KelliWorks</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Before anything else, watch these two videos to understand where KelliWorks came from and exactly what we do for our clients every day.</p>
+
+          <!-- ─ History of KelliWorks ─ -->
+          <div class="loom-slot" id="loom-firmoverview">
+            <a class="loom-play pending" href="#" id="loom-firmoverview-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">History of KelliWorks</div>
+              <div class="loom-status pending" id="loom-firmoverview-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: 380606791fd34dfcbca215e111585433 --></div>
+            </div>
+          </div>
+
+          <!-- ─ What Do We Do at KelliWorks? ─ -->
+          <div class="loom-slot" id="loom-firmoverview2">
+            <a class="loom-play pending" href="#" id="loom-firmoverview2-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">What Do We Do at KelliWorks?</div>
+              <div class="loom-status pending" id="loom-firmoverview2-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: b1169d1f16004409a4020393cb4d2fb5 --></div>
+            </div>
+          </div>
+
+          <ul class="checklist" data-day="mon">
+            <li><input type="checkbox" id="mon-1"><label for="mon-1">Watched "History of KelliWorks"</label></li>
+            <li><input type="checkbox" id="mon-2"><label for="mon-2">Watched "What Do We Do at KelliWorks?"</label></li>
+            <li><input type="checkbox" id="mon-3"><label for="mon-3">Completed live welcome call with Kelli</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Questions about Welcome & Orientation? Slack Kelli with subject: "Welcome Question"</h4>
+            <textarea id="q-mon-welcome" placeholder="Type your question here and copy it into Slack..."></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon-welcome')">Save Note</button>
+              <span class="q-saved-msg" id="saved-mon-welcome">✓ Saved!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1B: Client Roster -->
+      <div class="module-card" id="mod-mon-roster">
+        <div class="module-header">
+          <span class="module-icon">👥</span>
+          <h2>1B — Client Roster Review (Live with Kelli)</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Kelli will walk you through all active clients live during your Day 1 call. Tim will also be in the huddle — he manages the Asana boards and can help you navigate them afterward.</p>
+          <div class="alert info">
+            <span class="alert-icon">ℹ️</span>
+            <div>After the roster call, each client has their own project in Asana under the <strong>Master Client List KW</strong> portfolio. <strong>Ask Tim</strong> to walk you through how the boards are organized — that's his world and he'll get you oriented fast.</div>
+          </div>
+          <ul class="checklist" data-day="mon">
+            <li><input type="checkbox" id="mon-6a"><label for="mon-6a">Complete live Client Roster call with Kelli</label></li>
+            <li><input type="checkbox" id="mon-6b"><label for="mon-6b">Note each client's name, services, and key contacts</label></li>
+            <li><input type="checkbox" id="mon-6"><label for="mon-6">Ask Tim to show you how Asana Master Client List is organized</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Client Roster questions → Slack Kelli: "Client Roster Question"</h4>
+            <textarea id="q-mon-roster" placeholder="Note any client names, details, or questions to follow up on..."></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon-roster')">Save Note</button>
+              <span class="q-saved-msg" id="saved-mon-roster">✓ Saved!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1C: Email -->
+      <div class="module-card" id="mod-mon-email">
+        <div class="module-header">
+          <span class="module-icon">📧</span>
+          <h2>1C — Managing Email & Client Communication</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Email is your primary client-facing tool. Your standard is a 2-hour response window during business hours. Learn the inbox setup before anything else — this is how KelliWorks communicates with every client.</p>
+
+          <!-- KW EMAIL ADDRESSES -->
+          <div style="margin-bottom:18px;">
+            <div style="font-weight:700; font-size:14px; color:var(--navy); margin-bottom:10px;">📬 The KelliWorks Email Addresses — Know Each One</div>
+            <table class="tech-table">
+              <thead><tr><th>Email Address</th><th>Used For</th><th>Your Role</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="tech-name">service@kelliworks.com</td>
+                  <td>Payroll requests, A/R invoices, A/P bills, sales tax reports</td>
+                  <td>✅ <strong>Forwarded to you + merged into your mailbox.</strong> This is your primary inbox — own it.</td>
+                </tr>
+                <tr>
+                  <td class="tech-name">reports@kelliworks.com</td>
+                  <td>Reporting requests, transaction topics, allocation inquiries</td>
+                  <td>✅ <strong>Merged into your mailbox.</strong> You monitor and respond — surface anything complex to Kelli.</td>
+                </tr>
+                <tr>
+                  <td class="tech-name">sales@kelliworks.com</td>
+                  <td>New client onboarding, account structure changes</td>
+                  <td>👀 Awareness only — Kelli handles. Flag anything urgent via Slack.</td>
+                </tr>
+                <tr>
+                  <td class="tech-name">taxes@kelliworks.com</td>
+                  <td>Tax preparation & tax client concerns</td>
+                  <td>🚨 Tax clients only — always bring to Kelli. Draft first, never respond alone.</td>
+                </tr>
+                <tr>
+                  <td class="tech-name">kelli@kelliworks.com</td>
+                  <td>Urgent needs, direct client escalations</td>
+                  <td>🚨 Kelli's direct line — forward urgent items here with a Slack heads-up.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="alert success">
+            <span class="alert-icon">✅</span>
+            <div><strong>Setup note:</strong> <strong>service@kelliworks.com</strong> is forwarded to your Gmail and both the <em>service</em> and <em>reports</em> mailboxes are merged into your view. You will see all incoming emails from both addresses in one place. Respond from the appropriate address so clients see the right sender.</div>
+          </div>
+
+          <div style="font-weight:700; font-size:14px; color:var(--navy); margin:18px 0 10px;">✍️ Your Email Language Standards</div>
+          <p class="module-desc" style="margin-bottom:12px;">KelliWorks tone is: <strong>professional, warm, structured, solutions-focused, and transparent.</strong> Always sign off with <em>KelliWorks, so you don't have to.</em></p>
+          <div class="alert info">
+            <span class="alert-icon">💡</span>
+            <div>
+              <strong>Kelli's rule:</strong> "It's always important that you take your time with client communication and give them the full scope. You have to put yourself in their shoes — they're just getting an email and have no idea what it's for, especially if something changed. Explain everything clearly."
+            </div>
+          </div>
+
+          <div style="font-weight:700; font-size:13px; color:var(--navy); text-transform:uppercase; letter-spacing:0.8px; margin:18px 0 10px;">📬 Mailbox Training Videos</div>
+
+          <!-- ─ Services Mailbox ─ -->
+          <div class="loom-slot" id="loom-services">
+            <a class="loom-play pending" href="#" id="loom-services-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Email Mailbox Mgmt — service@kelliworks.com</div>
+              <div class="loom-status pending" id="loom-services-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: setLoomVideo('loom-services', 'https://www.loom.com/share/YOUR_ID', 'Services Mailbox Mgmt') --></div>
+            </div>
+          </div>
+
+          <!-- ─ Reports Mailbox ─ -->
+          <div class="loom-slot" id="loom-reports">
+            <a class="loom-play pending" href="#" id="loom-reports-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Email Mailbox Mgmt — reports@kelliworks.com</div>
+              <div class="loom-status pending" id="loom-reports-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: setLoomVideo('loom-reports', 'https://www.loom.com/share/YOUR_ID', 'Reports Mailbox Mgmt') --></div>
+            </div>
+          </div>
+
+          <!-- ─ Clearing the Inbox ─ -->
+          <div class="loom-slot" id="loom-clearinbox">
+            <a class="loom-play pending" href="#" id="loom-clearinbox-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Clearing the Inbox: A Critical Task</div>
+              <div class="loom-status pending" id="loom-clearinbox-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: 512fc939591d4c9d9d3f5c897674d6d7 --></div>
+            </div>
+          </div>
+
+          <!-- ─ Gmail Tips & Tricks ─ -->
+          <div class="loom-slot" id="loom-gmailtips">
+            <a class="loom-play pending" href="#" id="loom-gmailtips-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">GMAIL Tips & Tricks</div>
+              <div class="loom-status pending" id="loom-gmailtips-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: c7b807aad88c471ebd3e3036563f2ad5 --></div>
+            </div>
+          </div>
+
+          <div style="font-weight:700; font-size:13px; color:var(--navy); text-transform:uppercase; letter-spacing:0.8px; margin:18px 0 10px;">📤 Email Workflow Video</div>
+
+          <!-- ─ Email Dispatch / Flow (already has URL) ─ -->
+          <div class="loom-slot" id="loom-emailflow">
+            <a class="loom-play pending" href="#" id="loom-emailflow-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Email Dispatch, Follow-Up & Escalation</div>
+              <div class="loom-status pending" id="loom-emailflow-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: a9f5a88380124da288788842a1ba98c9 --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="mon">
+            <li><input type="checkbox" id="mon-7"><label for="mon-7">Watched Mailbox Mgmt video — service@kelliworks.com</label></li>
+            <li><input type="checkbox" id="mon-8"><label for="mon-8">Watched Mailbox Mgmt video — reports@kelliworks.com</label></li>
+            <li><input type="checkbox" id="mon-9"><label for="mon-9">Confirm both mailboxes are visible and merged in your Gmail</label></li>
+            <li><input type="checkbox" id="mon-10"><label for="mon-10">Know which inbox handles payroll, A/R, A/P, and sales tax (service@)</label></li>
+            <li><input type="checkbox" id="mon-10b"><label for="mon-10b">Know which inbox handles reporting and transaction questions (reports@)</label></li>
+            <li><input type="checkbox" id="mon-10c"><label for="mon-10c">Watched dispatch / follow-up / escalation video — understand the workflow</label></li>
+            <li><input type="checkbox" id="mon-10d"><label for="mon-10d">Watched "Clearing the Inbox: A Critical Task"</label></li>
+            <li><input type="checkbox" id="mon-10e"><label for="mon-10e">Watched "GMAIL Tips & Tricks"</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Email questions → Slack Kelli: "Email Question"</h4>
+            <textarea id="q-mon-email" placeholder="Any questions about the inboxes, email tone, workflows, or escalation?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon-email')">Save Note</button>
+              <span class="q-saved-msg" id="saved-mon-email">✓ Saved!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1D: Tech Stack -->
+      <div class="module-card" id="mod-mon-tech">
+        <div class="module-header">
+          <span class="module-icon">💻</span>
+          <h2>1D — Tech Stack Setup</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">All four core tools must be open in separate tabs by 9:00 AM EST every morning. Get set up today.</p>
+          <table class="tech-table">
+            <thead><tr><th>Tool</th><th>Purpose</th><th>Open Daily?</th></tr></thead>
+            <tbody>
+              <tr><td class="tech-name">Gmail</td><td>Primary client communication</td><td>✅ Yes — first</td></tr>
+              <tr><td class="tech-name">Slack</td><td>Internal team — message Kelli here, not email</td><td>✅ Yes</td></tr>
+              <tr><td class="tech-name">Asana</td><td>Project mgmt — each client = a project in Master Client List KW</td><td>✅ Yes</td></tr>
+              <tr><td class="tech-name">QuickBooks Online</td><td>All accounting work</td><td>✅ Yes</td></tr>
+              <tr><td class="tech-name">Everhour</td><td>Time tracking inside Asana tasks</td><td>✅ Yes</td></tr>
+            </tbody>
+          </table>
+          <div class="loom-slot" id="loom-slack">
+            <a class="loom-play pending" href="#" id="loom-slack-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Slack at KelliWorks — Channels, Norms & Communication Rules</div>
+              <div class="loom-status pending" id="loom-slack-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot" id="loom-asana">
+            <a class="loom-play pending" href="#" id="loom-asana-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Asana Walkthrough — Master Client List Portfolio (Part 1)</div>
+              <div class="loom-status pending" id="loom-asana-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: bcc48f8f430f4713afb6edc9b14d7db0 --></div>
+            </div>
+          </div>
+          <div class="loom-slot" id="loom-asana2">
+            <a class="loom-play pending" href="#" id="loom-asana2-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Asana Walkthrough — Master Client List Portfolio (Part 2)</div>
+              <div class="loom-status pending" id="loom-asana2-status">📹 Loading...</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: 3f3d44e2da2448aba96b82802c70c335 --></div>
+            </div>
+          </div>
+          <div class="loom-slot" id="loom-everhour">
+            <a class="loom-play pending" href="#" id="loom-everhour-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Everhour — Time Tracking Inside Asana</div>
+              <div class="loom-status pending" id="loom-everhour-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="mon">
+            <li><input type="checkbox" id="mon-11"><label for="mon-11">Gmail open and configured with KelliWorks signature</label></li>
+            <li><input type="checkbox" id="mon-12"><label for="mon-12">Slack workspace joined and notifications set up</label></li>
+            <li><input type="checkbox" id="mon-13"><label for="mon-13">Asana account set up and Master Client List portfolio found</label></li>
+            <li><input type="checkbox" id="mon-14"><label for="mon-14">QuickBooks Online access confirmed</label></li>
+            <li><input type="checkbox" id="mon-15"><label for="mon-15">Everhour time tracking connected to Asana</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Tech setup questions → Slack Kelli: "Tech Setup Question"</h4>
+            <textarea id="q-mon-tech" placeholder="Any access issues or setup questions?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon-tech')">Save Note</button>
+              <span class="q-saved-msg" id="saved-mon-tech">✓ Saved!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 1E: Document Sharing & Notes -->
+      <div class="module-card" id="mod-mon-docs">
+        <div class="module-header">
+          <span class="module-icon">📁</span>
+          <h2>1E — Document Sharing & Notes Protocol</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">Everything at KelliWorks has a home. Files, notes, and client documents all go through the right channel — never emailed as loose attachments, never stored only on your device.</p>
+
+          <div class="alert info" style="margin-bottom:16px;">
+            <span class="alert-icon">📌</span>
+            <div><strong>Golden Rule:</strong> If it's about a client, it lives in Asana. If it's a file that needs to be shared, it goes through the designated folder link. Never send files as email attachments — always share a link.</div>
+          </div>
+
+          <table class="email-table" style="margin-bottom:20px;">
+            <thead>
+              <tr><th>What</th><th>Where It Lives</th><th>How to Share</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Client Documents</strong><br><span style="font-size:12px;color:#666;">Tax docs, statements, reports</span></td>
+                <td>Client's Asana project or designated folder</td>
+                <td>Drop link into Asana task or Slack message to Kelli</td>
+              </tr>
+              <tr>
+                <td><strong>Your Notes</strong><br><span style="font-size:12px;color:#666;">Call notes, follow-up reminders</span></td>
+                <td>Asana task comments (attached to the relevant task)</td>
+                <td>Type directly in the task comment — tag Kelli if urgent</td>
+              </tr>
+              <tr>
+                <td><strong>Training Progress</strong><br><span style="font-size:12px;color:#666;">This site's checklist data</span></td>
+                <td>Export as JSON → save to your device; share file with Kelli on request</td>
+                <td>Use the <strong>Export Progress</strong> button in the top save bar</td>
+              </tr>
+              <tr>
+                <td><strong>Questions / Blockers</strong><br><span style="font-size:12px;color:#666;">Something feels off or unclear</span></td>
+                <td>Slack DM to Kelli — subject line style: "Client X — Question"</td>
+                <td>Keep it concise: what you tried, what's unclear, what you need</td>
+              </tr>
+              <tr>
+                <td><strong>Sensitive Files</strong><br><span style="font-size:12px;color:#666;">Tax returns, ID docs, financials</span></td>
+                <td>Kelli will provide secure share link for each client</td>
+                <td>Never send via regular email — always ask Kelli for the share link first</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="alert warning" style="margin-bottom:16px;">
+            <span class="alert-icon">⚠️</span>
+            <div><strong>Never do this:</strong> Download a client file to your desktop and email it as an attachment. Files emailed this way are untracked, unencrypted, and create liability for the firm.</div>
+          </div>
+
+          <h3 style="font-size:15px;font-weight:700;color:var(--navy);margin:16px 0 8px;">Saving Your Notes During Training Week</h3>
+          <p style="font-size:14px;line-height:1.6;margin-bottom:12px;">
+            Every module on this site has a notes box at the bottom. Use it — write down anything that surprises you, questions you want to ask Kelli, or things you want to remember. When you're done for the day:
+          </p>
+          <ol style="font-size:14px;line-height:1.8;padding-left:20px;margin-bottom:16px;">
+            <li>Click <strong>Export Progress</strong> (top of page) to download your checklist + notes as a JSON file</li>
+            <li>Name it something like <code style="background:#f0f0f0;padding:2px 5px;border-radius:3px;">KW_Training_Mon_April14.json</code></li>
+            <li>Save it somewhere you'll find it (Desktop or Downloads)</li>
+            <li>Start each new session by clicking <strong>Import Progress</strong> to pick up exactly where you left off</li>
+          </ol>
+
+          <ul class="checklist" data-day="mon">
+            <li><input type="checkbox" id="mon-16"><label for="mon-16">Understand that all client files are shared via link — never email attachments</label></li>
+            <li><input type="checkbox" id="mon-17"><label for="mon-17">Know where to put call notes and follow-up reminders (Asana task comments)</label></li>
+            <li><input type="checkbox" id="mon-18"><label for="mon-18">Exported today's training progress using the Export button</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>📁 Questions about where something should go? → Slack Kelli: "File/Docs Question"</h4>
+            <textarea id="q-mon-docs" placeholder="Note anything here — file questions, sharing confusion, or reminders for yourself..."></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon-docs')">Save Note</button>
+              <span class="q-saved-msg" id="saved-mon-docs">✓ Saved!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ TUESDAY -->
+    <div class="day-panel" id="panel-tue">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>💬 Tuesday, April 15</h1>
+          <div class="subtitle">Client Communication Scenarios & Escalation Practice</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-tue" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-tue-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-tue-outreach">
+        <div class="module-header"><span class="module-icon">📞</span><h2>2A — Outreach & Client Check-Ins</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">Today focuses on the outreach workflows you'll own: proactive client check-ins, following up on past-due items, and delivering financial updates professionally.</p>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-outreach-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Client Outreach — Past-Due Follow-Ups & Tax Status</div>
+              <div class="loom-status pending" id="loom-outreach-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-checkin-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Client Check-In Protocol — Financial Reviews & Deliverables</div>
+              <div class="loom-status pending" id="loom-checkin-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-financials-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Delivering Financials & Sales Tax Updates to Clients</div>
+              <div class="loom-status pending" id="loom-financials-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="tue">
+            <li><input type="checkbox" id="tue-1"><label for="tue-1">Watch client outreach video</label></li>
+            <li><input type="checkbox" id="tue-2"><label for="tue-2">Watch client check-in protocol video</label></li>
+            <li><input type="checkbox" id="tue-3"><label for="tue-3">Watch delivering financials video</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Outreach questions → Slack Kelli: "Outreach Question"</h4>
+            <textarea id="q-tue-outreach" placeholder="Questions about client outreach or check-in protocols?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('tue-outreach')">Save Note</button><span class="q-saved-msg" id="saved-tue-outreach">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-tue-escalation">
+        <div class="module-header"><span class="module-icon">🚦</span><h2>2B — Escalation Guide</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">Review the full escalation guide with Kelli during today's team meeting. Know exactly when to handle it vs. when to call Kelli in.</p>
+          <div class="escalation-grid">
+            <div class="esc-col">
+              <div class="esc-header green">✅ Handle Yourself</div>
+              <ul class="esc-list green">
+                <li>Invoice status, payment, or billing history</li>
+                <li>Request for prior report or document</li>
+                <li>Routine reconciliation / bookkeeping questions</li>
+                <li>Scheduling, meeting requests, document submissions</li>
+                <li>Following up on past-due invoices</li>
+              </ul>
+            </div>
+            <div class="esc-col">
+              <div class="esc-header red">🚨 Always Escalate to Kelli</div>
+              <ul class="esc-list red">
+                <li>Any IRS notice, state tax notice, or gov't correspondence</li>
+                <li>Client threatening to leave or seriously dissatisfied</li>
+                <li>Any request for tax advice or financial guidance</li>
+                <li>Payroll errors already submitted and processed</li>
+                <li>Legal questions or anything involving an attorney</li>
+                <li>Anything you're unsure about — err on escalating</li>
+              </ul>
+            </div>
+          </div>
+          <ul class="checklist" data-day="tue">
+            <li><input type="checkbox" id="tue-4"><label for="tue-4">Review escalation guide with Kelli in team meeting</label></li>
+            <li><input type="checkbox" id="tue-5"><label for="tue-5">Understand the "handle yourself" scenarios</label></li>
+            <li><input type="checkbox" id="tue-6"><label for="tue-6">Know the 6 always-escalate triggers by heart</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Escalation questions → Slack Kelli: "Escalation Question"</h4>
+            <textarea id="q-tue-escalation" placeholder="Any grey-area scenarios you want to clarify?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('tue-escalation')">Save Note</button><span class="q-saved-msg" id="saved-tue-escalation">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ WEDNESDAY -->
+    <div class="day-panel" id="panel-wed">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>📊 Wednesday, April 16</h1>
+          <div class="subtitle">QuickBooks Online — Invoicing, Bookkeeping & Reconciliation</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-wed" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-wed-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-wed-qbo">
+        <div class="module-header"><span class="module-icon">💼</span><h2>3A — QuickBooks Online Overview</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">QBO is the backbone of all accounting work at KelliWorks. Every client has their own QBO file.</p>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-qbo-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">QBO Overview — Navigating the KelliWorks Client Files</div>
+              <div class="loom-status pending" id="loom-qbo-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-1"><label for="wed-1">Watch QBO overview video</label></li>
+            <li><input type="checkbox" id="wed-2"><label for="wed-2">Log into QBO and locate all client files</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-wed-invoicing">
+        <div class="module-header"><span class="module-icon">🧾</span><h2>3B — Invoicing & Billing Support</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-invoice-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Creating & Sending Invoices in QBO</div>
+              <div class="loom-status pending" id="loom-invoice-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-ar-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Tracking Receivables & Following Up on Past-Due Accounts</div>
+              <div class="loom-status pending" id="loom-ar-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-3"><label for="wed-3">Watch invoicing video</label></li>
+            <li><input type="checkbox" id="wed-4"><label for="wed-4">Watch A/R tracking video</label></li>
+            <li><input type="checkbox" id="wed-5"><label for="wed-5">Practice creating a test invoice in QBO</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-wed-recon">
+        <div class="module-header"><span class="module-icon">🔍</span><h2>3C — Bookkeeping & Reconciliation</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="alert warning"><span class="alert-icon">⚠️</span><div><strong>Core Commitment #4:</strong> Every reconciliation adjustment gets documented — what changed, why, and when. Clean books are your signature. Over-document when in doubt.</div></div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-recon-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Month-End Reconciliation Walkthrough in QBO</div>
+              <div class="loom-status pending" id="loom-recon-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-categories-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Transaction Categorization & Journal Entries</div>
+              <div class="loom-status pending" id="loom-categories-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-discrepancies-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Flagging Uncleared Transactions & Reconciliation Discrepancies</div>
+              <div class="loom-status pending" id="loom-discrepancies-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-6"><label for="wed-6">Watch reconciliation walkthrough video</label></li>
+            <li><input type="checkbox" id="wed-7"><label for="wed-7">Watch transaction categorization video</label></li>
+            <li><input type="checkbox" id="wed-8"><label for="wed-8">Watch discrepancy flagging video</label></li>
+            <li><input type="checkbox" id="wed-9"><label for="wed-9">Shadow Kelli on a live reconciliation during team meeting</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ QBO questions → Slack Kelli: "QBO Question"</h4>
+            <textarea id="q-wed-qbo" placeholder="Any questions about QuickBooks, reconciliation, or bookkeeping?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('wed-qbo')">Save Note</button><span class="q-saved-msg" id="saved-wed-qbo">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ THURSDAY -->
+    <div class="day-panel" id="panel-thu">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>💰 Thursday, April 17</h1>
+          <div class="subtitle">Payroll Processing — Workflow, Rules & Client Coordination</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-thu" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-thu-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-thu-payroll">
+        <div class="module-header"><span class="module-icon">💳</span><h2>4A — Payroll Processing</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="alert warning"><span class="alert-icon">✍️</span><div><strong>Core Commitment #3 — Draft → Share → Send:</strong> For every payroll run, draft the confirmation first, share with Kelli in Slack, then process. This protects the client and you. Not about permission — about doing it right.</div></div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-payroll-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Payroll Processing Workflow — Current Client List & Frequency</div>
+              <div class="loom-status pending" id="loom-payroll-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-payrollcoord-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Payroll Coordination with Clients — Confirming Hours & Wages</div>
+              <div class="loom-status pending" id="loom-payrollcoord-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-payrollqbo-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Recording Payroll in QuickBooks Online</div>
+              <div class="loom-status pending" id="loom-payrollqbo-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-payrolltax-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Payroll Tax Corrections — When & How to Handle</div>
+              <div class="loom-status pending" id="loom-payrolltax-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-1"><label for="thu-1">Watch payroll workflow video</label></li>
+            <li><input type="checkbox" id="thu-2"><label for="thu-2">Watch client coordination / confirmation video</label></li>
+            <li><input type="checkbox" id="thu-3"><label for="thu-3">Watch recording payroll in QBO video</label></li>
+            <li><input type="checkbox" id="thu-4"><label for="thu-4">Watch payroll tax corrections video</label></li>
+            <li><input type="checkbox" id="thu-5"><label for="thu-5">Know all active clients' payroll schedules and frequencies</label></li>
+            <li><input type="checkbox" id="thu-6"><label for="thu-6">Shadow Kelli on payroll review during team meeting</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Payroll questions → Slack Kelli: "Payroll Question"</h4>
+            <textarea id="q-thu-payroll" placeholder="Questions about payroll workflows, clients, or QBO recording?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('thu-payroll')">Save Note</button><span class="q-saved-msg" id="saved-thu-payroll">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ FRIDAY -->
+    <div class="day-panel" id="panel-fri">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>🏛️ Friday, April 18</h1>
+          <div class="subtitle">State Filings, Sales Tax & Week 1 Wrap-Up</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-fri" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-fri-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-fri-state">
+        <div class="module-header"><span class="module-icon">🏛️</span><h2>5A — State Inquiries & Sales Tax Filing</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="alert warning"><span class="alert-icon">✍️</span><div><strong>Core Commitment #3 — Draft → Share → Send:</strong> Any IRS or state notice = forward to Kelli immediately via Slack. Draft any response for her eyes first. This protects the client relationship and ensures nothing goes out unreviewed.</div></div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-statetax-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">State Sales Tax Filing Process — Deadlines & Submissions</div>
+              <div class="loom-status pending" id="loom-statetax-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-stategov-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Handling State & Government Correspondence</div>
+              <div class="loom-status pending" id="loom-stategov-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-1"><label for="fri-1">Watch state sales tax filing video</label></li>
+            <li><input type="checkbox" id="fri-2"><label for="fri-2">Watch government correspondence video</label></li>
+            <li><input type="checkbox" id="fri-3"><label for="fri-3">Know the escalation rule for all state/IRS notices</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-fri-taxmgmt">
+        <div class="module-header"><span class="module-icon">📋</span><h2>5B — Tax Client Management</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">Support Kelli on tax client management including document collection, email support, and working alongside Jay on status and billing.</p>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-taxmgmt-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Tax Client Mgmt — Docs, Email Support & Status Updates</div>
+              <div class="loom-status pending" id="loom-taxmgmt-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-4"><label for="fri-4">Watch tax client management video</label></li>
+            <li><input type="checkbox" id="fri-5"><label for="fri-5">Understand the Jay coordination workflow for billing & status</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ State filing / tax questions → Slack Kelli: "State Filing Question"</h4>
+            <textarea id="q-fri-state" placeholder="Any questions about state filings or tax client management?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('fri-state')">Save Note</button><span class="q-saved-msg" id="saved-fri-state">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-fri-wrapup">
+        <div class="module-header" style="background: var(--gold);"><span class="module-icon">🎉</span><h2>5C — Week 1 Wrap-Up Call with Kelli</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">This afternoon debrief with Kelli closes out your first week. Be ready to share what you've learned, what's still unclear, and what you want more depth on in Week 2.</p>
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-6"><label for="fri-6">What are your 3 biggest takeaways from Week 1?</label></li>
+            <li><input type="checkbox" id="fri-7"><label for="fri-7">What are you still unclear on?</label></li>
+            <li><input type="checkbox" id="fri-8"><label for="fri-8">What topics do you want more depth on in Week 2?</label></li>
+            <li><input type="checkbox" id="fri-9"><label for="fri-9">Complete Week 1 debrief call with Kelli</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>📝 Week 1 Reflection — use this to prep for your debrief call</h4>
+            <textarea id="q-fri-wrapup" placeholder="Write your takeaways, questions, and Week 2 topics here..."></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('fri-wrapup')">Save Note</button><span class="q-saved-msg" id="saved-fri-wrapup">✓ Saved!</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ WEEK 2 -->
+    <div class="day-panel" id="panel-week2">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>🗄️ Week 2 — Coming April 21+</h1>
+          <div class="subtitle">KelliWorks Client Intelligence Portal — Database Training</div>
+        </div>
+        <div class="day-hero-right"><div style="font-size:48px;">🔒</div></div>
+      </div>
+      <div class="locked-banner">
+        <div class="lock-icon">🗄️</div>
+        <h2>Database Training Unlocks Week 2</h2>
+        <p>Kelli will train you on the KelliWorks Client Intelligence Portal once it is fully live. This session will cover the full dashboard, client data management, and how to use the portal in your daily workflow. A Loom video will be added here when ready.</p>
+        <br/>
+        <div class="loom-slot" style="text-align:left; max-width:560px; margin:0 auto;">
+          <a class="loom-play pending" href="#" target="_blank">▶</a>
+          <div class="loom-info">
+            <div class="loom-label">KelliWorks Client Intelligence Portal — Full Walkthrough</div>
+            <div class="loom-status pending">📹 Video coming — Kelli to record once portal is live</div>
+            <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:24px;">
+        <div class="module-card">
+          <div class="module-header"><span class="module-icon">📌</span><h2>Week 2 Topics Preview</h2></div>
+          <div class="module-body">
+            <ul class="checklist">
+              <li><input type="checkbox" id="w2-1" disabled><label for="w2-1" style="color:#AAA;">KelliWorks Client Intelligence Portal — dashboard walkthrough</label></li>
+              <li><input type="checkbox" id="w2-2" disabled><label for="w2-2" style="color:#AAA;">Monthly Close process — BB-Keeper, Travo Client, FTS workflows</label></li>
+              <li><input type="checkbox" id="w2-3" disabled><label for="w2-3" style="color:#AAA;">AR + AP deeper dive — light reconciliation ownership</label></li>
+              <li><input type="checkbox" id="w2-4" disabled><label for="w2-4" style="color:#AAA;">Begin taking client communications independently</label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══ JAVASCRIPT ════════════════════════════════════════════════════ -->
+<script>
+  // ── SUPABASE INIT ─────────────────────────────────────────────────
+  const { createClient } = window.supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let localData = {};
+  let supabaseLoaded = false;
+
+  async function syncFromSupabase() {
+    const { data, error } = await sb
+      .from('progress')
+      .select('data')
+      .eq('user_id', window.USER_ID)
+      .single();
+    
+    if (data && data.data) {
+      Object.keys(data.data).forEach(key => {
+        if (!localData.hasOwnProperty(key)) localData[key] = data.data[key];
+      });
+      localStorage.setItem('kw_training', JSON.stringify(localData));
+    }
+    supabaseLoaded = true;
+  }
+
+  async function syncToSupabase() {
+    if (!supabaseLoaded) return;
+    await sb
+      .from('progress')
+      .upsert({ user_id: window.USER_ID, data: localData });
+  }
+
+  // ── DAY DEFINITIONS (checkboxes per day) ─────────────────────────
+  const DAYS = {
+    mon: { ids: ['mon-1','mon-2','mon-3','mon-6a','mon-6b','mon-6','mon-7','mon-8','mon-9','mon-10','mon-10b','mon-10c','mon-10d','mon-10e','mon-11','mon-12','mon-13','mon-14','mon-15','mon-16','mon-17','mon-18'] },
+    tue: { ids: ['tue-1','tue-2','tue-3','tue-4','tue-5','tue-6'] },
+    wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9'] },
+    thu: { ids: ['thu-1','thu-2','thu-3','thu-4','thu-5','thu-6'] },
+    fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9'] },
+  };
+
+  // ── STORAGE ───────────────────────────────────────────────────────
+  function load() { return localData; }
+  function save(data) {
+    localData = data;
+    localStorage.setItem('kw_training', JSON.stringify(data));
+    syncToSupabase();
+  }
+
+  // ── INIT CHECKBOXES ───────────────────────────────────────────────
+  function initCheckboxes() {
+    try { localData = JSON.parse(localStorage.getItem('kw_training') || '{}'); } catch(e) { localData = {}; }
+    const data = load();
+    Object.keys(DAYS).forEach(day => {
+      DAYS[day].ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (data[id]) el.checked = true;
+        el.addEventListener('change', () => {
+          const d = load(); d[id] = el.checked; save(d);
+          updateProgress();
+        });
+      });
+    });
+    // Restore question notes
+    document.querySelectorAll('.question-box textarea').forEach(ta => {
+      const key = 'q_' + ta.id;
+      if (data[key]) ta.value = data[key];
+    });
+  }
+
+  // ── PROGRESS ──────────────────────────────────────────────────────
+  function updateProgress() {
+    const data = load();
+    let totalChecked = 0, totalAll = 0;
+
+    Object.keys(DAYS).forEach(day => {
+      const ids = DAYS[day].ids;
+      const checked = ids.filter(id => data[id]).length;
+      const pct = ids.length ? Math.round(checked / ids.length * 100) : 0;
+      totalChecked += checked; totalAll += ids.length;
+
+      // Week cards
+      const bar = document.getElementById('wc-' + day);
+      const pctEl = document.getElementById('wc-' + day + '-pct');
+      if (bar) bar.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + '%';
+
+      // Progress rings
+      const ring = document.getElementById('ring-' + day);
+      const ringPct = document.getElementById('ring-' + day + '-pct');
+      if (ring) {
+        const circ = 188.5;
+        ring.style.strokeDashoffset = circ - (circ * pct / 100);
+      }
+      if (ringPct) ringPct.textContent = pct + '%';
+
+      // Sidebar nav
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        const onclick = item.getAttribute('onclick') || '';
+        if (onclick.includes("'" + day + "'")) {
+          if (pct === 100) item.classList.add('day-complete');
+          else item.classList.remove('day-complete');
+        }
+      });
+    });
+
+    // Top bar
+    const overallPct = totalAll ? Math.round(totalChecked / totalAll * 100) : 0;
+    const fill = document.getElementById('topProgressFill');
+    const pctEl = document.getElementById('topProgressPct');
+    if (fill) fill.style.width = overallPct + '%';
+    if (pctEl) pctEl.textContent = overallPct + '%';
+  }
+
+  // ── NAV ───────────────────────────────────────────────────────────
+  function showDay(day) {
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const panel = document.getElementById('panel-' + day);
+    if (panel) panel.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if ((n.getAttribute('onclick') || '').includes("'" + day + "'")) n.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+
+  // ── SAVE QUESTION ─────────────────────────────────────────────────
+  function saveQuestion(key) {
+    const ta = document.getElementById('q-' + key);
+    if (!ta) return;
+    const d = load(); d['q_' + 'q-' + key] = ta.value; save(d);
+    const msg = document.getElementById('saved-' + key);
+    if (msg) { msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 2500); }
+  }
+
+  // ── LOOM HELPER — call this to activate a video slot ─────────────
+  // Usage: setLoomVideo('loom-services', 'https://www.loom.com/share/YOUR_ID', 'Video Title')
+  window.setLoomVideo = function(slotId, url, title) {
+    const link = document.getElementById(slotId + '-link');
+    const status = document.getElementById(slotId + '-status');
+    const slot = link ? link.closest('.loom-slot') : null;
+    if (link) { link.href = url; link.classList.remove('pending'); }
+    if (status) { status.textContent = '▶ Click to watch'; status.classList.remove('pending'); }
+    if (slot) slot.classList.add('has-video');
+  };
+
+  // ── BOOT ──────────────────────────────────────────────────────────
+  initCheckboxes();
+  updateProgress();
+  syncFromSupabase().then(() => { initCheckboxes(); updateProgress(); });
+
+  // ── EXPORT PROGRESS ───────────────────────────────────────────────
+  function exportProgress() {
+    const data = load();
+    data.__exported = new Date().toISOString();
+    data.__trainee = 'Yomaira Patricia Montan';
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const date = new Date().toISOString().slice(0,10);
+    a.download = `KW_Patricia_Training_Progress_${date}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showStatus('✓ Progress downloaded!');
+  }
+
+  // ── IMPORT PROGRESS ───────────────────────────────────────────────
+  function importProgress(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        save(data);
+        initCheckboxes();
+        updateProgress();
+        // Restore question textareas
+        document.querySelectorAll('.question-box textarea').forEach(ta => {
+          const key = 'q_' + ta.id;
+          if (data[key]) ta.value = data[key];
+        });
+        showStatus('✓ Progress loaded!');
+      } catch(err) {
+        alert('Could not load that file — make sure it\'s a KelliWorks training progress file.');
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // reset so same file can be re-imported
+  }
+
+  // ── RESET ALL ─────────────────────────────────────────────────────
+  function resetProgress() {
+    if (!confirm('Reset ALL progress and notes? This cannot be undone (unless you downloaded a backup).')) return;
+    try { localStorage.removeItem('kw_training'); } catch(e) {}
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.question-box textarea').forEach(ta => ta.value = '');
+    updateProgress();
+    showStatus('Progress reset.');
+  }
+
+  // ── STATUS FLASH ──────────────────────────────────────────────────
+  function showStatus(msg) {
+    const el = document.getElementById('saveStatus');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  // ═════════════════════════════════════════════════════════════════
+  // LOOM VIDEOS — ACTIVE (added by Kelli)
+  // ═════════════════════════════════════════════════════════════════
+
+  // Email Mailbox Management (service@ and reports@)
+  setLoomVideo('loom-services',   'https://www.loom.com/share/a7f25e503bd740c1930da5cfb5fc8e1a', 'Email Mailbox Mgmt — service@kelliworks.com');
+  setLoomVideo('loom-reports',    'https://www.loom.com/share/938307fd2ddc41e78ed2d6eb73236a4f', 'Email Mailbox Mgmt — reports@kelliworks.com');
+  setLoomVideo('loom-clearinbox', 'https://www.loom.com/share/512fc939591d4c9d9d3f5c897674d6d7', 'Clearing the Inbox: A Critical Task');
+  setLoomVideo('loom-gmailtips',  'https://www.loom.com/share/c7b807aad88c471ebd3e3036563f2ad5', 'GMAIL Tips & Tricks');
+
+  // #2 — About KelliWorks / Firm Overview (2 parts)
+  setLoomVideo('loom-firmoverview',  'https://www.loom.com/share/380606791fd34dfcbca215e111585433', 'Firm Overview — Part 1');
+  setLoomVideo('loom-firmoverview2', 'https://www.loom.com/share/b1169d1f16004409a4020393cb4d2fb5', 'Firm Overview — Part 2');
+
+  // #4 — How to Dispatch, Follow Up & Escalate Client Emails
+  setLoomVideo('loom-emailflow', 'https://www.loom.com/share/a9f5a88380124da288788842a1ba98c9', 'Email Dispatch, Follow-Up & Escalation');
+
+  // #7 — Slack at KelliWorks
+  setLoomVideo('loom-slack', 'https://www.loom.com/share/52e9aa32928a4f25838a0b17e046e672', 'Slack at KelliWorks');
+
+  // #8 — Asana Walkthrough (2 parts)
+  setLoomVideo('loom-asana',  'https://www.loom.com/share/bcc48f8f430f4713afb6edc9b14d7db0', 'Asana Walkthrough — Part 1');
+  setLoomVideo('loom-asana2', 'https://www.loom.com/share/3f3d44e2da2448aba96b82802c70c335', 'Asana Walkthrough — Part 2');
+
+  // #9 — Everhour Time Tracking
+  setLoomVideo('loom-everhour', 'https://www.loom.com/share/145aba6e77034382b759502265e745e8', 'Everhour — Time Tracking in Asana');
+
+  // ═════════════════════════════════════════════════════════════════
+  // STILL NEEDED — add below when ready:
+  // #10 setLoomVideo('loom-outreach',         'https://www.loom.com/share/YOUR_ID', 'Client Outreach & Follow-Ups');
+  // #11 setLoomVideo('loom-checkin',          'https://www.loom.com/share/YOUR_ID', 'Client Check-In Protocol');
+  // #12 setLoomVideo('loom-financials',       'https://www.loom.com/share/YOUR_ID', 'Delivering Financials');
+  // #13 setLoomVideo('loom-qbo',              'https://www.loom.com/share/YOUR_ID', 'QBO Overview');
+  // #14 setLoomVideo('loom-invoice',          'https://www.loom.com/share/YOUR_ID', 'Invoicing in QBO');
+  // #15 setLoomVideo('loom-ar',               'https://www.loom.com/share/YOUR_ID', 'Tracking Receivables');
+  // #16 setLoomVideo('loom-recon',            'https://www.loom.com/share/YOUR_ID', 'Month-End Reconciliation');
+  // #17 setLoomVideo('loom-categories',       'https://www.loom.com/share/YOUR_ID', 'Transaction Categorization');
+  // #18 setLoomVideo('loom-discrepancies',    'https://www.loom.com/share/YOUR_ID', 'Flagging Discrepancies');
+  // #19 setLoomVideo('loom-payroll',          'https://www.loom.com/share/YOUR_ID', 'Payroll Workflow');
+  // #20 setLoomVideo('loom-payrollcoord',     'https://www.loom.com/share/YOUR_ID', 'Payroll Coordination');
+  // #21 setLoomVideo('loom-payrollqbo',       'https://www.loom.com/share/YOUR_ID', 'Recording Payroll in QBO');
+  // #22 setLoomVideo('loom-payrolltax',       'https://www.loom.com/share/YOUR_ID', 'Payroll Tax Corrections');
+  // #23 setLoomVideo('loom-statetax',         'https://www.loom.com/share/YOUR_ID', 'State Sales Tax Filing');
+  // #24 setLoomVideo('loom-stategov',         'https://www.loom.com/share/YOUR_ID', 'Government Correspondence');
+  // #25 setLoomVideo('loom-taxmgmt',          'https://www.loom.com/share/YOUR_ID', 'Tax Client Management');
+  // #26 setLoomVideo('loom-portal',           'https://www.loom.com/share/YOUR_ID', 'Client Intelligence Portal');
+  // ═════════════════════════════════════════════════════════════════
+</script>
+
+</body>
+</html>
