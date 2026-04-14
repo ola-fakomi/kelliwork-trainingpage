@@ -1725,7 +1725,7 @@
     const { data, error } = await sb
       .from('progress')
       .select('data')
-      .eq('user_id', window.USER_ID)
+      .eq('user_id', USER_ID)
       .single();
     
     if (data && data.data) {
@@ -1741,7 +1741,7 @@
     if (!supabaseLoaded) return;
     await sb
       .from('progress')
-      .upsert({ user_id: window.USER_ID, data: localData });
+      .upsert({ user_id: USER_ID, data: localData });
   }
 
   // ── DAY DEFINITIONS (checkboxes per day) ─────────────────────────
