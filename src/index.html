@@ -1805,7 +1805,7 @@
       const ringPct = document.getElementById('ring-' + day + '-pct');
       if (ring) {
         const circ = 188.5;
-        ring.style.strokeDashoffset = circ - (circ * pct / 100);
+        ring.setAttribute('stroke-dashoffset', String(circ - (circ * pct / 100)));
       }
       if (ringPct) ringPct.textContent = pct + '%';
 
@@ -1855,7 +1855,21 @@
   // ── BOOT ──────────────────────────────────────────────────────────
   initCheckboxes();
   updateProgress();
-  syncFromSupabase().then(() => { initCheckboxes(); updateProgress(); });
+  syncFromSupabase().then(() => {
+    // Restore DOM state from merged Supabase data without re-adding event listeners
+    const data = load();
+    Object.keys(DAYS).forEach(day => {
+      DAYS[day].ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && data[id]) el.checked = true;
+      });
+    });
+    document.querySelectorAll('.question-box textarea').forEach(ta => {
+      const key = 'q_' + ta.id;
+      if (data[key]) ta.value = data[key];
+    });
+    updateProgress();
+  }).catch(() => {});
 
   // ── EXPORT PROGRESS ───────────────────────────────────────────────
   function exportProgress() {
