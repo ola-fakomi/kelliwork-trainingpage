@@ -5,6 +5,48 @@ All changes to this project are documented here in reverse chronological order.
 
 ---
 
+## [1.5.0] — 2026-04-14
+
+**Commit:** — *Add Slack DM notifications when Patricia saves a note*
+
+### Feature
+
+**Notes now delivered to Kelli's Slack DM instantly on save**
+
+- Every time Patricia clicks "Save Note" on any module, a formatted Slack message is sent to Kelli via Incoming Webhook
+- Message includes the module name, full note text, and timestamp
+- Uses a no-backend `fetch()` POST — no server required, runs entirely in the browser
+- Webhook URL stored in `src/config/supabase-config.js` as `SLACK_WEBHOOK_URL`
+- Gracefully skipped if note is empty or webhook is not configured
+- Does not block or delay the local save — fire-and-forget
+
+### Files Changed
+- `src/config/supabase-config.js` — 3 insertions (added `SLACK_WEBHOOK_URL`)
+- `src/index.html` — 25 insertions, 0 deletions (modified `saveQuestion()`)
+
+---
+
+## [1.4.0] — 2026-04-14
+
+**Commit:** — *Fix supabase-config.js path — move file inside src/ for Vercel*
+
+### Bug Fix
+
+**Critical production crash — entire JS dead on load**
+
+- `config/supabase-config.js` was located outside the `src/` directory
+- Vercel only serves files inside `src/` (per `outputDirectory: "src"` in `vercel.json`)
+- The `../config/supabase-config.js` script tag returned a 404 HTML error page
+- Browser tried to parse HTML as JavaScript, hit `<` at character 1, threw `Uncaught SyntaxError: Unexpected token '<'`
+- This crashed the entire `<script>` block — all event listeners, progress bars, and saves were dead
+- **Fix:** Moved file to `src/config/supabase-config.js`; updated `<script src>` from `../config/supabase-config.js` to `config/supabase-config.js`; removed old file via `git rm`
+
+### Files Changed
+- `src/config/supabase-config.js` — new location (moved from `config/supabase-config.js`)
+- `src/index.html` — 1 insertion, 1 deletion (updated script src path)
+
+---
+
 ## [1.3.0] — 2026-04-14
 
 **Commit:** `0f3a6d4` — *Fix progress bars not updating on any page*
@@ -223,3 +265,5 @@ Without this file, Vercel would attempt to serve files from the project root and
 | 1.1.0 | 2026-04-14 | `572cefc` | Content | Tuesday panel rebuilt with correct curriculum |
 | 1.2.0 | 2026-04-14 | `0f64174` | Bug Fix | Supabase sync broken (`window.USER_ID` → `USER_ID`) |
 | 1.3.0 | 2026-04-14 | `0f3a6d4` | Bug Fix | Progress bars broken (SVG setAttribute + duplicate listeners) |
+| 1.4.0 | 2026-04-14 | — | Bug Fix | Critical crash — supabase-config.js path outside Vercel served dir |
+| 1.5.0 | 2026-04-14 | — | Feature | Slack DM notifications when Patricia saves a note |

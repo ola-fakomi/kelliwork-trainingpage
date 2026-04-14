@@ -1846,6 +1846,32 @@
     const ta = document.getElementById('q-' + key);
     if (!ta) return;
     const d = load(); d['q_' + 'q-' + key] = ta.value; save(d);
+    syncToSupabase();
+
+    if (ta.value.trim()) {
+      const moduleLabels = {
+        'mon-welcome': 'Monday — Welcome & Orientation',
+        'mon-qbo': 'Monday — QBO & Chart of Accounts',
+        'mon-clients': 'Monday — Client Roster',
+        'mon-comms': 'Monday — Communication Standards',
+        'mon-tools': 'Monday — Tools & Access',
+        'tue-asana': 'Tuesday — Asana & Daily Workflow',
+        'tue-keeper': 'Tuesday — Keeper: Client Financial Delivery',
+        'tue-escalation': 'Tuesday — Escalation Guide',
+        'wed-qbo': 'Wednesday — QBO Deep Dive',
+        'thu-payroll': 'Thursday — Payroll Processing',
+        'fri-filings': 'Friday — State Filings & Wrap-Up'
+      };
+      const label = moduleLabels[key] || key;
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: `📝 *Patricia saved a note*\n*Module:* ${label}\n\n${ta.value.trim()}\n\n_${new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}_`
+        })
+      });
+    }
+
     const msg = document.getElementById('saved-' + key);
     if (msg) { msg.style.display = 'inline'; setTimeout(() => msg.style.display = 'none', 2500); }
   }
