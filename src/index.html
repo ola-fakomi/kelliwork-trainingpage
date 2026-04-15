@@ -599,6 +599,71 @@
       .week-grid { grid-template-columns: 1fr 1fr; }
       .escalation-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── Fathom recording slots ───────────────────────────────────── */
+    .fathom-slot {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid #EEF3F8;
+    }
+    .fathom-slot:last-of-type { border-bottom: none; }
+    .fathom-play {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #6C5CE7; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; text-decoration: none; flex-shrink: 0;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(108,92,231,0.30);
+    }
+    .fathom-play:hover { transform: scale(1.09); box-shadow: 0 4px 16px rgba(108,92,231,0.45); color: #fff; }
+    .fathom-info { flex: 1; min-width: 0; }
+    .fathom-label { font-size: 14px; font-weight: 600; color: #2C2C2C; }
+    .fathom-meta  { font-size: 12px; color: #6C5CE7; font-weight: 600; margin-top: 3px; }
+
+    /* ── SOP Phase flow ───────────────────────────────────────────── */
+    .sop-flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .sop-phase {
+      background: #EEF3F8; border-left: 3px solid #2E86AB;
+      border-radius: 6px; padding: 8px 12px; font-size: 13px;
+      min-width: 180px; flex: 1;
+    }
+    .sop-phase-num { font-size: 10px; font-weight: 800; color: #2E86AB; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sop-phase-title { font-weight: 700; color: #1B2A4A; margin: 2px 0; font-size: 13px; }
+    .sop-phase-who { font-size: 11px; color: #666; }
+    .sop-phase.patricia { border-left-color: #F4A261; background: #FFF8F2; }
+    .sop-phase.patricia .sop-phase-num { color: #F4A261; }
+
+    /* ── Role ownership table ─────────────────────────────────────── */
+    .role-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
+    .role-table th { background: #1B2A4A; color: white; padding: 9px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .role-table td { padding: 9px 12px; border-bottom: 1px solid #EEF3F8; vertical-align: top; }
+    .role-table tr:nth-child(even) td { background: #F9FBFD; }
+    .role-badge { display: inline-block; border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+    .role-badge.yes { background: #D4EDDA; color: #155724; }
+    .role-badge.no  { background: #F8D7DA; color: #721C24; }
+    .role-badge.ref { background: #FFF3CD; color: #856404; }
+
+    /* ── Dropbox path ─────────────────────────────────────────────── */
+    .dropbox-path {
+      background: #F5F5F5; border: 1px solid #DDE3EC; border-radius: 8px;
+      padding: 14px 18px; font-family: 'Courier New', monospace;
+      font-size: 13px; color: #1B2A4A; margin: 14px 0; line-height: 1.8;
+    }
+    .dropbox-path .db-arrow { color: #2E86AB; font-weight: 700; }
+    .dropbox-path .db-final { color: #F4A261; font-weight: 800; }
+
+    /* ── Link button ──────────────────────────────────────────────── */
+    .link-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #1B2A4A; color: white;
+      padding: 10px 18px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      margin: 6px 6px 6px 0; transition: background 0.2s;
+    }
+    .link-btn:hover { background: #2E86AB; color: white; }
+    .link-btn.gold { background: #F4A261; color: #1B2A4A; }
+    .link-btn.gold:hover { background: #e0894a; color: #1B2A4A; }
+    .link-btn.teal { background: #2E86AB; color: white; }
+    .link-btn.teal:hover { background: #246e8e; }
   </style>
 </head>
 <body>
@@ -1406,8 +1471,8 @@
     <div class="day-panel" id="panel-wed">
       <div class="day-hero">
         <div class="day-hero-left">
-          <h1>📊 Wednesday, April 16</h1>
-          <div class="subtitle">QuickBooks Online — Invoicing, Bookkeeping & Reconciliation</div>
+          <h1>🧾 Wednesday, April 16</h1>
+          <div class="subtitle">Tax Season Deep Dive — Organizers, Pipeline, Documents &amp; Your Role</div>
         </div>
         <div class="day-hero-right">
           <div class="day-progress-ring">
@@ -1421,93 +1486,517 @@
         </div>
       </div>
 
-      <div class="module-card" id="mod-wed-qbo">
-        <div class="module-header"><span class="module-icon">💼</span><h2>3A — QuickBooks Online Overview</h2><span class="module-complete-badge">✓ Done</span></div>
-        <div class="module-body">
-          <p class="module-desc">QBO is the backbone of all accounting work at KelliWorks. Every client has their own QBO file.</p>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-qbo-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">QBO Overview — Navigating the KelliWorks Client Files</div>
-              <div class="loom-status pending" id="loom-qbo-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <ul class="checklist" data-day="wed">
-            <li><input type="checkbox" id="wed-1"><label for="wed-1">Watch QBO overview video</label></li>
-            <li><input type="checkbox" id="wed-2"><label for="wed-2">Log into QBO and locate all client files</label></li>
-          </ul>
+      <!-- ══ MODULE 3A — TAX CONSULTATION CONTEXT ═══════════════════════ -->
+      <div class="module-card" id="mod-wed-context">
+        <div class="module-header">
+          <span class="module-icon">🎓</span>
+          <h2>3A — Tax Consultation Context</h2>
+          <span class="module-complete-badge">✓ Done</span>
         </div>
-      </div>
-
-      <div class="module-card" id="mod-wed-invoicing">
-        <div class="module-header"><span class="module-icon">🧾</span><h2>3B — Invoicing & Billing Support</h2><span class="module-complete-badge">✓ Done</span></div>
         <div class="module-body">
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-invoice-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Creating & Sending Invoices in QBO</div>
-              <div class="loom-status pending" id="loom-invoice-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-ar-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Tracking Receivables & Following Up on Past-Due Accounts</div>
-              <div class="loom-status pending" id="loom-ar-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <ul class="checklist" data-day="wed">
-            <li><input type="checkbox" id="wed-3"><label for="wed-3">Watch invoicing video</label></li>
-            <li><input type="checkbox" id="wed-4"><label for="wed-4">Watch A/R tracking video</label></li>
-            <li><input type="checkbox" id="wed-5"><label for="wed-5">Practice creating a test invoice in QBO</label></li>
-          </ul>
-        </div>
-      </div>
+          <p class="module-desc">
+            Before you touch any client file, watch these recordings so you understand how
+            KelliWorks consults with tax clients, what the organizer experience looks like from
+            the client's side, and why the intake process matters. Two videos are older — watch
+            them for context only, not as current procedure.
+          </p>
 
-      <div class="module-card" id="mod-wed-recon">
-        <div class="module-header"><span class="module-icon">🔍</span><h2>3C — Bookkeeping & Reconciliation</h2><span class="module-complete-badge">✓ Done</span></div>
-        <div class="module-body">
-          <div class="alert warning"><span class="alert-icon">⚠️</span><div><strong>Core Commitment #4:</strong> Every reconciliation adjustment gets documented — what changed, why, and when. Clean books are your signature. Over-document when in doubt.</div></div>
+          <div class="alert warning" style="margin-bottom:10px;">
+            <span class="alert-icon">⚠️</span>
+            <div><strong>Outdated — For Context Only:</strong> The next two videos show an older version of our process. We no longer use Smartsheet and some tools have changed. Watch to understand Kelli's consulting style and how we think about client intake — <em>not</em> as a how-to guide.</div>
+          </div>
+
           <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-recon-link" target="_blank">▶</a>
+            <a class="loom-play" href="https://www.loom.com/share/b6818b8351264bfe9314ddca01191058" id="loom-wed-consult-link" target="_blank">▶</a>
             <div class="loom-info">
-              <div class="loom-label">Month-End Reconciliation Walkthrough in QBO</div>
-              <div class="loom-status pending" id="loom-recon-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+              <div class="loom-label">Kelli Explains the Consultation &amp; Organizer Process</div>
+              <div class="loom-status" id="loom-wed-consult-status">▶ Click to watch</div>
+              <div style="font-size:11px; color:#aaa; margin-top:3px;">⚠️ Outdated — watch for context &amp; Kelli's approach, not current procedure</div>
             </div>
           </div>
+
           <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-categories-link" target="_blank">▶</a>
+            <a class="loom-play" href="https://www.loom.com/share/473453ca9f12493bafeb3463456ab296" id="loom-wed-smartsheet-link" target="_blank">▶</a>
             <div class="loom-info">
-              <div class="loom-label">Transaction Categorization & Journal Entries</div>
-              <div class="loom-status pending" id="loom-categories-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+              <div class="loom-label">Old Smartsheet Workflow Overview</div>
+              <div class="loom-status" id="loom-wed-smartsheet-status">▶ Click to watch</div>
+              <div style="font-size:11px; color:#aaa; margin-top:3px;">⚠️ Outdated — we no longer use Smartsheet. Watch for general workflow context only.</div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-discrepancies-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Flagging Uncleared Transactions & Reconciliation Discrepancies</div>
-              <div class="loom-status pending" id="loom-discrepancies-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+
+          <div style="margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A; text-transform: uppercase; letter-spacing: 0.5px;">
+            🎬 Real Consultation Recordings
+          </div>
+          <p style="font-size:13px; color:#666; margin-bottom:12px;">
+            These are Fathom recordings of actual KelliWorks client consultations. Watch to understand
+            how Kelli communicates, what questions clients ask, and the tone we set from day one.
+          </p>
+
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/calls/415718175?timestamp=54" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Tax Consultation — Paul Lee</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Click to Watch</div>
             </div>
           </div>
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/calls/418490321?timestamp=955" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Tax Consultation — Ami Song (Current Client)</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Click to Watch</div>
+            </div>
+          </div>
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/share/a_wrsr_zWZQmaRtGpTJ3yQyVEMWEAtyW" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Tax Consultation — Additional Client</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Click to Watch</div>
+            </div>
+          </div>
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/calls/594666554?timestamp=256" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Why Bookkeeping Matters — Kelli Explains</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Click to Watch</div>
+            </div>
+          </div>
+
           <ul class="checklist" data-day="wed">
-            <li><input type="checkbox" id="wed-6"><label for="wed-6">Watch reconciliation walkthrough video</label></li>
-            <li><input type="checkbox" id="wed-7"><label for="wed-7">Watch transaction categorization video</label></li>
-            <li><input type="checkbox" id="wed-8"><label for="wed-8">Watch discrepancy flagging video</label></li>
-            <li><input type="checkbox" id="wed-9"><label for="wed-9">Shadow Kelli on a live reconciliation during team meeting</label></li>
+            <li><input type="checkbox" id="wed-1"><label for="wed-1">Watch Loom: Kelli on the consultation &amp; organizer process (context only)</label></li>
+            <li><input type="checkbox" id="wed-2"><label for="wed-2">Watch Loom: Old Smartsheet workflow (context only — we don't use Smartsheet)</label></li>
+            <li><input type="checkbox" id="wed-3"><label for="wed-3">Watch Fathom: Paul Lee consultation</label></li>
+            <li><input type="checkbox" id="wed-4"><label for="wed-4">Watch Fathom: Ami Song consultation (current client)</label></li>
+            <li><input type="checkbox" id="wed-5"><label for="wed-5">Watch Fathom: Additional client consultation</label></li>
+            <li><input type="checkbox" id="wed-6"><label for="wed-6">Watch Fathom: Why bookkeeping matters</label></li>
           </ul>
           <div class="question-box">
-            <h4>❓ QBO questions → Slack Kelli: "QBO Question"</h4>
-            <textarea id="q-wed-qbo" placeholder="Any questions about QuickBooks, reconciliation, or bookkeeping?"></textarea>
-            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('wed-qbo')">Send</button><span class="q-saved-msg" id="saved-wed-qbo">✓ Sent to Slack</span></div>
+            <h4>❓ Questions about consultations → Slack Kelli: "Consult Question"</h4>
+            <textarea id="q-wed-context" placeholder="What stood out? What questions do you have about how Kelli communicates with clients?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-context')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-context">✓ Sent to Slack</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ══ MODULE 3B — THE CLIENT ORGANIZER EXPERIENCE ════════════════ -->
+      <div class="module-card" id="mod-wed-organizer">
+        <div class="module-header">
+          <span class="module-icon">📋</span>
+          <h2>3B — The Client Organizer Experience</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            You cannot support clients through this process without experiencing it yourself first.
+            Today you'll complete <strong>both</strong> organizers as a test client — this is how
+            you'll know what to look for, what questions clients struggle with, and what "complete"
+            actually looks like.
+          </p>
+
+          <div class="alert warning">
+            <span class="alert-icon">📌</span>
+            <div>
+              <strong>Use this test identity when filling out the organizers:</strong><br/>
+              Name: <strong>Patricia 🌴👩‍👧‍👦</strong> &nbsp;|&nbsp; Make up the rest of the information (address, SSN dummy, income, etc.)<br/>
+              Go through <strong>every section, line by line</strong>. Do not skip anything. This is how you'll know what your clients are being asked.
+            </div>
+          </div>
+
+          <div style="margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            Step 1 — Complete the Personal Tax Organizer
+          </div>
+          <p style="font-size:13px; color:#555; margin-bottom: 10px;">
+            This is the form individual/personal tax clients fill out. Go through every question carefully.
+          </p>
+          <a class="link-btn teal" href="https://kelliworks.pipelineapp.io/app/forms/SZD383VERMR6/" target="_blank">
+            📋 Open Personal Tax Organizer
+          </a>
+
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            Step 2 — Complete the Business Tax Organizer
+          </div>
+          <p style="font-size:13px; color:#555; margin-bottom: 10px;">
+            This is the form business clients fill out. Notice how it differs from the personal one.
+          </p>
+          <a class="link-btn teal" href="https://kelliworks.pipelineapp.io/app/forms/UJM385NE8Y4D/" target="_blank">
+            🏢 Open Business Tax Organizer
+          </a>
+
+          <div style="margin:20px 0 8px; font-size:13px; color:#555;">
+            <strong>What to pay attention to as you go through each organizer:</strong>
+          </div>
+          <ul style="font-size:13px; color:#555; padding-left:20px; line-height:1.9;">
+            <li>What documents is the client asked to upload or reference?</li>
+            <li>Which sections are clients most likely to skip or misunderstand?</li>
+            <li>What does a "fully complete" organizer look like vs. a partial one?</li>
+            <li>What questions would YOU have if you were the client?</li>
+          </ul>
+
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-7"><label for="wed-7">Complete the Personal Tax Organizer as "Patricia 🌴👩‍👧‍👦" (line by line)</label></li>
+            <li><input type="checkbox" id="wed-8"><label for="wed-8">Complete the Business Tax Organizer as "Patricia 🌴👩‍👧‍👦" (line by line)</label></li>
+            <li><input type="checkbox" id="wed-9"><label for="wed-9">Note which sections clients are most likely to struggle with</label></li>
+            <li><input type="checkbox" id="wed-10"><label for="wed-10">Understand what "fully complete" looks like in the organizer</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Organizer questions → Slack Kelli: "Organizer Question"</h4>
+            <textarea id="q-wed-organizer" placeholder="What was confusing? What do you think clients will struggle with?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-organizer')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-organizer">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ MODULE 3C — PIPELINE: THE ADMIN BACK END ═══════════════════ -->
+      <div class="module-card" id="mod-wed-pipeline">
+        <div class="module-header">
+          <span class="module-icon">⚙️</span>
+          <h2>3C — Pipeline: The Admin Back End</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Pipeline is where all tax client workflow is tracked — from organizer completion to filing.
+            You'll log in under the <strong>Taxes identity</strong> (taxes@kelliworks.com Google account)
+            and explore what the admin back end looks like. Then watch two meetings Kelli had with
+            Caitlyn to understand exactly how this pipeline runs day-to-day.
+          </p>
+
+          <div class="alert warning">
+            <span class="alert-icon">🔑</span>
+            <div>
+              <strong>Login:</strong> Use the <strong>Taxes Google account</strong> (taxes@kelliworks.com) to log into Pipeline. Kelli will give you access — do not use your personal Google account.
+              <br/><strong>You are NOT managing the CRM</strong> — that is handled by Kelli. Your job in Pipeline is intake monitoring and document confirmation only.
+            </div>
+          </div>
+
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            Log in &amp; Explore Pipeline
+          </div>
+          <a class="link-btn" href="https://kelliworks.pipelineapp.io/logon/default.aspx" target="_blank">
+            ⚙️ Open Pipeline Admin Login
+          </a>
+          <p style="font-size:12px; color:#888; margin-top:6px;">
+            Once logged in: navigate to <strong>Requests → All</strong> and find the <strong>2025 Individual Organizers</strong> bundle. This is where all client organizers live.
+          </p>
+
+          <div style="margin: 20px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            Watch: Workflow &amp; Pipeline Meetings
+          </div>
+          <p style="font-size:13px; color:#555; margin-bottom:12px;">
+            These meetings show you exactly how the pipeline back end is managed. Watch for context on workflow — keep in mind, <strong>we are adjusting processes now</strong> and your specific role is to ensure documents are complete before handoff to Jay (the tax preparer).
+          </p>
+
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/share/kWtPP7Kp8PZBWFNT87SGNj3ZdoRFBZNg" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Kelli &amp; Jay — Tax Preparer Workflow Meeting</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Watch for workflow context &amp; Jay's role</div>
+            </div>
+          </div>
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/share/yG2ysdT_4ozWyDGBe1iwVR6yKo1oQ7vz" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Kelli &amp; Caitlyn — Pipeline &amp; Tax Workflow Meeting (Part 1)</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Pipeline back end &amp; handoff process</div>
+            </div>
+          </div>
+          <div class="fathom-slot">
+            <a class="fathom-play" href="https://fathom.video/share/i97RKAi5LxcTQDzts2MLoS_ZzyjoWGp-" target="_blank">▶</a>
+            <div class="fathom-info">
+              <div class="fathom-label">Kelli &amp; Caitlyn — Pipeline &amp; Tax Workflow Meeting (Part 2)</div>
+              <div class="fathom-meta">🎬 Fathom Recording — Pipeline back end &amp; handoff process</div>
+            </div>
+          </div>
+
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-11"><label for="wed-11">Log into Pipeline using the Taxes Google account</label></li>
+            <li><input type="checkbox" id="wed-12"><label for="wed-12">Navigate to Requests → All and find the 2025 Individual Organizers bundle</label></li>
+            <li><input type="checkbox" id="wed-13"><label for="wed-13">Watch Fathom: Kelli &amp; Jay — Tax Preparer Workflow Meeting</label></li>
+            <li><input type="checkbox" id="wed-14"><label for="wed-14">Watch Fathom: Caitlyn Pipeline Meeting Part 1</label></li>
+            <li><input type="checkbox" id="wed-15"><label for="wed-15">Watch Fathom: Caitlyn Pipeline Meeting Part 2</label></li>
+            <li><input type="checkbox" id="wed-16"><label for="wed-16">Understand the difference between a "questionnaire complete" vs. "documents uploaded complete" notification</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Pipeline questions → Slack Kelli: "Pipeline Question"</h4>
+            <textarea id="q-wed-pipeline" placeholder="Questions about Pipeline, the workflow steps, or how clients move through the system?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-pipeline')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-pipeline">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ MODULE 3D — DROPBOX: DOCUMENT MANAGEMENT ═══════════════════ -->
+      <div class="module-card" id="mod-wed-dropbox">
+        <div class="module-header">
+          <span class="module-icon">📁</span>
+          <h2>3D — Dropbox: Document Management</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Dropbox is where client tax documents live. Once a client completes their organizer,
+            your job is to go into their Dropbox folder and <strong>confirm that every document
+            they listed is actually there</strong>. When everything matches, you turn the file
+            over to Jay. Use the Taxes identity to log into Dropbox.
+          </p>
+
+          <div style="margin: 14px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            📍 Dropbox Path to KelliWorks Tax Clients
+          </div>
+          <div class="dropbox-path">
+            📦 KelliWorks Bookkeeping<br/>
+            &nbsp;&nbsp;<span class="db-arrow">→</span> Business Dock<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> Division<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> Tax Division<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> KelliWorks Tax Prep Services<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> Taxes To Go<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> <span class="db-final">📂 KelliWorks Tax Clients</span> ← Everyone is here
+          </div>
+
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            Your Document Confirmation Process
+          </div>
+          <div style="background:#D4EDDA; border-left: 4px solid #28A745; border-radius:8px; padding:14px 18px; font-size:13px; color:#155724; margin-bottom:14px; line-height:1.8;">
+            <strong>When a client completes their organizer in Pipeline:</strong><br/>
+            1️⃣ &nbsp;Go to their folder in Dropbox (path above)<br/>
+            2️⃣ &nbsp;Cross-reference their organizer answers against documents uploaded<br/>
+            3️⃣ &nbsp;If everything matches → <strong>notify Jay the file is ready</strong><br/>
+            4️⃣ &nbsp;If anything is missing → <strong>email the client to request the missing documents</strong><br/>
+            5️⃣ &nbsp;Do not move the file forward until all documents are confirmed ✅
+          </div>
+
+          <div class="alert warning">
+            <span class="alert-icon">🔑</span>
+            <div><strong>Dropbox Login:</strong> Log in using the <strong>Taxes Google account</strong> — the same one you use for Pipeline. Kelli will confirm your access.</div>
+          </div>
+
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-17"><label for="wed-17">Log into Dropbox with the Taxes Google account</label></li>
+            <li><input type="checkbox" id="wed-18"><label for="wed-18">Navigate the full folder path to KelliWorks Tax Clients</label></li>
+            <li><input type="checkbox" id="wed-19"><label for="wed-19">Open 2–3 existing client folders to understand how documents are organized</label></li>
+            <li><input type="checkbox" id="wed-20"><label for="wed-20">Understand the organizer-to-document matching process</label></li>
+            <li><input type="checkbox" id="wed-21"><label for="wed-21">Know the 5-step confirmation process above by heart</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Dropbox questions → Slack Kelli: "Dropbox Question"</h4>
+            <textarea id="q-wed-dropbox" placeholder="Questions about the Dropbox folder structure or document matching process?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-dropbox')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-dropbox">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ MODULE 3E — TAX PROCESSING SOP ════════════════════════════ -->
+      <div class="module-card" id="mod-wed-sop">
+        <div class="module-header">
+          <span class="module-icon">📄</span>
+          <h2>3E — Tax Processing SOP: The 10-Phase Workflow</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            This is the official KelliWorks Tax Processing SOP. Read it fully and understand where
+            <strong>you</strong> fit inside the 10-phase workflow. The phases highlighted in
+            <span style="color:#F4A261; font-weight:700;">gold</span> are where your role is most active.
+            Download the full PDF for your records.
+          </p>
+
+          <a class="link-btn gold" href="https://docs.google.com/document/d/15mFZZWPIHHuQ7ob_OO43Bvke2uuBiST4sd_rfi8XX4I/edit?usp=sharing" target="_blank">
+            📄 Download Full Tax Processing SOP (PDF)
+          </a>
+
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+            The 10 Phases — At a Glance
+          </div>
+          <div class="sop-flow">
+            <div class="sop-phase patricia">
+              <div class="sop-phase-num">⭐ Phase 1 — YOUR ROLE</div>
+              <div class="sop-phase-title">Intake Monitoring</div>
+              <div class="sop-phase-who">Patricia: Monitor Pipeline daily. Confirm questionnaire PDF received &amp; documents accessible.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 2</div>
+              <div class="sop-phase-title">O&amp;A Review</div>
+              <div class="sop-phase-who">Preparer: Reviews intake, compares to prior year.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 3</div>
+              <div class="sop-phase-title">Tax Preparation</div>
+              <div class="sop-phase-who">Jay: Prepares return in Drake software.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 4</div>
+              <div class="sop-phase-title">Internal Review (QC)</div>
+              <div class="sop-phase-who">Senior Reviewer: Confirms amounts, state returns.</div>
+            </div>
+            <div class="sop-phase patricia">
+              <div class="sop-phase-num">⭐ Phase 5 — YOUR ROLE</div>
+              <div class="sop-phase-title">High-Level Summary to Client</div>
+              <div class="sop-phase-who">Patricia: Complete High-Level Review Form in Pipeline → triggers auto email to client.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 6</div>
+              <div class="sop-phase-title">Client Approval</div>
+              <div class="sop-phase-who">Admin/Preparer: Send draft for approval if applicable.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 7</div>
+              <div class="sop-phase-title">Billing Control</div>
+              <div class="sop-phase-who">Admin: Confirm invoice paid. Do not move forward until payment received.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 8</div>
+              <div class="sop-phase-title">E-Signature (DocuSign)</div>
+              <div class="sop-phase-who">Admin: Upload 8879 forms, send for signature, monitor completion.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 9</div>
+              <div class="sop-phase-title">E-File</div>
+              <div class="sop-phase-who">Jay: Files return in Drake. Monitors federal + state acceptance.</div>
+            </div>
+            <div class="sop-phase">
+              <div class="sop-phase-num">Phase 10</div>
+              <div class="sop-phase-title">Final Delivery</div>
+              <div class="sop-phase-who">Admin: Email client filed return, acceptance confirmation, save to Dropbox.</div>
+            </div>
+          </div>
+
+          <div style="background:#FFF3CD; border-left:4px solid #F4A261; border-radius:8px; padding:14px 18px; font-size:13px; margin:16px 0;">
+            <strong>⭐ The Golden Rule from the SOP:</strong><br/>
+            Never file without: payment received, signed authorization forms (8879), and all internal reviews complete.
+            Only move a client to the next step when fully done — <strong>never skip stages.</strong>
+          </div>
+
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-22"><label for="wed-22">Read the full Tax Processing SOP (download PDF above)</label></li>
+            <li><input type="checkbox" id="wed-23"><label for="wed-23">Understand the 10-phase workflow end to end</label></li>
+            <li><input type="checkbox" id="wed-24"><label for="wed-24">Know which phases are YOUR responsibility (Phase 1 &amp; Phase 5)</label></li>
+            <li><input type="checkbox" id="wed-25"><label for="wed-25">Understand the "never file without" controls at the bottom of the SOP</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ SOP questions → Slack Kelli: "SOP Question"</h4>
+            <textarea id="q-wed-sop" placeholder="Questions about any of the 10 phases or where your role starts and ends?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-sop')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-sop">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ MODULE 3F — PATRICIA'S ROLE IN TAX SEASON ════════════════ -->
+      <div class="module-card" id="mod-wed-role">
+        <div class="module-header">
+          <span class="module-icon">🎯</span>
+          <h2>3F — Your Role in Tax Season</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            This is your ownership map for tax season. Be clear on what you own, what you support,
+            and what is <strong>not</strong> in your scope. When in doubt, escalate to Kelli.
+          </p>
+
+          <table class="role-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Your Role</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monitor Pipeline daily for completed organizers</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>Check every morning — Phase 1 of SOP</td>
+              </tr>
+              <tr>
+                <td>Confirm documents in Dropbox match the organizer</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>Line-by-line document verification before any file moves forward</td>
+              </tr>
+              <tr>
+                <td>Email clients about missing documents</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>Professional, warm tone — Kelli will provide email language templates</td>
+              </tr>
+              <tr>
+                <td>Manage client communication &amp; expectation via email</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>Status updates, document requests, timeline questions</td>
+              </tr>
+              <tr>
+                <td>Hand off complete files to Jay (the tax preparer)</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>Only when ALL documents are confirmed and matching</td>
+              </tr>
+              <tr>
+                <td>Complete the High-Level Summary in Pipeline (Phase 5)</td>
+                <td><span class="role-badge yes">✅ You Own This</span></td>
+                <td>After Jay completes prep — you enter the summary that triggers client email</td>
+              </tr>
+              <tr>
+                <td>CRM management</td>
+                <td><span class="role-badge no">🚫 Not Your Role</span></td>
+                <td>Kelli manages the CRM — do not modify client records in CRM</td>
+              </tr>
+              <tr>
+                <td>Tax preparation / return preparation</td>
+                <td><span class="role-badge no">🚫 Not Your Role</span></td>
+                <td>That's Jay's job in Drake software</td>
+              </tr>
+              <tr>
+                <td>Tax advice to clients</td>
+                <td><span class="role-badge no">🚫 Always Escalate</span></td>
+                <td>Escalate all tax advice questions directly to Kelli — no exceptions</td>
+              </tr>
+              <tr>
+                <td>DocuSign / e-signature management</td>
+                <td><span class="role-badge ref">🔄 TBD with Kelli</span></td>
+                <td>Clarify with Kelli — this may come into your scope as you ramp up</td>
+              </tr>
+              <tr>
+                <td>IRS notices or government correspondence</td>
+                <td><span class="role-badge no">🚫 Always Escalate</span></td>
+                <td>Never respond to these — forward to Kelli immediately</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:#D5E8F0; border-left:4px solid #2E86AB; border-radius:8px; padding:14px 18px; font-size:13px; color:#1B2A4A; margin:16px 0;">
+            <strong>🔑 The One Sentence That Defines Your Tax Role:</strong><br/>
+            <em>"I make sure the client's documents are complete, the file is ready for Jay,
+            and the client knows where they stand — then I get out of the way and let the
+            professionals do the tax work."</em>
+          </div>
+
+          <ul class="checklist" data-day="wed">
+            <li><input type="checkbox" id="wed-26"><label for="wed-26">Review your full role ownership table above</label></li>
+            <li><input type="checkbox" id="wed-27"><label for="wed-27">Know the 6 tasks you own in tax season</label></li>
+            <li><input type="checkbox" id="wed-28"><label for="wed-28">Know what is NOT in scope (CRM, tax prep, tax advice, IRS notices)</label></li>
+            <li><input type="checkbox" id="wed-29"><label for="wed-29">Slack Kelli to confirm the handoff process for notifying Jay a file is ready</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ Role questions → Slack Kelli: "Role Question"</h4>
+            <textarea id="q-wed-role" placeholder="Any unclear ownership areas? Anything you're unsure belongs to you?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('wed-role')">Send</button>
+              <span class="q-saved-msg" id="saved-wed-role">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ═══════════════════════════════════════════════════ THURSDAY -->
@@ -1577,6 +2066,94 @@
             <h4>❓ Payroll questions → Slack Kelli: "Payroll Question"</h4>
             <textarea id="q-thu-payroll" placeholder="Questions about payroll workflows, clients, or QBO recording?"></textarea>
             <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('thu-payroll')">Send</button><span class="q-saved-msg" id="saved-thu-payroll">✓ Sent to Slack</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-thu-qbo">
+        <div class="module-header"><span class="module-icon">💼</span><h2>4B — QuickBooks Online Overview</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <p class="module-desc">QBO is the backbone of all accounting work at KelliWorks. Every client has their own QBO file.</p>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-qbo-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">QBO Overview — Navigating the KelliWorks Client Files</div>
+              <div class="loom-status pending" id="loom-qbo-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-7"><label for="thu-7">Watch QBO overview video</label></li>
+            <li><input type="checkbox" id="thu-8"><label for="thu-8">Log into QBO and locate all client files</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-thu-invoicing">
+        <div class="module-header"><span class="module-icon">🧾</span><h2>4C — Invoicing &amp; Billing Support</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-invoice-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Creating &amp; Sending Invoices in QBO</div>
+              <div class="loom-status pending" id="loom-invoice-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-ar-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Tracking Receivables &amp; Following Up on Past-Due Accounts</div>
+              <div class="loom-status pending" id="loom-ar-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-9"><label for="thu-9">Watch invoicing video</label></li>
+            <li><input type="checkbox" id="thu-10"><label for="thu-10">Watch A/R tracking video</label></li>
+            <li><input type="checkbox" id="thu-11"><label for="thu-11">Practice creating a test invoice in QBO</label></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card" id="mod-thu-recon">
+        <div class="module-header"><span class="module-icon">🔍</span><h2>4D — Bookkeeping &amp; Reconciliation</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-body">
+          <div class="alert warning"><span class="alert-icon">⚠️</span><div><strong>Core Commitment #4:</strong> Every reconciliation adjustment gets documented — what changed, why, and when. Clean books are your signature. Over-document when in doubt.</div></div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-recon-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Month-End Reconciliation Walkthrough in QBO</div>
+              <div class="loom-status pending" id="loom-recon-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-categories-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Transaction Categorization &amp; Journal Entries</div>
+              <div class="loom-status pending" id="loom-categories-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-discrepancies-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Flagging Uncleared Transactions &amp; Reconciliation Discrepancies</div>
+              <div class="loom-status pending" id="loom-discrepancies-status">📹 Video coming soon</div>
+              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+            </div>
+          </div>
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-12"><label for="thu-12">Watch reconciliation walkthrough video</label></li>
+            <li><input type="checkbox" id="thu-13"><label for="thu-13">Watch transaction categorization video</label></li>
+            <li><input type="checkbox" id="thu-14"><label for="thu-14">Watch discrepancy flagging video</label></li>
+            <li><input type="checkbox" id="thu-15"><label for="thu-15">Shadow Kelli on a live reconciliation during team meeting</label></li>
+          </ul>
+          <div class="question-box">
+            <h4>❓ QBO questions → Slack Kelli: "QBO Question"</h4>
+            <textarea id="q-thu-qbo" placeholder="Any questions about QuickBooks, reconciliation, or bookkeeping?"></textarea>
+            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('thu-qbo')">Send</button><span class="q-saved-msg" id="saved-thu-qbo">✓ Sent to Slack</span></div>
           </div>
         </div>
       </div>
@@ -1748,8 +2325,8 @@
   const DAYS = {
     mon: { ids: ['mon-1','mon-2','mon-3','mon-6a','mon-6b','mon-6','mon-7','mon-8','mon-9','mon-10','mon-10b','mon-10c','mon-10d','mon-10e','mon-11','mon-12','mon-13','mon-14','mon-15','mon-16','mon-17','mon-18'] },
     tue: { ids: ['tue-1','tue-2','tue-3','tue-4','tue-5','tue-6','tue-7','tue-8','tue-9','tue-10','tue-11','tue-12','tue-13'] },
-    wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9'] },
-    thu: { ids: ['thu-1','thu-2','thu-3','thu-4','thu-5','thu-6'] },
+    wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9','wed-10','wed-11','wed-12','wed-13','wed-14','wed-15','wed-16','wed-17','wed-18','wed-19','wed-20','wed-21','wed-22','wed-23','wed-24','wed-25','wed-26','wed-27','wed-28','wed-29'] },
+    thu: { ids: ['thu-1','thu-2','thu-3','thu-4','thu-5','thu-6','thu-7','thu-8','thu-9','thu-10','thu-11','thu-12','thu-13','thu-14','thu-15'] },
     fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9'] },
   };
 
@@ -1850,17 +2427,29 @@
 
     if (ta.value.trim()) {
       const moduleLabels = {
-        'mon-welcome': 'Monday — Welcome & Orientation',
-        'mon-qbo': 'Monday — QBO & Chart of Accounts',
-        'mon-clients': 'Monday — Client Roster',
-        'mon-comms': 'Monday — Communication Standards',
-        'mon-tools': 'Monday — Tools & Access',
-        'tue-asana': 'Tuesday — Asana & Daily Workflow',
-        'tue-keeper': 'Tuesday — Keeper: Client Financial Delivery',
+        'mon-welcome':    'Monday — Welcome & Orientation',
+        'mon-qbo':        'Monday — QBO & Chart of Accounts',
+        'mon-clients':    'Monday — Client Roster',
+        'mon-comms':      'Monday — Communication Standards',
+        'mon-tools':      'Monday — Tools & Access',
+        'mon-email':      'Monday — Email & Communication',
+        'mon-roster':     'Monday — Client Roster',
+        'mon-tech':       'Monday — Tech Stack & Tools',
+        'mon-docs':       'Monday — Documents & SOPs',
+        'tue-asana':      'Tuesday — Asana & Daily Workflow',
+        'tue-keeper':     'Tuesday — Keeper: Client Financial Delivery',
         'tue-escalation': 'Tuesday — Escalation Guide',
-        'wed-qbo': 'Wednesday — QBO Deep Dive',
-        'thu-payroll': 'Thursday — Payroll Processing',
-        'fri-filings': 'Friday — State Filings & Wrap-Up'
+        'wed-context':    'Wednesday — Tax Consultation Context',
+        'wed-organizer':  'Wednesday — Client Organizer Experience',
+        'wed-pipeline':   'Wednesday — Pipeline: Admin Back End',
+        'wed-dropbox':    'Wednesday — Dropbox Document Management',
+        'wed-sop':        'Wednesday — Tax Processing SOP',
+        'wed-role':       'Wednesday — Your Role in Tax Season',
+        'thu-payroll':    'Thursday — Payroll Processing',
+        'thu-qbo':        'Thursday — QuickBooks Online',
+        'fri-state':      'Friday — State Filings',
+        'fri-wrapup':     'Friday — Week 1 Wrap-Up',
+        'fri-filings':    'Friday — State Filings & Wrap-Up'
       };
       const label = moduleLabels[key] || key;
       fetch('/api/notify', {
