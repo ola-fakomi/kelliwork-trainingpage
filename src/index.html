@@ -10,33 +10,33 @@
     /* ─── RESET & BASE ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy:      #1B2A4A;
-      --teal:      #2E86AB;
-      --teal-lt:   #D5E8F0;
-      --gold:      #F4A261;
-      --gold-lt:   #FFF3CD;
-      --green:     #28A745;
-      --green-lt:  #D4EDDA;
-      --red:       #DC3545;
-      --red-lt:    #F8D7DA;
-      --gray:      #F5F5F5;
-      --dark:      #2C2C2C;
-      --mid:       #666666;
+      --navy:      #10284D;
+      --blue:      #0285CE;
+      --blue-lt:   #A0D2EF;
+      --gold:      #BCA162;
+      --gold-lt:   #FFF7EE;
+      --green:     #477651;
+      --green-lt:  #B6D1BB;
+      --red:       #DF3131;
+      --red-lt:    #FDEAEA;
+      --gray:      #FBF8F9;
+      --dark:      #1A1A1A;
+      --mid:       #767676;
       --white:     #FFFFFF;
-      --shadow:    0 2px 12px rgba(0,0,0,0.10);
-      --radius:    10px;
+      --shadow:    0px 1px 4px 0px rgba(0,0,0,0.5);
+      --radius:    8px;
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #EEF3F8;
+      font-family: 'Source Sans 3', 'myriad-pro', 'Liberation Sans', Arial, sans-serif;
+      background: #FBF8F9;
       color: var(--dark);
       min-height: 100vh;
     }
 
     /* ─── TOP BAR ───────────────────────────────────────────────────── */
     .topbar {
-      background: linear-gradient(135deg, #152238 0%, var(--navy) 60%, #1e3a5f 100%);
+      background: #12261F;
       color: white;
       padding: 0 32px;
       display: flex;
@@ -62,8 +62,8 @@
     }
     .topbar-brand { font-size: 17px; font-weight: 700; letter-spacing: 0.3px; line-height:1.2; }
     .topbar-brand span { color: var(--gold); }
-    .topbar-tagline { font-size: 10px; color: #8BBAD4; letter-spacing: 0.5px; text-transform: uppercase; margin-top:2px; }
-    .topbar-meta { font-size: 13px; color: #A8C4D8; }
+    .topbar-tagline { font-size: 10px; color: rgba(255,253,242,0.55); letter-spacing: 0.5px; text-transform: uppercase; margin-top:2px; }
+    .topbar-meta { font-size: 13px; color: rgba(255,253,242,0.7); }
     .topbar-progress {
       display: flex;
       align-items: center;
@@ -123,9 +123,9 @@
     }
     .nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
     .nav-item.active {
-      background: rgba(46,134,171,0.25);
+      background: rgba(2,133,206,0.2);
       color: white;
-      border-left-color: var(--teal);
+      border-left-color: var(--blue);
       font-weight: 600;
     }
     .nav-item .nav-emoji { font-size: 16px; }
@@ -139,7 +139,7 @@
       font-weight: 700;
     }
     .nav-item.active .nav-day-badge {
-      background: var(--teal);
+      background: var(--blue);
       color: white;
     }
     .nav-check {
@@ -179,7 +179,7 @@
       justify-content: space-between;
       gap: 20px;
     }
-    .day-hero.today { background: linear-gradient(135deg, #1B2A4A 0%, #2E4A7A 100%); }
+    .day-hero.today { background: linear-gradient(135deg, #10284D 0%, #1a3a6a 100%); }
     .day-hero-left .tag {
       display: inline-block;
       background: var(--gold);
@@ -239,7 +239,7 @@
       overflow: hidden;
     }
     .module-header {
-      background: var(--teal);
+      background: var(--blue);
       padding: 14px 20px;
       display: flex;
       align-items: center;
@@ -273,8 +273,8 @@
 
     /* ─── LOOM SLOT ─────────────────────────────────────────────────── */
     .loom-slot {
-      background: var(--teal-lt);
-      border: 2px dashed var(--teal);
+      background: var(--blue-lt);
+      border: 2px dashed var(--blue);
       border-radius: 8px;
       padding: 16px 18px;
       margin-bottom: 14px;
@@ -285,12 +285,12 @@
     .loom-slot.has-video {
       background: #EBF5FB;
       border-style: solid;
-      border-color: var(--teal);
+      border-color: var(--blue);
     }
     .loom-play {
       width: 44px;
       height: 44px;
-      background: var(--teal);
+      background: var(--blue);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -314,7 +314,7 @@
     }
     .loom-status {
       font-size: 12px;
-      color: var(--teal);
+      color: var(--blue);
       font-style: italic;
     }
     .loom-status.pending { color: #888; }
@@ -343,7 +343,7 @@
     .checklist input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      accent-color: var(--teal);
+      accent-color: var(--blue);
       flex-shrink: 0;
       margin-top: 2px;
       cursor: pointer;
@@ -372,10 +372,10 @@
       line-height: 1.5;
     }
     .alert-icon { font-size: 18px; flex-shrink: 0; }
-    .alert.warning { background: var(--gold-lt); border-left: 4px solid var(--gold); color: #856404; }
-    .alert.danger  { background: var(--red-lt);  border-left: 4px solid var(--red);  color: #721C24; }
-    .alert.info    { background: var(--teal-lt); border-left: 4px solid var(--teal); color: #0C5460; }
-    .alert.success { background: var(--green-lt); border-left: 4px solid var(--green); color: #155724; }
+    .alert.warning { background: var(--gold-lt); border-left: 4px solid var(--gold); color: #6B5400; }
+    .alert.danger  { background: var(--red-lt);  border-left: 4px solid var(--red);  color: #8B1A1A; }
+    .alert.info    { background: #EBF5FC; border-left: 4px solid #0285CE; color: #014C7A; }
+    .alert.success { background: #E8F1E9; border-left: 4px solid #477651; color: #2F4F36; }
     .alert strong { font-weight: 700; }
 
     /* ─── ESCALATION TABLE ──────────────────────────────────────────── */
@@ -444,7 +444,7 @@
     .tech-table td { padding: 10px 14px; border-bottom: 1px solid #EEE; vertical-align: top; }
     .tech-table tr:last-child td { border-bottom: none; }
     .tech-table tr:nth-child(even) td { background: #FAFAFA; }
-    .tech-name { font-weight: 700; color: var(--teal); }
+    .tech-name { font-weight: 700; color: var(--blue); }
 
     /* ─── QUESTION BOX ──────────────────────────────────────────────── */
     .question-box {
@@ -471,7 +471,7 @@
       min-height: 72px;
       background: white;
     }
-    .question-box textarea:focus { outline: none; border-color: var(--teal); }
+    .question-box textarea:focus { outline: none; border-color: var(--blue); }
     .question-box .qbox-actions {
       display: flex;
       gap: 10px;
@@ -480,7 +480,7 @@
     }
     .btn {
       padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: 0px;
       border: none;
       font-size: 13px;
       font-weight: 600;
@@ -488,9 +488,11 @@
       transition: opacity 0.2s;
     }
     .btn:hover { opacity: 0.85; }
-    .btn-teal  { background: var(--teal); color: white; }
+    .btn-teal  { background: var(--blue); color: white; }
     .btn-navy  { background: var(--navy); color: white; }
-    .btn-ghost { background: transparent; border: 1.5px solid var(--teal); color: var(--teal); }
+    .btn-ghost { background: transparent; border: 1.5px solid #0285CE; color: #0285CE; }
+    .btn-teal:hover { background: white; color: #0285CE; border: 1.5px solid #0285CE; }
+    .btn-navy:hover { background: transparent; color: #10284D; border: 1.5px solid #10284D; }
     .qbox-hint { font-size: 12px; color: #AAA; margin-left: auto; }
     .q-saved-msg {
       font-size: 12px;
@@ -521,13 +523,13 @@
     .day-progress-list li:last-child { border-bottom: none; }
     .dpl-name { width: 110px; font-weight: 600; color: var(--navy); }
     .dpl-bar-wrap { flex: 1; height: 8px; background: #EEE; border-radius: 99px; overflow: hidden; }
-    .dpl-bar { height: 100%; background: var(--teal); border-radius: 99px; transition: width 0.4s; }
+    .dpl-bar { height: 100%; background: var(--blue); border-radius: 99px; transition: width 0.4s; }
     .dpl-pct { width: 36px; text-align: right; font-size: 12px; font-weight: 700; color: var(--mid); }
 
     /* ─── WEEK 2 LOCKED ─────────────────────────────────────────────── */
     .locked-banner {
-      background: var(--teal-lt);
-      border: 2px dashed var(--teal);
+      background: var(--blue-lt);
+      border: 2px dashed var(--blue);
       border-radius: var(--radius);
       padding: 40px;
       text-align: center;
@@ -550,7 +552,7 @@
       box-shadow: var(--shadow);
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
-      border-top: 4px solid var(--teal);
+      border-top: 4px solid var(--blue);
       text-align: center;
     }
     .week-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
@@ -559,25 +561,25 @@
     .week-card .wc-day { font-size: 13px; font-weight: 700; color: var(--navy); }
     .week-card .wc-date { font-size: 11px; color: var(--mid); margin-bottom: 8px; }
     .week-card .wc-bar-wrap { height: 6px; background: #EEE; border-radius: 99px; overflow: hidden; }
-    .week-card .wc-bar { height: 100%; background: var(--teal); border-radius: 99px; transition: width 0.4s; }
+    .week-card .wc-bar { height: 100%; background: var(--blue); border-radius: 99px; transition: width 0.4s; }
     .week-card.today-card .wc-bar { background: var(--gold); }
     .week-card .wc-pct { font-size: 11px; font-weight: 700; color: var(--mid); margin-top: 4px; }
 
     /* ─── SAVE BAR ──────────────────────────────────────────────────── */
     .save-bar {
-      background: #1a3a5c;
+      background: #12261F;
       padding: 8px 32px;
       display: flex;
       align-items: center;
       gap: 12px;
       font-size: 13px;
-      color: #A8C4D8;
+      color: rgba(255,253,242,0.65);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .save-bar strong { color: white; }
+    .save-bar strong { color: var(--gold); }
     .save-btn {
       padding: 5px 14px;
-      border-radius: 6px;
+      border-radius: 0px;
       border: none;
       font-size: 12px;
       font-weight: 700;
@@ -585,7 +587,7 @@
       transition: opacity 0.2s;
     }
     .save-btn:hover { opacity: 0.85; }
-    .save-btn-export { background: var(--teal); color: white; }
+    .save-btn-export { background: var(--blue); color: white; }
     .save-btn-import { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #A8C4D8; }
     .save-btn-reset  { background: transparent; border: 1.5px solid rgba(220,53,69,0.4); color: #F09098; }
     .save-status { margin-left: auto; font-size: 12px; color: var(--gold); font-weight: 600; opacity: 0; transition: opacity 0.5s; }
@@ -616,53 +618,53 @@
     }
     .fathom-play:hover { transform: scale(1.09); box-shadow: 0 4px 16px rgba(108,92,231,0.45); color: #fff; }
     .fathom-info { flex: 1; min-width: 0; }
-    .fathom-label { font-size: 14px; font-weight: 600; color: #2C2C2C; }
+    .fathom-label { font-size: 14px; font-weight: 600; color: #1A1A1A; }
     .fathom-meta  { font-size: 12px; color: #6C5CE7; font-weight: 600; margin-top: 3px; }
 
     /* ── SOP Phase flow ───────────────────────────────────────────── */
     .sop-flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
     .sop-phase {
-      background: #EEF3F8; border-left: 3px solid #2E86AB;
+      background: #FBF8F9; border-left: 3px solid #0285CE;
       border-radius: 6px; padding: 8px 12px; font-size: 13px;
       min-width: 180px; flex: 1;
     }
-    .sop-phase-num { font-size: 10px; font-weight: 800; color: #2E86AB; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sop-phase-title { font-weight: 700; color: #1B2A4A; margin: 2px 0; font-size: 13px; }
+    .sop-phase-num { font-size: 10px; font-weight: 800; color: #0285CE; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sop-phase-title { font-weight: 700; color: #10284D; margin: 2px 0; font-size: 13px; }
     .sop-phase-who { font-size: 11px; color: #666; }
-    .sop-phase.patricia { border-left-color: #F4A261; background: #FFF8F2; }
-    .sop-phase.patricia .sop-phase-num { color: #F4A261; }
+    .sop-phase.patricia { border-left-color: #BCA162; background: #FFF8F2; }
+    .sop-phase.patricia .sop-phase-num { color: #BCA162; }
 
     /* ── Role ownership table ─────────────────────────────────────── */
     .role-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
-    .role-table th { background: #1B2A4A; color: white; padding: 9px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .role-table th { background: #10284D; color: white; padding: 9px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
     .role-table td { padding: 9px 12px; border-bottom: 1px solid #EEF3F8; vertical-align: top; }
     .role-table tr:nth-child(even) td { background: #F9FBFD; }
     .role-badge { display: inline-block; border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
-    .role-badge.yes { background: #D4EDDA; color: #155724; }
-    .role-badge.no  { background: #F8D7DA; color: #721C24; }
-    .role-badge.ref { background: #FFF3CD; color: #856404; }
+    .role-badge.yes { background: #B6D1BB; color: #155724; }
+    .role-badge.no  { background: #FDEAEA; color: #721C24; }
+    .role-badge.ref { background: #FFF7EE; color: #856404; }
 
     /* ── Dropbox path ─────────────────────────────────────────────── */
     .dropbox-path {
-      background: #F5F5F5; border: 1px solid #DDE3EC; border-radius: 8px;
+      background: #FBF8F9; border: 1px solid #DDE3EC; border-radius: 8px;
       padding: 14px 18px; font-family: 'Courier New', monospace;
-      font-size: 13px; color: #1B2A4A; margin: 14px 0; line-height: 1.8;
+      font-size: 13px; color: #10284D; margin: 14px 0; line-height: 1.8;
     }
-    .dropbox-path .db-arrow { color: #2E86AB; font-weight: 700; }
-    .dropbox-path .db-final { color: #F4A261; font-weight: 800; }
+    .dropbox-path .db-arrow { color: #0285CE; font-weight: 700; }
+    .dropbox-path .db-final { color: #BCA162; font-weight: 800; }
 
     /* ── Link button ──────────────────────────────────────────────── */
     .link-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #1B2A4A; color: white;
+      background: #10284D; color: white;
       padding: 10px 18px; border-radius: 8px;
       font-size: 14px; font-weight: 600; text-decoration: none;
       margin: 6px 6px 6px 0; transition: background 0.2s;
     }
-    .link-btn:hover { background: #2E86AB; color: white; }
-    .link-btn.gold { background: #F4A261; color: #1B2A4A; }
-    .link-btn.gold:hover { background: #e0894a; color: #1B2A4A; }
-    .link-btn.teal { background: #2E86AB; color: white; }
+    .link-btn:hover { background: #0285CE; color: white; }
+    .link-btn.gold { background: #BCA162; color: #10284D; }
+    .link-btn.gold:hover { background: #e0894a; color: #10284D; }
+    .link-btn.teal { background: #0285CE; color: white; }
     .link-btn.teal:hover { background: #246e8e; }
 
 /* ── Email scenario cards ─────────────────────────────────────────────── */
@@ -673,7 +675,7 @@
   margin: 20px 0;
 }
 .scenario-header {
-  background: #1B2A4A;
+  background: #10284D;
   color: white;
   padding: 12px 18px;
   display: flex;
@@ -681,8 +683,8 @@
   gap: 12px;
 }
 .scenario-num {
-  background: #F4A261;
-  color: #1B2A4A;
+  background: #BCA162;
+  color: #10284D;
   font-weight: 900;
   font-size: 12px;
   padding: 3px 9px;
@@ -703,9 +705,9 @@
   margin-top: 4px;
   display: inline-block;
 }
-.scenario-badge.live    { background: #DC3545; color: white; }
-.scenario-badge.great   { background: #28A745; color: white; }
-.scenario-badge.caution { background: #F4A261; color: #1B2A4A; }
+.scenario-badge.live    { background: #DF3131; color: white; }
+.scenario-badge.great   { background: #477651; color: white; }
+.scenario-badge.caution { background: #BCA162; color: #10284D; }
 .scenario-badge.internal{ background: #6C5CE7; color: white; }
 
 .email-preview {
@@ -716,21 +718,21 @@
   overflow: hidden;
 }
 .email-preview-header {
-  background: #EEF3F8;
+  background: #FBF8F9;
   padding: 8px 14px;
   font-size: 12px;
   color: #666;
   border-bottom: 1px solid #DDE3EC;
   line-height: 1.6;
 }
-.email-preview-header strong { color: #1B2A4A; }
+.email-preview-header strong { color: #10284D; }
 .email-preview-body {
   padding: 12px 14px;
   font-size: 13px;
-  color: #2C2C2C;
+  color: #1A1A1A;
   line-height: 1.7;
   white-space: pre-wrap;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Source Sans 3', 'myriad-pro', 'Liberation Sans', Arial, sans-serif;
 }
 .email-preview-body.sent { background: #F0F7FF; }
 
@@ -742,10 +744,10 @@
   font-size: 13px;
   line-height: 1.7;
 }
-.analysis-block.green  { background: #D4EDDA; border-left: 4px solid #28A745; }
-.analysis-block.amber  { background: #FFF3CD; border-left: 4px solid #F4A261; }
-.analysis-block.red    { background: #F8D7DA; border-left: 4px solid #DC3545; }
-.analysis-block.teal   { background: #D5E8F0; border-left: 4px solid #2E86AB; }
+.analysis-block.green  { background: #B6D1BB; border-left: 4px solid #477651; }
+.analysis-block.amber  { background: #FFF7EE; border-left: 4px solid #BCA162; }
+.analysis-block.red    { background: #FDEAEA; border-left: 4px solid #DF3131; }
+.analysis-block.teal   { background: #A0D2EF; border-left: 4px solid #0285CE; }
 .analysis-block strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 .analysis-block ul { padding-left: 18px; margin: 4px 0 0; }
 .analysis-block li { margin-bottom: 3px; }
@@ -768,7 +770,7 @@
 }
 .time-row:last-child { border-bottom: none; }
 .time-label {
-  background: #1B2A4A;
+  background: #10284D;
   color: #A8C4D8;
   font-size: 11px;
   font-weight: 700;
@@ -781,14 +783,14 @@
 .time-content {
   padding: 10px 16px;
   flex: 1;
-  color: #2C2C2C;
+  color: #1A1A1A;
   line-height: 1.6;
 }
-.time-content strong { color: #1B2A4A; }
-.time-row.focus    .time-label { background: #2E86AB; color: white; }
-.time-row.priority .time-label { background: #F4A261; color: #1B2A4A; }
+.time-content strong { color: #10284D; }
+.time-row.focus    .time-label { background: #0285CE; color: white; }
+.time-row.priority .time-label { background: #BCA162; color: #10284D; }
 .time-row.huddle   .time-label { background: #6C5CE7; color: white; }
-.time-row.wrap     .time-label { background: #28A745; color: white; }
+.time-row.wrap     .time-label { background: #477651; color: white; }
 .time-tag {
   display: inline-block;
   font-size: 10px;
@@ -798,10 +800,10 @@
   margin-left: 6px;
   vertical-align: middle;
 }
-.time-tag.email  { background: #D5E8F0; color: #1B2A4A; }
-.time-tag.slack  { background: #FFF3CD; color: #856404; }
-.time-tag.asana  { background: #D4EDDA; color: #155724; }
-.time-tag.kelli  { background: #F8D7DA; color: #721C24; }
+.time-tag.email  { background: #A0D2EF; color: #10284D; }
+.time-tag.slack  { background: #FFF7EE; color: #856404; }
+.time-tag.asana  { background: #B6D1BB; color: #155724; }
+.time-tag.kelli  { background: #FDEAEA; color: #721C24; }
 
 /* ── 3-channel monitor ────────────────────────────────────────────────── */
 .channel-grid {
@@ -823,13 +825,13 @@
   font-size: 14px;
   color: white;
 }
-.channel-card-header.email  { background: #1B2A4A; }
+.channel-card-header.email  { background: #10284D; }
 .channel-card-header.slack  { background: #4A154B; }
 .channel-card-header.asana  { background: #F06A6A; }
 .channel-card-body {
   padding: 12px 16px;
   font-size: 13px;
-  color: #2C2C2C;
+  color: #1A1A1A;
   line-height: 1.8;
 }
 .channel-card-body ul { padding-left: 16px; margin: 0; }
@@ -837,7 +839,7 @@
 .channel-flag {
   font-size: 11px;
   font-weight: 700;
-  color: #DC3545;
+  color: #DF3131;
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px solid #EEF3F8;
@@ -860,7 +862,7 @@
   padding: 14px 16px;
 }
 .sas-num {
-  background: #2E86AB;
+  background: #0285CE;
   color: white;
   font-weight: 900;
   font-size: 13px;
@@ -873,10 +875,10 @@
   flex-shrink: 0;
 }
 .sas-content { flex: 1; font-size: 13px; line-height: 1.7; }
-.sas-content strong { color: #1B2A4A; display: block; margin-bottom: 2px; }
+.sas-content strong { color: #10284D; display: block; margin-bottom: 2px; }
 .reminder-box {
-  background: #FFF3CD;
-  border: 1px solid #F4A261;
+  background: #FFF7EE;
+  border: 1px solid #BCA162;
   border-radius: 8px;
   padding: 14px 18px;
   font-size: 13px;
@@ -886,6 +888,7 @@
 .reminder-box strong { color: #856404; }
 
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Questrial&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -994,28 +997,28 @@
           <p class="module-desc" style="margin-bottom:18px;">You'll meet everyone in the daily 1-hour huddle. Here's who's who and how you fit in together.</p>
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
 
-            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--gold);">
+            <div style="background:#FBF8F9; border-radius:8px; padding:16px; border-left:4px solid var(--gold);">
               <div style="font-size:22px; margin-bottom:6px;">👑</div>
               <div style="font-weight:700; font-size:15px; color:var(--navy);">Kelli Lewis</div>
-              <div style="font-size:12px; color:var(--teal); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Founder & CEO — Your Direct Report</div>
+              <div style="font-size:12px; color:var(--blue); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Founder & CEO — Your Direct Report</div>
               <div style="font-size:13px; color:#555; line-height:1.5;">Leads the daily team huddle. Reviews and approves all sensitive client communications, payroll, and state/IRS matters. Reach her on <strong>Slack first</strong>, always.</div>
             </div>
 
-            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--teal);">
+            <div style="background:#FBF8F9; border-radius:8px; padding:16px; border-left:4px solid var(--blue);">
               <div style="font-size:22px; margin-bottom:6px;">🗂️</div>
               <div style="font-weight:700; font-size:15px; color:var(--navy);">Tim (Admin KelliWorks)</div>
-              <div style="font-size:12px; color:var(--teal); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Operations Admin — Your Day-to-Day Teammate</div>
+              <div style="font-size:12px; color:var(--blue); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Operations Admin — Your Day-to-Day Teammate</div>
               <div style="font-size:13px; color:#555; line-height:1.5;">Tim is your closest operational partner. He manages Asana tasks, email flow, meeting prep, and sends daily EOD recaps to Kelli. He's in every huddle. Loop him in when you need coordination help — and he'll loop you in too.</div>
             </div>
 
-            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid #7E57C2;">
+            <div style="background:#FBF8F9; border-radius:8px; padding:16px; border-left:4px solid #7E57C2;">
               <div style="font-size:22px; margin-bottom:6px;">📒</div>
               <div style="font-weight:700; font-size:15px; color:var(--navy);">Rangan (Bookkeeper)</div>
               <div style="font-size:12px; color:#7E57C2; font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Lead Bookkeeper</div>
               <div style="font-size:13px; color:#555; line-height:1.5;">Handles QBO reconciliations and bookkeeping across client files. You'll work alongside him on month-end tasks. Note: Rangan typically signs off at 1PM EST — plan your QBO questions accordingly.</div>
             </div>
 
-            <div style="background:#F5F5F5; border-radius:8px; padding:16px; border-left:4px solid var(--green);">
+            <div style="background:#FBF8F9; border-radius:8px; padding:16px; border-left:4px solid var(--green);">
               <div style="font-size:22px; margin-bottom:6px;">📊</div>
               <div style="font-weight:700; font-size:15px; color:var(--navy);">Sagar (Bookkeeping Team)</div>
               <div style="font-size:12px; color:var(--green); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Bookkeeping Team</div>
@@ -1601,16 +1604,16 @@
           </div>
 
           <div style="
-            background: #FFF3CD;
-            border-left: 4px solid #F4A261;
+            background: #FFF7EE;
+            border-left: 4px solid #BCA162;
             border-radius: 8px;
             padding: 14px 18px;
             margin: 16px 0;
             font-size: 14px;
-            color: #2C2C2C;
+            color: #1A1A1A;
           ">
             <strong>📌 Keeper Site:</strong>&nbsp;
-            <a href="https://app.trykeeper.com" target="_blank" style="color:#1B2A4A; font-weight:600;">
+            <a href="https://app.trykeeper.com" target="_blank" style="color:#10284D; font-weight:600;">
               app.trykeeper.com
             </a>
             — Kelli will walk you through your login and the client-facing view.
@@ -1745,7 +1748,7 @@
             </div>
           </div>
 
-          <div style="margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A; text-transform: uppercase; letter-spacing: 0.5px;">
+          <div style="margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: #10284D; text-transform: uppercase; letter-spacing: 0.5px;">
             🎬 Real Consultation Recordings
           </div>
           <p style="font-size:13px; color:#666; margin-bottom:12px;">
@@ -1825,7 +1828,7 @@
             </div>
           </div>
 
-          <div style="margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
             Step 1 — Complete the Personal Tax Organizer
           </div>
           <p style="font-size:13px; color:#555; margin-bottom: 10px;">
@@ -1835,7 +1838,7 @@
             📋 Open Personal Tax Organizer
           </a>
 
-          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
             Step 2 — Complete the Business Tax Organizer
           </div>
           <p style="font-size:13px; color:#555; margin-bottom: 10px;">
@@ -1895,7 +1898,7 @@
             </div>
           </div>
 
-          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
             Log in &amp; Explore Pipeline
           </div>
           <a class="link-btn" href="https://kelliworks.pipelineapp.io/logon/default.aspx" target="_blank">
@@ -1905,7 +1908,7 @@
             Once logged in: navigate to <strong>Requests → All</strong> and find the <strong>2025 Individual Organizers</strong> bundle. This is where all client organizers live.
           </p>
 
-          <div style="margin: 20px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 20px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
             Watch: Workflow &amp; Pipeline Meetings
           </div>
           <p style="font-size:13px; color:#555; margin-bottom:12px;">
@@ -1968,7 +1971,7 @@
             over to Jay. Use the Taxes identity to log into Dropbox.
           </p>
 
-          <div style="margin: 14px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 14px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
             📍 Dropbox Path to KelliWorks Tax Clients
           </div>
           <div class="dropbox-path">
@@ -1981,10 +1984,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> <span class="db-final">📂 KelliWorks Tax Clients</span> ← Everyone is here
           </div>
 
-          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
             Your Document Confirmation Process
           </div>
-          <div style="background:#D4EDDA; border-left: 4px solid #28A745; border-radius:8px; padding:14px 18px; font-size:13px; color:#155724; margin-bottom:14px; line-height:1.8;">
+          <div style="background:#B6D1BB; border-left: 4px solid #477651; border-radius:8px; padding:14px 18px; font-size:13px; color:#155724; margin-bottom:14px; line-height:1.8;">
             <strong>When a client completes their organizer in Pipeline:</strong><br/>
             1️⃣ &nbsp;Go to their folder in Dropbox (path above)<br/>
             2️⃣ &nbsp;Cross-reference their organizer answers against documents uploaded<br/>
@@ -2027,7 +2030,7 @@
           <p class="module-desc">
             This is the official KelliWorks Tax Processing SOP. Read it fully and understand where
             <strong>you</strong> fit inside the 10-phase workflow. The phases highlighted in
-            <span style="color:#F4A261; font-weight:700;">gold</span> are where your role is most active.
+            <span style="color:#BCA162; font-weight:700;">gold</span> are where your role is most active.
             Download the full PDF for your records.
           </p>
 
@@ -2035,7 +2038,7 @@
             📄 Download Full Tax Processing SOP (PDF)
           </a>
 
-          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #1B2A4A;">
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
             The 10 Phases — At a Glance
           </div>
           <div class="sop-flow">
@@ -2091,7 +2094,7 @@
             </div>
           </div>
 
-          <div style="background:#FFF3CD; border-left:4px solid #F4A261; border-radius:8px; padding:14px 18px; font-size:13px; margin:16px 0;">
+          <div style="background:#FFF7EE; border-left:4px solid #BCA162; border-radius:8px; padding:14px 18px; font-size:13px; margin:16px 0;">
             <strong>⭐ The Golden Rule from the SOP:</strong><br/>
             Never file without: payment received, signed authorization forms (8879), and all internal reviews complete.
             Only move a client to the next step when fully done — <strong>never skip stages.</strong>
@@ -2194,7 +2197,7 @@
             </tbody>
           </table>
 
-          <div style="background:#D5E8F0; border-left:4px solid #2E86AB; border-radius:8px; padding:14px 18px; font-size:13px; color:#1B2A4A; margin:16px 0;">
+          <div style="background:#A0D2EF; border-left:4px solid #0285CE; border-radius:8px; padding:14px 18px; font-size:13px; color:#10284D; margin:16px 0;">
             <strong>🔑 The One Sentence That Defines Your Tax Role:</strong><br/>
             <em>"I make sure the client's documents are complete, the file is ready for Jay,
             and the client knows where they stand — then I get out of the way and let the
@@ -3574,8 +3577,8 @@ KelliWorks</div>
             <strong>Asana Due Time</strong> — best for time-critical items (e.g., "send report by 5 PM")
           </div>
 
-          <div style="background: #F0F7FF; border: 1px solid #2E86AB; border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 14px 0; line-height: 1.7;">
-            <strong style="color: #1B2A4A;">🔄 Real Example — Baycos Scenario Applied:</strong><br>
+          <div style="background: #F0F7FF; border: 1px solid #0285CE; border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 14px 0; line-height: 1.7;">
+            <strong style="color: #10284D;">🔄 Real Example — Baycos Scenario Applied:</strong><br>
             Kelli says in Slack: "Patricia — can you check in on the ADP status for Baycos? Tomasz is waiting."<br><br>
             ✅ You react to the message in Slack.<br>
             ✅ You open Asana → New Task: "Check ADP status for Baycos / update Tomasz" → Due: Today 2:00 PM<br>
