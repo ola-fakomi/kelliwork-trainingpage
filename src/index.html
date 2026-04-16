@@ -664,6 +664,227 @@
     .link-btn.gold:hover { background: #e0894a; color: #1B2A4A; }
     .link-btn.teal { background: #2E86AB; color: white; }
     .link-btn.teal:hover { background: #246e8e; }
+
+/* ── Email scenario cards ─────────────────────────────────────────────── */
+.scenario-card {
+  border: 1px solid #DDE3EC;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.scenario-header {
+  background: #1B2A4A;
+  color: white;
+  padding: 12px 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.scenario-num {
+  background: #F4A261;
+  color: #1B2A4A;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+.scenario-title-block { flex: 1; }
+.scenario-title { font-weight: 700; font-size: 15px; }
+.scenario-client { font-size: 12px; color: #A8C4D8; margin-top: 2px; }
+.scenario-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+  margin-top: 4px;
+  display: inline-block;
+}
+.scenario-badge.live    { background: #DC3545; color: white; }
+.scenario-badge.great   { background: #28A745; color: white; }
+.scenario-badge.caution { background: #F4A261; color: #1B2A4A; }
+.scenario-badge.internal{ background: #6C5CE7; color: white; }
+
+.email-preview {
+  background: #F9FBFD;
+  border: 1px solid #EEF3F8;
+  border-radius: 8px;
+  margin: 12px 16px;
+  overflow: hidden;
+}
+.email-preview-header {
+  background: #EEF3F8;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #666;
+  border-bottom: 1px solid #DDE3EC;
+  line-height: 1.6;
+}
+.email-preview-header strong { color: #1B2A4A; }
+.email-preview-body {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #2C2C2C;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.email-preview-body.sent { background: #F0F7FF; }
+
+.scenario-body { padding: 4px 16px 16px; }
+.analysis-block {
+  border-radius: 8px;
+  padding: 13px 16px;
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.analysis-block.green  { background: #D4EDDA; border-left: 4px solid #28A745; }
+.analysis-block.amber  { background: #FFF3CD; border-left: 4px solid #F4A261; }
+.analysis-block.red    { background: #F8D7DA; border-left: 4px solid #DC3545; }
+.analysis-block.teal   { background: #D5E8F0; border-left: 4px solid #2E86AB; }
+.analysis-block strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.analysis-block ul { padding-left: 18px; margin: 4px 0 0; }
+.analysis-block li { margin-bottom: 3px; }
+
+/* ── Time block schedule ──────────────────────────────────────────────── */
+.time-block-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 16px 0;
+  border: 1px solid #DDE3EC;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.time-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #EEF3F8;
+  font-size: 13px;
+}
+.time-row:last-child { border-bottom: none; }
+.time-label {
+  background: #1B2A4A;
+  color: #A8C4D8;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 10px 14px;
+  min-width: 90px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.3px;
+}
+.time-content {
+  padding: 10px 16px;
+  flex: 1;
+  color: #2C2C2C;
+  line-height: 1.6;
+}
+.time-content strong { color: #1B2A4A; }
+.time-row.focus    .time-label { background: #2E86AB; color: white; }
+.time-row.priority .time-label { background: #F4A261; color: #1B2A4A; }
+.time-row.huddle   .time-label { background: #6C5CE7; color: white; }
+.time-row.wrap     .time-label { background: #28A745; color: white; }
+.time-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 99px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.time-tag.email  { background: #D5E8F0; color: #1B2A4A; }
+.time-tag.slack  { background: #FFF3CD; color: #856404; }
+.time-tag.asana  { background: #D4EDDA; color: #155724; }
+.time-tag.kelli  { background: #F8D7DA; color: #721C24; }
+
+/* ── 3-channel monitor ────────────────────────────────────────────────── */
+.channel-grid {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.channel-card {
+  flex: 1;
+  min-width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #DDE3EC;
+}
+.channel-card-header {
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+.channel-card-header.email  { background: #1B2A4A; }
+.channel-card-header.slack  { background: #4A154B; }
+.channel-card-header.asana  { background: #F06A6A; }
+.channel-card-body {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #2C2C2C;
+  line-height: 1.8;
+}
+.channel-card-body ul { padding-left: 16px; margin: 0; }
+.channel-card-body li { margin-bottom: 2px; }
+.channel-flag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #DC3545;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #EEF3F8;
+}
+
+/* ── Slack-to-Asana steps ─────────────────────────────────────────────── */
+.slack-asana-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+}
+.sas-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #F9FBFD;
+  border: 1px solid #DDE3EC;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.sas-num {
+  background: #2E86AB;
+  color: white;
+  font-weight: 900;
+  font-size: 13px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sas-content { flex: 1; font-size: 13px; line-height: 1.7; }
+.sas-content strong { color: #1B2A4A; display: block; margin-bottom: 2px; }
+.reminder-box {
+  background: #FFF3CD;
+  border: 1px solid #F4A261;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 14px 0;
+}
+.reminder-box strong { color: #856404; }
+
   </style>
 </head>
 <body>
@@ -2003,8 +2224,8 @@
     <div class="day-panel" id="panel-thu">
       <div class="day-hero">
         <div class="day-hero-left">
-          <h1>💰 Thursday, April 17</h1>
-          <div class="subtitle">Payroll Processing — Workflow, Rules & Client Coordination</div>
+          <h1>📬 Thursday, April 17</h1>
+          <div class="subtitle">Real Client Scenarios, Daily Rhythm &amp; The 3-Channel Monitoring System</div>
         </div>
         <div class="day-hero-right">
           <div class="day-progress-ring">
@@ -2018,146 +2239,1373 @@
         </div>
       </div>
 
-      <div class="module-card" id="mod-thu-payroll">
-        <div class="module-header"><span class="module-icon">💳</span><h2>4A — Payroll Processing</h2><span class="module-complete-badge">✓ Done</span></div>
+      <!-- ── MODULE 4A — REAL EMAIL SCENARIOS ──────────────────────────── -->
+      <div class="module-card" id="mod-thu-scenarios">
+        <div class="module-header">
+          <span class="module-icon">📬</span>
+          <h2>4A — 20 Real Client Email Scenarios</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
         <div class="module-body">
-          <div class="alert warning"><span class="alert-icon">✍️</span><div><strong>Core Commitment #3 — Draft → Share → Send:</strong> For every payroll run, draft the confirmation first, share with Kelli in Slack, then process. This protects the client and you. Not about permission — about doing it right.</div></div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-payroll-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Payroll Processing Workflow — Current Client List & Frequency</div>
-              <div class="loom-status pending" id="loom-payroll-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+          <p class="module-desc">
+            These are actual threads from the KelliWorks inbox — real clients, real situations, real outcomes.
+            Study each one. For every scenario you'll see what happened, what went right, what we'd do differently,
+            and the key lesson to carry into your daily work.
+            <strong>A few are live action items sitting in the inbox right now.</strong>
+          </p>
+
+          <!-- ── SCENARIO 1 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#1</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">The Name Spelling &amp; 5-Day Document Gap</div>
+                <div class="scenario-client">Irene Caro · Tax Documents</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Irene Caro &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Documents Needed for Your Tax Return
+                </div>
+                <div class="email-preview-body">Hi Irane,
+
+I hope you're doing well! We still need a few documents to complete your tax return. Could you please send over your W-2 forms and any 1099s you received this year at your earliest convenience?
+
+Thank you,
+KelliWorks</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Irene Caro &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Documents Needed (5 days later)
+                </div>
+                <div class="email-preview-body">Hi — just sending these over. Also my name is Irene, not Irane.
+
+[W-2 attached]</div>
+              </div>
+              <div class="analysis-block red">
+                <strong>🚨 What We Need to Fix</strong>
+                <ul>
+                  <li>Her name was misspelled in the opening line — small detail, big impression</li>
+                  <li>5 days passed between our request and her response — was there a follow-up? No.</li>
+                  <li>No confirmation of receipt was sent after she submitted her documents</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                <ul>
+                  <li>Always copy-paste the client's name from their profile — never type it from memory</li>
+                  <li>If no response in 48 hours, send one warm follow-up: <em>"Just checking in — did you see our request?"</em></li>
+                  <li>When docs arrive, reply same day: <em>"Got it — thank you, Irene! We'll be in touch once reviewed."</em></li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-payrollcoord-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Payroll Coordination with Clients — Confirming Hours & Wages</div>
-              <div class="loom-status pending" id="loom-payrollcoord-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+
+          <!-- ── SCENARIO 2 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#2</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Entity Info Done Right — Attachment + Link, Same Day</div>
+                <div class="scenario-client">James Stover · New Entity Setup</div>
+              </div>
+              <span class="scenario-badge great">✅ Great Example</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> James Stover &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Entity Information Needed — KelliWorks Setup
+                </div>
+                <div class="email-preview-body sent">Hi James,
+
+To get your entity set up properly in our system, we need a few details. I've attached our standard Entity Information form — you can fill it out and send it back, or use this Google Form if that's easier: [link]
+
+Either way works! Just let us know if you have any questions.
+
+Thanks,
+KelliWorks</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> James Stover &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Entity Information (Same day)
+                </div>
+                <div class="email-preview-body">Here you go! Used the Google Form — much easier. Let me know if you need anything else.</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What We Did Right</strong>
+                <ul>
+                  <li>Gave the client two options (attachment OR live form) — zero friction</li>
+                  <li>Friendly, non-pressuring tone — client felt empowered</li>
+                  <li>Same-day response from client proves the approach worked</li>
+                  <li>Clear next step set — client knew exactly what was needed</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Remove barriers to "yes." When you make it easy, clients respond fast. Always offer the option that takes the least effort on their end.
+              </div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-payrollqbo-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Recording Payroll in QuickBooks Online</div>
-              <div class="loom-status pending" id="loom-payrollqbo-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+
+          <!-- ── SCENARIO 3 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#3</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">VIN Error Fixed, But No "What's Next" Given</div>
+                <div class="scenario-client">German Villasenor · Team Signal · Balance Sheet Correction</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> German Villasenor &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Balance Sheet — Vehicle Entry
+                </div>
+                <div class="email-preview-body sent">Hi German,
+
+I found the vehicle entry on the balance sheet and the VIN number has been corrected. Let me know if there's anything else!
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block amber">
+                <strong>⚠ What's Missing Here</strong>
+                <ul>
+                  <li>The correction was made — but the client has no idea what happens next</li>
+                  <li>Does this affect his tax filing? Will the updated balance sheet be resent? When?</li>
+                  <li>"Let me know if there's anything else" puts the burden on the client</li>
+                </ul>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ How We'd Say It Better</strong>
+                <ul>
+                  <li><em>"Hi German — the VIN has been corrected on your balance sheet. The updated report will be available in Keeper by [date]. No action needed on your end. Let me know if anything else looks off!"</em></li>
+                  <li>Client knows: (1) it's fixed, (2) where to see it, (3) when, (4) they don't have to do anything</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Every resolution email needs a "what happens next" sentence. Never leave a client wondering what they're supposed to do or expect.
+              </div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-payrolltax-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Payroll Tax Corrections — When & How to Handle</div>
-              <div class="loom-status pending" id="loom-payrolltax-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+
+          <!-- ── SCENARIO 4 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#4</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">13-Year Client Frustration — "Multiple Misses Are Disconcerting"</div>
+                <div class="scenario-client">Aaron Twersky · Bricks &amp; Sticks / Atlantic PR · March–April Thread</div>
+              </div>
+              <span class="scenario-badge internal">🔴 Internal + Client</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Aaron Twersky &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> AmEx Statement — Wrong Entity
+                </div>
+                <div class="email-preview-body">Hi — I've been waiting on the AmEx reconciliation. It looks like charges were posted to Bricks & Sticks when they should be under Atlantic PR. This has now happened more than once.
+
+I want to say directly: the multiple emails and follow-ups required to get resolution on things like this are disconcerting. We've been working together for 13 years and I expect a higher standard.
+
+Aaron</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com (internal forward) &nbsp;|&nbsp;
+                  <strong>To:</strong> Kelli &nbsp;|&nbsp;
+                  <strong>Subject:</strong> FYR — Aaron Twersky AmEx Thread
+                </div>
+                <div class="email-preview-body">FYR</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Kelli &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: FYR
+                </div>
+                <div class="email-preview-body sent">I asked you to send this directly to the client — not to me as a "FYR."</div>
+              </div>
+              <div class="analysis-block red">
+                <strong>🚨 Two Separate Failures Here</strong>
+                <ul>
+                  <li><strong>Client-facing:</strong> AmEx charges were posted to the wrong entity — and this wasn't the first time. A 13-year client noticed pattern-level errors.</li>
+                  <li><strong>Internal:</strong> When Kelli asked for a direct response to the client, the report was forwarded back to Kelli as "FYR" instead. That's the opposite of the instruction.</li>
+                </ul>
+              </div>
+              <div class="analysis-block amber">
+                <strong>⚠ Why This Matters to You</strong>
+                <ul>
+                  <li>When Kelli gives a specific instruction (e.g., "send this to the client"), execute it exactly — no interpretation</li>
+                  <li>"FYR" (For Your Review) sends something back UP the chain. "Send to client" means it goes OUT.</li>
+                  <li>A long-tenured client saying "disconcerting" is a trust alarm — flag these to Kelli immediately, don't let them sit</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Read instructions word for word. If Kelli says "send X to the client" — that means compose a response, address it to the client, and send it. When you're unsure, ask before acting. And when a long-time client expresses frustration, always escalate to Kelli — never handle it alone.
+              </div>
             </div>
           </div>
+
+          <!-- ── SCENARIO 5 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#5</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">"We Can't Verify Payment" — Client Went to Bank Themselves</div>
+                <div class="scenario-client">Lee Caulfield · Circle PR · Payment Verification</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Lee Caulfield &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Payment Sent
+                </div>
+                <div class="email-preview-body">Hi — just wanted to let you know I sent the payment yesterday. Should be showing up shortly.</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Lee Caulfield &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Payment Sent
+                </div>
+                <div class="email-preview-body sent">Hi Lee,
+
+We're unable to verify receipt of the payment at this time. Please check with your bank for confirmation.
+
+KelliWorks</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Lee Caulfield &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Payment Sent
+                </div>
+                <div class="email-preview-body">I went to the bank — they confirmed it left our account. Can someone on your end double-check?</div>
+              </div>
+              <div class="analysis-block red">
+                <strong>🚨 What Went Wrong</strong>
+                <ul>
+                  <li>We sent a "we can't verify" message before checking with Kelli or the correct account</li>
+                  <li>The burden fell on the client to go verify with their own bank</li>
+                  <li>Kelli resolved it the next day — meaning it was findable, just not checked properly</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                If you can't locate a payment in your first check, the next step is NOT "ask the client to check their bank." Escalate to Kelli: <em>"Lee Caulfield says payment was sent yesterday — I don't see it yet. Can you check?"</em> Never make the client do homework we should be doing.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 6 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#6</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Q1 Statements Just Arrived — Live Action Item in the Inbox</div>
+                <div class="scenario-client">Mareike Opeña · Q1 Bank Statements · Arrived Today 7:51 AM</div>
+              </div>
+              <span class="scenario-badge live">🔴 LIVE TODAY</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Mareike Opeña &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Q1 2026 Bank Statements &nbsp;|&nbsp;
+                  <strong>Received:</strong> Today, 7:51 AM
+                </div>
+                <div class="email-preview-body">Hi,
+
+Attaching Q1 statements as requested. Let me know if you need anything else.
+
+— Mareike
+
+[Q1_2026_Statements.pdf attached]</div>
+              </div>
+              <div class="analysis-block amber">
+                <strong>⚠ This Is in the Inbox Right Now</strong>
+                <ul>
+                  <li>This email arrived at 7:51 AM this morning — it is unread and unprocessed</li>
+                  <li>Patricia: this is a real action item for you today</li>
+                </ul>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What Patricia Should Do</strong>
+                <ul>
+                  <li>Step 1: Reply to Mareike: <em>"Hi Mareike — got it, thank you! We'll get these processed. We'll be in touch if anything is needed."</em></li>
+                  <li>Step 2: Download and file the statements to Dropbox: KelliWorks Tax Clients → Mareike Opeña → 2026 → Q1 Statements</li>
+                  <li>Step 3: Create an Asana task: "Process Mareike Q1 statements" — assign to yourself, due today</li>
+                  <li>Step 4: Let Kelli know at the 11:30 AM huddle: "Mareike's Q1 statements arrived — filed and task created."</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Morning email sweeps should happen before 9:30 AM. Every document that arrives gets: (1) acknowledged, (2) filed, (3) tasked. Same day, every time.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 7 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#7</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">ADP Payroll Setup — IRS Business Name Required First</div>
+                <div class="scenario-client">Gian Ferdi Enterprise · Payroll Onboarding via ADP</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> ADP Onboarding &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Action Required — Business Name Verification
+                </div>
+                <div class="email-preview-body">We need the exact IRS-registered business name for Gian Ferdi Enterprise to complete payroll setup. The name entered does not match IRS records.
+
+Please provide the exact legal entity name as it appears on your EIN confirmation letter.</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Gian Ferdi &nbsp;|&nbsp;
+                  <strong>Subject:</strong> ADP Setup — One More Thing Needed
+                </div>
+                <div class="email-preview-body sent">Hi Gian,
+
+ADP needs your exact IRS-registered business name to complete your payroll setup. This needs to match what's on your EIN confirmation letter exactly — including punctuation and abbreviations (e.g., "LLC" vs "L.L.C.").
+
+Can you forward that letter, or let me know the exact name shown on it?
+
+Thanks,
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What We Did Right</strong>
+                <ul>
+                  <li>Explained specifically what was needed and why</li>
+                  <li>Gave the client two ways to respond (forward the letter OR tell us the name)</li>
+                  <li>Flagged the common pitfall (punctuation differences) proactively</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Third-party vendor setups (ADP, payroll, insurance) almost always need IRS-exact information. Never assume the business name a client gives you casually matches their legal filing. Always verify with the EIN letter.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 8 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#8</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Weekly Cash Requirements Report — Know Your Recurring Deliverables</div>
+                <div class="scenario-client">GEMCO · okGEMCO.com · Weekly Reporting</div>
+              </div>
+              <span class="scenario-badge great">✅ Recurring</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> GEMCO Team &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Weekly Cash Requirements Report — Week of April 14
+                </div>
+                <div class="email-preview-body sent">Hi team,
+
+Please find this week's cash requirements report attached. Let us know if you have any questions.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What This Represents</strong>
+                <ul>
+                  <li>GEMCO receives a weekly cash requirements report — every single week</li>
+                  <li>This is a scheduled, repeating deliverable — it goes out regardless of whether the client asks</li>
+                  <li>If this misses a week without communication, it creates concern on the client side</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Know your recurring deliverables by heart. These are in Asana as repeating tasks. If you see a recurring task due and the report hasn't been prepared — flag it to Kelli before the deadline, not after. GEMCO expects this every Monday morning.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 9 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#9</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">"I'll Follow Up Shortly" — You OWN That Promise</div>
+                <div class="scenario-client">Unleashed Management · Campaign Invoice · Multi-Party Chain</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Unleashed Management &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Campaign Invoice Discrepancy
+                </div>
+                <div class="email-preview-body">Hi — there's a discrepancy in the campaign invoice. We've CC'd our production team. Can someone clarify?</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Unleashed Management (+ CC: production team) &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Campaign Invoice Discrepancy
+                </div>
+                <div class="email-preview-body sent">Hi — thank you for flagging this. I'll follow up shortly with next steps.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block amber">
+                <strong>⚠ The Hidden Risk</strong>
+                <ul>
+                  <li>"I'll follow up shortly" is a commitment — the clock starts the moment you send it</li>
+                  <li>If you forget to follow up, the client remembers you said "shortly"</li>
+                  <li>Multi-party chains (client + production team CC'd) mean your delay is visible to everyone</li>
+                </ul>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ The Right Move After Sending This</strong>
+                <ul>
+                  <li>Immediately open Asana → create task: "Follow up Unleashed invoice discrepancy" → due: same day or next morning</li>
+                  <li>Or: set a Slack reminder on the thread → "/remind me in 2 hours about this"</li>
+                  <li>Never let a "follow up shortly" go overnight without resolution</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Every acknowledgment that includes a future promise creates a task. Build the habit: send the acknowledgment → immediately create the Asana task → never trust your memory.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 10 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#10</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Technical Questions Get Escalated — Kelli Steps In Professionally</div>
+                <div class="scenario-client">Brian Gilhooly · Team Signal · Depreciation &amp; Reconciliation</div>
+              </div>
+              <span class="scenario-badge great">✅ Great Escalation</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Brian Gilhooly &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Depreciation Schedule / Reconciliation Question
+                </div>
+                <div class="email-preview-body">Hey — I have some questions about how the vehicle depreciation is being handled and how it ties into the reconciliation. Can someone walk me through it?</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Brian Gilhooly &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Depreciation Schedule / Reconciliation Question
+                </div>
+                <div class="email-preview-body sent">Hi Brian,
+
+Thank you for reaching out! These are great questions. I'm looping in Kelli to walk you through the details — she'll be in touch shortly.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What Was Done Right</strong>
+                <ul>
+                  <li>Responded quickly — Brian didn't sit waiting with no acknowledgment</li>
+                  <li>Didn't attempt to answer technical accounting questions (that's Kelli's domain)</li>
+                  <li>"Looping in Kelli" sets the right expectation — clear handoff</li>
+                  <li>Tone stayed warm and professional, not dismissive</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Depreciation schedules, tax advice, reconciliation methodology — these are always escalate-to-Kelli topics. Your job is to receive the question gracefully, acknowledge it fast, and hand it off correctly. Never attempt to answer technical accounting questions on your own.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 11 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#11</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">The Baycos ADP Chaos — No Credentials, 3-Week Delay</div>
+                <div class="scenario-client">Baycos Inc · Tomasz Pabisiak, VP · ADP Billing Dispute · Feb–Mar</div>
+              </div>
+              <span class="scenario-badge internal">🔥 Chaos Thread</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Tomasz Pabisiak (Baycos Inc) &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> ADP Charges — Service No Longer In Use · Feb 4
+                </div>
+                <div class="email-preview-body">Hi Kelli,
+
+We've been getting charged by ADP for a payroll service we are no longer using. This has been going on for a few months now. Can you help get this cancelled? We need login access to their portal to initiate the cancellation.
+
+— Tomasz</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Kelli &nbsp;|&nbsp;
+                  <strong>To:</strong> Tim (internal forward) &nbsp;|&nbsp;
+                  <strong>Subject:</strong> FW: ADP Charges · Feb 4, 5:00 AM
+                </div>
+                <div class="email-preview-body sent">Tim — can you handle this?</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>Timeline:</strong> Tim filed ADP service request · Feb 6 &nbsp;|&nbsp; ADP resolved: Feb 25 &nbsp;|&nbsp; Baycos terminated ADP account entirely + ownership transfer: March
+                </div>
+                <div class="email-preview-body">Tomasz (Mar 2): "The charges have finally stopped — thank you. We've also decided to terminate the ADP account entirely. There's an ownership transfer document ADP is requiring — can KW sign off on this?"
+
+[Ownership transfer completed March — account fully closed]</div>
+              </div>
+              <div class="analysis-block red">
+                <strong>🚨 What Made This Chaotic</strong>
+                <ul>
+                  <li>KelliWorks had no login credentials on file for Baycos's ADP account — a basic information gap</li>
+                  <li>Client reported recurring charges on Feb 4. First real action didn't happen until Feb 6. ADP resolution: Feb 25. That's 3 weeks of ongoing charges.</li>
+                  <li>Kelli's initial reply to Tomasz was "The service needs to be cancelled" — no action plan, no next steps given to the client</li>
+                  <li>Tomasz had to ask again for login credentials — we still couldn't provide them</li>
+                  <li>Then: ADP required an ownership transfer document, adding another layer of delay</li>
+                </ul>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ How It Resolved</strong>
+                Tim filed the ADP service request, the account was eventually closed, and Tomasz thanked Kelli warmly at the end. The relationship held — but it required significant back-and-forth that could have been avoided.
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                <ul>
+                  <li>Every vendor account KelliWorks manages should have credentials documented (ADP, insurance portals, payroll systems)</li>
+                  <li>When a client reports a billing problem: (1) acknowledge same day, (2) tell them the specific action being taken, (3) give a timeline</li>
+                  <li>Never leave a client with just "the service needs to be cancelled" — that's a statement, not a plan</li>
+                  <li>If you receive a vendor dispute and can't locate credentials: Slack Kelli immediately with the details</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 12 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#12</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Client Departure Handled With Grace — Offboarding Done Right</div>
+                <div class="scenario-client">Unleashed Management · Cheyenne Arnold · Client Offboarding</div>
+              </div>
+              <span class="scenario-badge great">✅ Gold Standard</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Cheyenne Arnold (Unleashed Management) &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Transition — Ending Bookkeeping Services
+                </div>
+                <div class="email-preview-body">Hi Kelli,
+
+I wanted to let you know that we'll be wrapping up our bookkeeping services with KelliWorks. We've had a great experience and appreciate everything you've done for us. We're moving our accounting in-house.
+
+Thank you,
+Cheyenne</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Kelli &nbsp;|&nbsp;
+                  <strong>To:</strong> Cheyenne Arnold &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Transition
+                </div>
+                <div class="email-preview-body sent">Hi Cheyenne,
+
+Thank you so much for letting us know, and for the kind words — it truly means a lot. We've loved working with the Unleashed team and are so proud of what you've built.
+
+Moving in-house is a great step, and I want to make sure your transition is as smooth as possible. A few things we can help with:
+
+• Final reconciled books through your last active date
+• Exporting all records in a format your new team can use
+• Answering any questions your internal accountant might have during the handoff
+
+I'd also love to introduce you to our invoicing automation tool — it might actually save you time even as you bring things in-house. Happy to do a quick 10-minute walkthrough if you're curious.
+
+We'll be rooting for you. Please keep us in mind if things ever change or if you need spot help down the road.
+
+Warmly,
+Kelli</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Cheyenne Arnold &nbsp;|&nbsp;
+                  <strong>To:</strong> Kelli &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Transition
+                </div>
+                <div class="email-preview-body">Kelli — this is so thoughtful, thank you. We'd love the exported records and yes, let's do that 10-minute walkthrough!
+
+Our last date will be April 17. I'll make sure everything is wrapped up on our end.</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ Why This Response Was Gold</strong>
+                <ul>
+                  <li>Zero defensiveness — no "we're sorry to see you go" guilt language</li>
+                  <li>Kelli immediately offered concrete help (3 specific offboarding supports)</li>
+                  <li>Introduced a new value-add (invoicing automation) even in the exit conversation — kept the door open</li>
+                  <li>Result: client left feeling grateful, not just "let go." They booked the walkthrough.</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Offboarding is not a failure — it's a reputation moment. How you handle departures is how clients describe you to their peers. Always: thank them genuinely, offer specific exit support, and leave the door open. Never let a client offboard without a proper handoff plan.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 13 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#13</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">$206K in Unidentified Deposits — KW Caught It First</div>
+                <div class="scenario-client">Daps Inc · McKinley Projects / Adidas Job · Proactive Reconciliation</div>
+              </div>
+              <span class="scenario-badge great">✅ We Showed Up</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Daps Inc &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Deposits Needing Identification — Daps Account
+                </div>
+                <div class="email-preview-body sent">Hi,
+
+While reviewing your accounts we identified $206,325 in deposits that we weren't able to match to a specific invoice or project. We want to make sure these are categorized correctly before closing out the period.
+
+Could you let us know the source of these funds?
+
+KelliWorks</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Daps Inc &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Deposits
+                </div>
+                <div class="email-preview-body">Those are payments from McKinley Projects for the Adidas job. Invoices were sent in January. There may also be a $3,675 union fee difference you'll see — that's a deduction from the total.
+
+Let me know if you need the invoice numbers.</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ Why This Matters</strong>
+                <ul>
+                  <li>KelliWorks flagged $206,325 in unmatched deposits <em>before the client noticed or asked</em></li>
+                  <li>The client provided project context, invoice match, and explained the $3,675 union fee variance</li>
+                  <li>Result: clean books, no surprises, client sees KW as attentive and thorough</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Proactive financial monitoring is the difference between a bookkeeper and a trusted advisor. When you see something unusual in the accounts — unmatched deposits, unexplained charges, gaps — you flag it first, before the client asks. That's the KelliWorks standard.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 14 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#14</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Contractor Illness, Delayed Billing &amp; a Professional Property Manager Thread</div>
+                <div class="scenario-client">Gary Loo · Sun Garden Landscape · Jeffrey Boucher (Property Mgr) Negotiation</div>
+              </div>
+              <span class="scenario-badge great">✅ Handled Well</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Jeffrey Boucher (Property Mgr) &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Sun Garden — Billing Delay / Request
+                </div>
+                <div class="email-preview-body">Hi — I'm reaching out regarding Gary Loo and Sun Garden Landscape. Gary has been dealing with a serious illness and has gotten behind on invoicing. We've been in contact with him and would like to propose skipping one month's payment while he gets back on track.
+
+We wanted to loop you in before proceeding.
+
+— Jeffrey Boucher</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Jeffrey Boucher &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Sun Garden — Billing Delay
+                </div>
+                <div class="email-preview-body sent">Hi Jeffrey,
+
+Thank you for looping us in and for looking out for Gary during this difficult time. We appreciate the proactive communication.
+
+We've noted the one-month payment skip on our end. We'll make sure everything is documented properly and will follow up with Gary directly once he's feeling better.
+
+Please let us know if there are any updates.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ Why This Response Worked</strong>
+                <ul>
+                  <li>Acknowledged the human situation (illness) with genuine warmth — not just "noted"</li>
+                  <li>Confirmed the accommodation clearly: "noted the one-month skip"</li>
+                  <li>Took ownership of follow-up with Gary directly — didn't leave it with the property manager</li>
+                  <li>Kept it brief and professional — Jeffrey is a third party, not our client directly</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Sometimes client situations are personal. Meet them with empathy first, then the administrative details. And whenever a third party (property manager, attorney, partner) loops in about a client, acknowledge them professionally and confirm you'll handle the client-side follow-up.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 15 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#15</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Florida Annual Report — $400 Late Fee Coming May 1</div>
+                <div class="scenario-client">KSW Drywall · Florida State Compliance · LIVE Action Item</div>
+              </div>
+              <span class="scenario-badge live">🔴 LIVE — Due May 1</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Florida Division of Corporations &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Annual Report Reminder — KSW Drywall LLC · Due May 1, 2026
+                </div>
+                <div class="email-preview-body">This is a reminder that the 2026 Annual Report for KSW Drywall LLC is due by May 1, 2026.
+
+Failure to file by the deadline will result in a $400 late fee and potential administrative dissolution.
+
+File at: dos.myflorida.com/sunbiz</div>
+              </div>
+              <div class="analysis-block red">
+                <strong>🚨 This Is in the Inbox Right Now — Unread</strong>
+                <ul>
+                  <li>KSW Drywall's Florida Annual Report is due May 1, 2026 — 15 days from today</li>
+                  <li>Late fee: $400. Potential consequence: administrative dissolution of the LLC</li>
+                  <li>This email has not been actioned yet</li>
+                </ul>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What Patricia Should Do Right Now</strong>
+                <ul>
+                  <li>Step 1: Slack Kelli: "KSW Drywall Florida Annual Report is due May 1 — $400 late fee. Should I file or flag for them to handle?"</li>
+                  <li>Step 2: Create Asana task: "KSW Drywall FL Annual Report — due May 1" → assign to Kelli, due April 25 (buffer)</li>
+                  <li>Step 3: Do NOT ignore state compliance emails — these have hard deadlines with real financial consequences</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Government and state compliance emails are never routine. Any email from a Secretary of State, IRS, or state agency goes directly to Kelli — do not hold, do not archive. Immediate Slack notification required.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 16 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#16</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Client Sends Bank Statements — The Filing Workflow</div>
+                <div class="scenario-client">AZ Nutrition Center · Capital One Q1 Statements</div>
+              </div>
+              <span class="scenario-badge great">✅ Standard Workflow</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> AZ Nutrition Center &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> January–March Capital One Statements
+                </div>
+                <div class="email-preview-body">Hi — attaching our Capital One statements for January, February, and March. Let me know if you need anything else.
+
+[Jan_CapitalOne.pdf] [Feb_CapitalOne.pdf] [Mar_CapitalOne.pdf]</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> AZ Nutrition Center &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Statements Received — Thank You
+                </div>
+                <div class="email-preview-body sent">Hi,
+
+Got all three — thank you! We'll get these processed and will follow up if anything needs clarification.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ The Complete Filing Workflow</strong>
+                <ul>
+                  <li>Acknowledge receipt same day (done above)</li>
+                  <li>Save all three PDFs to Dropbox: KelliWorks Tax Clients → AZ Nutrition Center → 2026 → Bank Statements → Capital One</li>
+                  <li>Create Asana task: "Reconcile AZ Nutrition Capital One Jan–Mar" → assign appropriately</li>
+                  <li>Note in Asana if any statement looks unusual (missing pages, unclear transactions)</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Every document that arrives follows the same three-step pattern: acknowledge → file to Dropbox (correct folder) → create Asana task. This is automatic, every time, without exception.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 17 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#17</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Bookkeeping Finalization — Clean Account Closure Communication</div>
+                <div class="scenario-client">Hydro Hydration · Account Wrap-Up</div>
+              </div>
+              <span class="scenario-badge great">✅ Clean Close</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Hydro Hydration &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Finalized Books — Hydro Hydration
+                </div>
+                <div class="email-preview-body sent">Hi,
+
+Your books through March 31, 2026 have been finalized and reconciled. The updated financial reports are now available in your Keeper portal.
+
+A few items to note:
+• All bank accounts are fully reconciled through end of March
+• The outstanding vendor credit from February has been applied
+• Year-to-date P&amp;L is included in your Keeper dashboard
+
+Please review when you get a chance and let us know if you have any questions. We'll be in touch with your April close timeline.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What Makes This Communication Excellent</strong>
+                <ul>
+                  <li>Gives a clear "as of" date — client knows exactly what period is covered</li>
+                  <li>Points them to Keeper — client knows where to look</li>
+                  <li>Bullet points cover specific items the client cares about (the vendor credit, the P&amp;L)</li>
+                  <li>Sets expectation for next communication: "April close timeline"</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Monthly close emails aren't just "done." They should tell the client: (1) what period is finalized, (2) where to find the reports, (3) any notable items resolved, (4) what's coming next. Four elements, every time.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 18 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#18</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Insurance Bill Forwarded to Reports@ — Routing It Right</div>
+                <div class="scenario-client">Carol Mendez · Greener by Design · Hartford Insurance</div>
+              </div>
+              <span class="scenario-badge caution">⚠ Watch This</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Carol Mendez &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Fwd: Hartford Invoice — April
+                </div>
+                <div class="email-preview-body">Hi — forwarding this Hartford insurance bill. Not sure if this goes through you or if I pay it directly. Just wanted to make sure it's on your radar.
+
+[Hartford_Invoice_April_2026.pdf attached]</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Carol Mendez &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Hartford Invoice
+                </div>
+                <div class="email-preview-body sent">Hi Carol,
+
+Thank you for forwarding this! Insurance payments typically come from your business checking account directly — this one wouldn't go through our office.
+
+That said, I'm logging this bill so we make sure it's recorded properly when we reconcile. You're all set to pay Hartford directly. Let us know once you've processed it so we can note the date.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ What Was Done Right</strong>
+                <ul>
+                  <li>Answered Carol's actual question: does this go through you? No — pay directly.</li>
+                  <li>But didn't just say "not our problem" — logged it for reconciliation purposes</li>
+                  <li>Asked for payment confirmation date — helps KW keep books current</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Clients sometimes CC or forward bills to reports@ just to "make sure someone knows." Always answer their actual question, confirm your role in the transaction, and close the loop by asking them to confirm payment so you can record it.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 19 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#19</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Wise Payment Confirmation — Match It to the Books</div>
+                <div class="scenario-client">Daps Inc · International Payment via Wise</div>
+              </div>
+              <span class="scenario-badge great">✅ Payment Tracking</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Daps Inc &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Also Paid — Transfer via Wise
+                </div>
+                <div class="email-preview-body">Hi — also wanted to let you know we sent a payment via Wise (formerly TransferWise) last week. It should show as an international transfer. Confirmation number: WISE-2026-04-TXN-8821.
+
+Let me know if it doesn't show up on your end.</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Daps Inc &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Also Paid — Wise Transfer
+                </div>
+                <div class="email-preview-body sent">Hi,
+
+Thank you — noted! We'll look for the Wise transfer (WISE-2026-04-TXN-8821) and match it to your account. International transfers through Wise can take 1–3 business days to clear.
+
+We'll confirm once it's been posted and applied.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ The Right Moves Here</strong>
+                <ul>
+                  <li>Repeated the transaction confirmation number in the reply — creates a paper trail in the thread itself</li>
+                  <li>Set realistic expectation: 1–3 days for Wise international transfers</li>
+                  <li>Committed to confirming once posted — client doesn't have to follow up</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Non-standard payment methods (Wise, Zelle, Venmo Business, crypto) require special handling. Always: (1) confirm the reference number, (2) note the platform, (3) add a "pending match" note in QBO or Asana, (4) confirm once it clears. Never assume it will match itself.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SCENARIO 20 ──────────────────────────────────────────── -->
+          <div class="scenario-card">
+            <div class="scenario-header">
+              <span class="scenario-num">#20</span>
+              <div class="scenario-title-block">
+                <div class="scenario-title">Prior Bank Statements Requested — The Document Retrieval Process</div>
+                <div class="scenario-client">Circle PR · Lee Caulfield Team · Prior Period Statements</div>
+              </div>
+              <span class="scenario-badge great">✅ Standard Process</span>
+            </div>
+            <div class="scenario-body">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> Circle PR (Lee Caulfield's team) &nbsp;|&nbsp;
+                  <strong>To:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>Subject:</strong> Request — Prior Statements Q3/Q4 2025
+                </div>
+                <div class="email-preview-body">Hi — we're working with our auditor and need copies of our Q3 and Q4 2025 bank statements. Can you pull these from your records?</div>
+              </div>
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <strong>From:</strong> reports@kelliworks.com &nbsp;|&nbsp;
+                  <strong>To:</strong> Circle PR &nbsp;|&nbsp;
+                  <strong>Subject:</strong> RE: Prior Statements — Q3/Q4 2025
+                </div>
+                <div class="email-preview-body sent">Hi,
+
+Absolutely — I'll pull the Q3 and Q4 2025 statements from our records and send them over via a secure Dropbox link.
+
+You'll receive the link within 24 hours. Let us know if your auditor needs any specific format or additional documentation.
+
+KelliWorks</div>
+              </div>
+              <div class="analysis-block green">
+                <strong>✅ Document Retrieval Best Practices</strong>
+                <ul>
+                  <li>Confirmed the request and gave a clear turnaround: 24 hours</li>
+                  <li>Said HOW the documents will be sent (secure Dropbox link) — not just "I'll send them"</li>
+                  <li>Asked about format/additional needs proactively — auditor requests often have specific requirements</li>
+                </ul>
+              </div>
+              <div class="analysis-block amber">
+                <strong>⚠ Before You Pull Documents, Check With Kelli If:</strong>
+                <ul>
+                  <li>The request is from a third party (auditor, attorney, lender) rather than the client directly</li>
+                  <li>You're unsure which entity or account the statements belong to</li>
+                  <li>The request mentions "audit," "legal," or "court" — always escalate those</li>
+                </ul>
+              </div>
+              <div class="analysis-block teal">
+                <strong>💡 The Lesson</strong>
+                Document requests should always go via Dropbox — never email attachments for sensitive financial documents. Set a 24-hour turnaround expectation and deliver on it. If something is unclear about the scope of the request, ask before pulling.
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenarios checklist -->
           <ul class="checklist" data-day="thu">
-            <li><input type="checkbox" id="thu-1"><label for="thu-1">Watch payroll workflow video</label></li>
-            <li><input type="checkbox" id="thu-2"><label for="thu-2">Watch client coordination / confirmation video</label></li>
-            <li><input type="checkbox" id="thu-3"><label for="thu-3">Watch recording payroll in QBO video</label></li>
-            <li><input type="checkbox" id="thu-4"><label for="thu-4">Watch payroll tax corrections video</label></li>
-            <li><input type="checkbox" id="thu-5"><label for="thu-5">Know all active clients' payroll schedules and frequencies</label></li>
-            <li><input type="checkbox" id="thu-6"><label for="thu-6">Shadow Kelli on payroll review during team meeting</label></li>
+            <li><input type="checkbox" id="thu-s1"><label for="thu-s1">Scenario 1 — Irene Caro: Know the name + 48-hr follow-up rule</label></li>
+            <li><input type="checkbox" id="thu-s2"><label for="thu-s2">Scenario 2 — James Stover: Give clients two easy ways to respond</label></li>
+            <li><input type="checkbox" id="thu-s3"><label for="thu-s3">Scenario 3 — German Villasenor: Every resolution needs a "what's next"</label></li>
+            <li><input type="checkbox" id="thu-s4"><label for="thu-s4">Scenario 4 — Aaron Twersky: Follow instructions exactly; escalate long-client frustration</label></li>
+            <li><input type="checkbox" id="thu-s5"><label for="thu-s5">Scenario 5 — Lee Caulfield: Never make the client do homework KW should do</label></li>
+            <li><input type="checkbox" id="thu-s6"><label for="thu-s6">Scenario 6 — Mareike Opeña: <strong>ACTION TODAY</strong> — acknowledge, file, task</label></li>
+            <li><input type="checkbox" id="thu-s7"><label for="thu-s7">Scenario 7 — Gian Ferdi/ADP: Verify IRS exact business name for all vendor setups</label></li>
+            <li><input type="checkbox" id="thu-s8"><label for="thu-s8">Scenario 8 — GEMCO: Know your recurring deliverables; GEMCO gets weekly cash report</label></li>
+            <li><input type="checkbox" id="thu-s9"><label for="thu-s9">Scenario 9 — Unleashed Invoice: Every "I'll follow up" = immediate Asana task</label></li>
+            <li><input type="checkbox" id="thu-s10"><label for="thu-s10">Scenario 10 — Brian Gilhooly: Technical questions → Kelli, always</label></li>
+            <li><input type="checkbox" id="thu-s11"><label for="thu-s11">Scenario 11 — Baycos ADP: No credentials = chaos. Flag vendor credential gaps to Kelli.</label></li>
+            <li><input type="checkbox" id="thu-s12"><label for="thu-s12">Scenario 12 — Unleashed Offboarding: Handle departures with grace and a plan</label></li>
+            <li><input type="checkbox" id="thu-s13"><label for="thu-s13">Scenario 13 — Daps $206K: Flag unmatched transactions proactively</label></li>
+            <li><input type="checkbox" id="thu-s14"><label for="thu-s14">Scenario 14 — Sun Garden: Meet personal situations with empathy first</label></li>
+            <li><input type="checkbox" id="thu-s15"><label for="thu-s15">Scenario 15 — KSW Drywall: <strong>ACTION TODAY</strong> — Slack Kelli about May 1 deadline</label></li>
+            <li><input type="checkbox" id="thu-s16"><label for="thu-s16">Scenario 16 — AZ Nutrition: Acknowledge → Dropbox → Asana task (every document)</label></li>
+            <li><input type="checkbox" id="thu-s17"><label for="thu-s17">Scenario 17 — Hydro Hydration: Monthly close emails have 4 required elements</label></li>
+            <li><input type="checkbox" id="thu-s18"><label for="thu-s18">Scenario 18 — Greener by Design: Answer the routing question; log it anyway</label></li>
+            <li><input type="checkbox" id="thu-s19"><label for="thu-s19">Scenario 19 — Daps Wise: Non-standard payments need reference # + confirmation</label></li>
+            <li><input type="checkbox" id="thu-s20"><label for="thu-s20">Scenario 20 — Circle PR: Document requests go via Dropbox, 24-hr turnaround</label></li>
           </ul>
+
           <div class="question-box">
-            <h4>❓ Payroll questions → Slack Kelli: "Payroll Question"</h4>
-            <textarea id="q-thu-payroll" placeholder="Questions about payroll workflows, clients, or QBO recording?"></textarea>
-            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('thu-payroll')">Send</button><span class="q-saved-msg" id="saved-thu-payroll">✓ Sent to Slack</span></div>
+            <h4>❓ Scenario questions → Slack Kelli: "Scenario Question"</h4>
+            <textarea id="q-thu-scenarios" placeholder="Which scenario resonated most? Any situations you'd like to discuss with Kelli?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('thu-scenarios')">Send</button>
+              <span class="q-saved-msg" id="saved-thu-scenarios">✓ Sent to Slack</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="module-card" id="mod-thu-qbo">
-        <div class="module-header"><span class="module-icon">💼</span><h2>4B — QuickBooks Online Overview</h2><span class="module-complete-badge">✓ Done</span></div>
-        <div class="module-body">
-          <p class="module-desc">QBO is the backbone of all accounting work at KelliWorks. Every client has their own QBO file.</p>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-qbo-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">QBO Overview — Navigating the KelliWorks Client Files</div>
-              <div class="loom-status pending" id="loom-qbo-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <ul class="checklist" data-day="thu">
-            <li><input type="checkbox" id="thu-7"><label for="thu-7">Watch QBO overview video</label></li>
-            <li><input type="checkbox" id="thu-8"><label for="thu-8">Log into QBO and locate all client files</label></li>
-          </ul>
+      <!-- ── MODULE 4B — 3-CHANNEL MONITORING SYSTEM ───────────────────── -->
+      <div class="module-card" id="mod-thu-channels">
+        <div class="module-header">
+          <span class="module-icon">📡</span>
+          <h2>4B — The 3-Channel Monitoring System</h2>
+          <span class="module-complete-badge">✓ Done</span>
         </div>
-      </div>
-
-      <div class="module-card" id="mod-thu-invoicing">
-        <div class="module-header"><span class="module-icon">🧾</span><h2>4C — Invoicing &amp; Billing Support</h2><span class="module-complete-badge">✓ Done</span></div>
         <div class="module-body">
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-invoice-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Creating &amp; Sending Invoices in QBO</div>
-              <div class="loom-status pending" id="loom-invoice-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-ar-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Tracking Receivables &amp; Following Up on Past-Due Accounts</div>
-              <div class="loom-status pending" id="loom-ar-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <ul class="checklist" data-day="thu">
-            <li><input type="checkbox" id="thu-9"><label for="thu-9">Watch invoicing video</label></li>
-            <li><input type="checkbox" id="thu-10"><label for="thu-10">Watch A/R tracking video</label></li>
-            <li><input type="checkbox" id="thu-11"><label for="thu-11">Practice creating a test invoice in QBO</label></li>
-          </ul>
-        </div>
-      </div>
+          <p class="module-desc">
+            Your job runs across three channels simultaneously — the reports@ inbox, the Slack #activity feed, and your Asana task list.
+            Nothing gets dropped because you're watching all three, all day. Here's exactly what to watch for in each.
+          </p>
 
-      <div class="module-card" id="mod-thu-recon">
-        <div class="module-header"><span class="module-icon">🔍</span><h2>4D — Bookkeeping &amp; Reconciliation</h2><span class="module-complete-badge">✓ Done</span></div>
-        <div class="module-body">
-          <div class="alert warning"><span class="alert-icon">⚠️</span><div><strong>Core Commitment #4:</strong> Every reconciliation adjustment gets documented — what changed, why, and when. Clean books are your signature. Over-document when in doubt.</div></div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-recon-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Month-End Reconciliation Walkthrough in QBO</div>
-              <div class="loom-status pending" id="loom-recon-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+          <div class="channel-grid">
+            <div class="channel-card">
+              <div class="channel-card-header email">📧 reports@kelliworks.com</div>
+              <div class="channel-card-body">
+                <ul>
+                  <li>Check first at 9:00 AM — before anything else</li>
+                  <li>New documents (statements, W-2s, organizers) → file &amp; task same day</li>
+                  <li>Client questions → acknowledge within 2 hours</li>
+                  <li>State/IRS/government emails → Slack Kelli immediately</li>
+                  <li>Payment notifications → log reference # in Asana</li>
+                  <li>Re-check mid-afternoon (around 2–2:30 PM)</li>
+                </ul>
+                <div class="channel-flag">🚨 Never let an email sit 24 hours without a response or Asana task created.</div>
+              </div>
+            </div>
+            <div class="channel-card">
+              <div class="channel-card-header slack">💬 Slack #activity</div>
+              <div class="channel-card-body">
+                <ul>
+                  <li>Monitor throughout the day — this is real-time client activity</li>
+                  <li>Client check-ins → respond within 30 minutes</li>
+                  <li>If Kelli posts a task or direction → acknowledge and execute</li>
+                  <li>Anything you're unsure about → ask in Slack before acting</li>
+                  <li>See something unusual? Slack Kelli: "Heads up — [client] just asked about X"</li>
+                  <li>Before huddle: quick scan of morning activity to brief Kelli</li>
+                </ul>
+                <div class="channel-flag">🚨 Slack is not optional — it's where fast decisions happen.</div>
+              </div>
+            </div>
+            <div class="channel-card">
+              <div class="channel-card-header asana">✅ Asana Task Board</div>
+              <div class="channel-card-body">
+                <ul>
+                  <li>Start each morning by reviewing your Asana "My Tasks" view</li>
+                  <li>Everything you promise in email or Slack gets a task created immediately</li>
+                  <li>Recurring tasks (GEMCO report, weekly deliverables) → check due dates</li>
+                  <li>Tasks without a due date → set one before leaving for the day</li>
+                  <li>Complete tasks promptly — an overloaded task list creates blind spots</li>
+                  <li>End of day: no task left without a status update</li>
+                </ul>
+                <div class="channel-flag">🚨 If it's not in Asana, it doesn't exist.</div>
+              </div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-categories-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Transaction Categorization &amp; Journal Entries</div>
-              <div class="loom-status pending" id="loom-categories-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-discrepancies-link" target="_blank">▶</a>
-            <div class="loom-info">
-              <div class="loom-label">Flagging Uncleared Transactions &amp; Reconciliation Discrepancies</div>
-              <div class="loom-status pending" id="loom-discrepancies-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
-            </div>
-          </div>
+
           <ul class="checklist" data-day="thu">
-            <li><input type="checkbox" id="thu-12"><label for="thu-12">Watch reconciliation walkthrough video</label></li>
-            <li><input type="checkbox" id="thu-13"><label for="thu-13">Watch transaction categorization video</label></li>
-            <li><input type="checkbox" id="thu-14"><label for="thu-14">Watch discrepancy flagging video</label></li>
-            <li><input type="checkbox" id="thu-15"><label for="thu-15">Shadow Kelli on a live reconciliation during team meeting</label></li>
+            <li><input type="checkbox" id="thu-21"><label for="thu-21">Know what to look for in reports@ at 9 AM each morning</label></li>
+            <li><input type="checkbox" id="thu-22"><label for="thu-22">Understand Slack #activity monitoring cadence</label></li>
+            <li><input type="checkbox" id="thu-23"><label for="thu-23">Asana task hygiene: every promise = a task, every task has a due date</label></li>
+            <li><input type="checkbox" id="thu-24"><label for="thu-24">Know the escalation triggers: state/IRS email → Slack Kelli immediately</label></li>
           </ul>
+
           <div class="question-box">
-            <h4>❓ QBO questions → Slack Kelli: "QBO Question"</h4>
-            <textarea id="q-thu-qbo" placeholder="Any questions about QuickBooks, reconciliation, or bookkeeping?"></textarea>
-            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('thu-qbo')">Send</button><span class="q-saved-msg" id="saved-thu-qbo">✓ Sent to Slack</span></div>
+            <h4>❓ Monitoring questions → Slack Kelli: "Monitoring Question"</h4>
+            <textarea id="q-thu-channels" placeholder="Any questions about the monitoring system or how channels interact?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('thu-channels')">Send</button>
+              <span class="q-saved-msg" id="saved-thu-channels">✓ Sent to Slack</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ── MODULE 4C — DAILY TIME BLOCK ─────────────────────────────── -->
+      <div class="module-card" id="mod-thu-timeblock">
+        <div class="module-header">
+          <span class="module-icon">⏰</span>
+          <h2>4C — Your Daily Time Block (9 AM – 4 PM)</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Flex hours don't mean unstructured hours. Here's the daily rhythm that keeps all three channels covered,
+            leaves space for focused task work, and sets you up to stay ahead instead of playing catch-up.
+          </p>
+
+          <div class="time-block-grid">
+            <div class="time-row focus">
+              <div class="time-label">9:00 AM</div>
+              <div class="time-content">
+                <strong>Morning Sweep</strong>
+                <span class="time-tag email">EMAIL</span>
+                <span class="time-tag asana">ASANA</span><br>
+                Open reports@ — read and triage every new email. Acknowledge any client messages that came in overnight. Check Asana "My Tasks" for today's priorities. Note anything to surface at huddle.
+              </div>
+            </div>
+            <div class="time-row">
+              <div class="time-label">9:30 AM</div>
+              <div class="time-content">
+                <strong>Deep Work Block — Client Tasks</strong>
+                <span class="time-tag asana">ASANA</span><br>
+                Work through your Asana task list. This is focused time: document filing, reconciliation prep, organizer processing, statement matching. Minimize interruptions — save Slack for urgent items only.
+              </div>
+            </div>
+            <div class="time-row priority">
+              <div class="time-label">11:00 AM</div>
+              <div class="time-content">
+                <strong>Pre-Huddle Prep</strong>
+                <span class="time-tag slack">SLACK</span>
+                <span class="time-tag email">EMAIL</span><br>
+                Quick scan of Slack #activity. Review any new emails that came in. Write down 2–3 items to mention at huddle: what you processed, what's pending, anything that needs Kelli's input.
+              </div>
+            </div>
+            <div class="time-row huddle">
+              <div class="time-label">11:30 AM</div>
+              <div class="time-content">
+                <strong>🟣 Daily Huddle with Kelli</strong>
+                <span class="time-tag kelli">KELLI</span><br>
+                KelliWorks daily team standup. Come prepared with: (1) what you completed this morning, (2) what's in progress, (3) any blockers or questions, (4) any client items that need Kelli's eyes. Keep it crisp — this is a 15-minute check-in, not a deep dive.
+              </div>
+            </div>
+            <div class="time-row">
+              <div class="time-label">12:00 PM</div>
+              <div class="time-content">
+                <strong>Lunch / Break</strong><br>
+                You're flex — take your break here. Step away from the screen. A clear head makes the afternoon more productive.
+              </div>
+            </div>
+            <div class="time-row focus">
+              <div class="time-label">1:00 PM</div>
+              <div class="time-content">
+                <strong>Afternoon Deep Work — Focus Tasks</strong>
+                <span class="time-tag asana">ASANA</span><br>
+                Pick up where you left off on your task list. This is the longest uninterrupted block of the day — protect it. Batch similar tasks: all document filing together, all email drafts together.
+              </div>
+            </div>
+            <div class="time-row priority">
+              <div class="time-label">2:30 PM</div>
+              <div class="time-content">
+                <strong>Email Re-Check &amp; Client Follow-Ups</strong>
+                <span class="time-tag email">EMAIL</span>
+                <span class="time-tag slack">SLACK</span><br>
+                Second email sweep of the day. Respond to anything that arrived after the morning. Check Slack for afternoon activity. This is also the time to send follow-ups you promised earlier: "Just following up on X from this morning."
+              </div>
+            </div>
+            <div class="time-row">
+              <div class="time-label">3:15 PM</div>
+              <div class="time-content">
+                <strong>Asana Cleanup &amp; Next-Day Prep</strong>
+                <span class="time-tag asana">ASANA</span><br>
+                Close out any completed tasks. Make sure every open task has a due date. Add notes to in-progress items so you can pick them up easily tomorrow. Flag anything that needs Kelli's attention before end of day.
+              </div>
+            </div>
+            <div class="time-row wrap">
+              <div class="time-label">3:45 PM</div>
+              <div class="time-content">
+                <strong>🟢 End-of-Day Wrap</strong>
+                <span class="time-tag email">EMAIL</span>
+                <span class="time-tag asana">ASANA</span><br>
+                Final email check. If anything came in that can't wait — action it or Slack Kelli. Close Asana — your task list should be clean or have clear next-day items. At 4 PM, you're done. Log off.
+              </div>
+            </div>
+          </div>
+
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-25"><label for="thu-25">Understand the 9 AM morning sweep rhythm</label></li>
+            <li><input type="checkbox" id="thu-26"><label for="thu-26">Know what to bring prepared to the 11:30 AM daily huddle</label></li>
+            <li><input type="checkbox" id="thu-27"><label for="thu-27">Protect your two deep work blocks (9:30 AM and 1:00 PM)</label></li>
+            <li><input type="checkbox" id="thu-28"><label for="thu-28">Build the 2:30 PM follow-up check into your habit</label></li>
+            <li><input type="checkbox" id="thu-29"><label for="thu-29">End every day with a clean Asana task list (all items have due dates)</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ Schedule questions → Slack Kelli: "Schedule Question"</h4>
+            <textarea id="q-thu-timeblock" placeholder="Any questions about the daily rhythm or time blocks?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('thu-timeblock')">Send</button>
+              <span class="q-saved-msg" id="saved-thu-timeblock">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE 4D — SLACK TO ASANA ────────────────────────────────── -->
+      <div class="module-card" id="mod-thu-slackasana">
+        <div class="module-header">
+          <span class="module-icon">🔁</span>
+          <h2>4D — Turning Slack Conversations into Asana Tasks &amp; Reminders</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Slack is where things get said. Asana is where things get done. Your job is to be the bridge.
+            Any time something actionable comes through Slack — a client update, a task from Kelli, a follow-up you promised —
+            it needs to live in Asana within minutes, not in your head overnight.
+          </p>
+
+          <div class="slack-asana-steps">
+            <div class="sas-step">
+              <div class="sas-num">1</div>
+              <div class="sas-content">
+                <strong>Spot the Action in Slack</strong>
+                Watch for: requests ("can you check on X?"), commitments you made ("I'll look into that"), updates that affect a client ("Kelli mentioned Aaron Twersky's report needs to go out today"), or deadlines dropped casually in conversation.
+              </div>
+            </div>
+            <div class="sas-step">
+              <div class="sas-num">2</div>
+              <div class="sas-content">
+                <strong>React + Save the Message</strong>
+                React to the Slack message with ✅ so the sender knows you saw it. Then click the three dots (···) on the message → <strong>Save for Later</strong> → or use the Asana Slack integration to convert directly to a task.
+              </div>
+            </div>
+            <div class="sas-step">
+              <div class="sas-num">3</div>
+              <div class="sas-content">
+                <strong>Create the Asana Task — Within 5 Minutes</strong>
+                Don't wait until later. Open Asana → My Tasks → Add Task. Title: be specific (not "check email" — use "Follow up: Baycos ADP cancellation status"). Assign to yourself. Set due date. Paste the Slack message link in the task description as context.
+              </div>
+            </div>
+            <div class="sas-step">
+              <div class="sas-num">4</div>
+              <div class="sas-content">
+                <strong>Set a Slack Reminder if It's Time-Sensitive</strong>
+                For things due in a few hours (not days): hover over the Slack message → clock icon → <strong>Set Reminder</strong>. Options include: 20 minutes, 1 hour, 3 hours, or custom. Slack will ping you with the original message as context — perfect for "I'll follow up shortly" promises.
+              </div>
+            </div>
+            <div class="sas-step">
+              <div class="sas-num">5</div>
+              <div class="sas-content">
+                <strong>Acknowledge in Slack After You Complete It</strong>
+                When the task is done, go back to the original Slack message and reply: "Done — [what you did]." This keeps the team informed without requiring a separate check-in. Kelli sees it in the thread. Client-facing actions should be confirmed in Asana and Slack.
+              </div>
+            </div>
+          </div>
+
+          <div class="reminder-box">
+            <strong>⏰ The 3 Types of Reminders You'll Use Most:</strong><br>
+            <strong>Slack Reminder</strong> — best for same-day, hours-away follow-ups<br>
+            <strong>Asana Due Date</strong> — best for multi-day tasks and deliverables<br>
+            <strong>Asana Due Time</strong> — best for time-critical items (e.g., "send report by 5 PM")
+          </div>
+
+          <div style="background: #F0F7FF; border: 1px solid #2E86AB; border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 14px 0; line-height: 1.7;">
+            <strong style="color: #1B2A4A;">🔄 Real Example — Baycos Scenario Applied:</strong><br>
+            Kelli says in Slack: "Patricia — can you check in on the ADP status for Baycos? Tomasz is waiting."<br><br>
+            ✅ You react to the message in Slack.<br>
+            ✅ You open Asana → New Task: "Check ADP status for Baycos / update Tomasz" → Due: Today 2:00 PM<br>
+            ✅ You paste the Slack message URL in the task description.<br>
+            ✅ You email/call ADP → get status update → email Tomasz.<br>
+            ✅ You reply in Slack: "Done — ADP update sent to Tomasz. Status: [X]."<br><br>
+            That's the full loop. Nothing falls through.
+          </div>
+
+          <ul class="checklist" data-day="thu">
+            <li><input type="checkbox" id="thu-30"><label for="thu-30">Know how to save a Slack message for later</label></li>
+            <li><input type="checkbox" id="thu-31"><label for="thu-31">Know how to set a Slack reminder on a message</label></li>
+            <li><input type="checkbox" id="thu-32"><label for="thu-32">Practice creating an Asana task with a Slack thread link as context</label></li>
+            <li><input type="checkbox" id="thu-33"><label for="thu-33">Understand the 3 reminder types: Slack reminder, Asana due date, Asana due time</label></li>
+            <li><input type="checkbox" id="thu-34"><label for="thu-34">Close every Slack action loop by replying "Done — [what you did]"</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ Workflow questions → Slack Kelli: "Workflow Question"</h4>
+            <textarea id="q-thu-slackasana" placeholder="Any questions about Slack reminders, Asana task creation, or the action loop?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('thu-slackasana')">Send</button>
+              <span class="q-saved-msg" id="saved-thu-slackasana">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+    <!-- ══════════════════════════════════════════════════════ END THURSDAY -->
 
     <!-- ═══════════════════════════════════════════════════ FRIDAY -->
     <div class="day-panel" id="panel-fri">
@@ -2326,7 +3774,7 @@
     mon: { ids: ['mon-1','mon-2','mon-3','mon-6a','mon-6b','mon-6','mon-7','mon-8','mon-9','mon-10','mon-10b','mon-10c','mon-10d','mon-10e','mon-11','mon-12','mon-13','mon-14','mon-15','mon-16','mon-17','mon-18'] },
     tue: { ids: ['tue-1','tue-2','tue-3','tue-4','tue-5','tue-6','tue-7','tue-8','tue-9','tue-10','tue-11','tue-12','tue-13'] },
     wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9','wed-10','wed-11','wed-12','wed-13','wed-14','wed-15','wed-16','wed-17','wed-18','wed-19','wed-20','wed-21','wed-22','wed-23','wed-24','wed-25','wed-26','wed-27','wed-28','wed-29'] },
-    thu: { ids: ['thu-1','thu-2','thu-3','thu-4','thu-5','thu-6','thu-7','thu-8','thu-9','thu-10','thu-11','thu-12','thu-13','thu-14','thu-15'] },
+    thu: { ids: ['thu-s1','thu-s2','thu-s3','thu-s4','thu-s5','thu-s6','thu-s7','thu-s8','thu-s9','thu-s10','thu-s11','thu-s12','thu-s13','thu-s14','thu-s15','thu-s16','thu-s17','thu-s18','thu-s19','thu-s20','thu-21','thu-22','thu-23','thu-24','thu-25','thu-26','thu-27','thu-28','thu-29','thu-30','thu-31','thu-32','thu-33','thu-34'] },
     fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9'] },
   };
 
