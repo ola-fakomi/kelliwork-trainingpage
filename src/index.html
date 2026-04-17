@@ -4,41 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KelliWorks Accounting Firm — Patricia Montan Training Hub</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config/supabase-config.js"></script>
   <style>
     /* ─── RESET & BASE ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy:      #10284D;
-      --blue:      #0285CE;
-      --blue-lt:   #A0D2EF;
-      --gold:      #BCA162;
-      --gold-lt:   #FFF7EE;
-      --green:     #477651;
-      --green-lt:  #B6D1BB;
+      --navy:      #122620;
+      --blue:      #C3A862;
+      --blue-lt:   #FBF8F9;
+      --gold:      #C3A862;
+      --gold-lt:   #FFF7ED;
+      --green:     #C3A862;
+      --green-lt:  #FBF8F9;
       --red:       #DF3131;
       --red-lt:    #FDEAEA;
       --gray:      #FBF8F9;
       --dark:      #1A1A1A;
       --mid:       #767676;
       --white:     #FFFFFF;
-      --shadow:    0px 1px 4px 0px rgba(0,0,0,0.5);
-      --radius:    8px;
+      --shadow:    0px 2px 8px 0px rgba(0,0,0,0.08), 0px 1px 2px 0px rgba(0,0,0,0.06);
+      --radius:    12px;
+      --font-head: 'Marcellus', Georgia, serif;
     }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Source Sans 3', 'myriad-pro', 'Liberation Sans', Arial, sans-serif;
-      background: #FBF8F9;
+      font-family: 'Questrial', Arial, sans-serif;
+      background: #FFF7ED;
       color: var(--dark);
       min-height: 100vh;
+      letter-spacing: 0.01em;
+      line-height: 1.6;
     }
 
     /* ─── TOP BAR ───────────────────────────────────────────────────── */
     .topbar {
-      background: #12261F;
+      background: #122620;
       color: white;
-      padding: 0 32px;
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -46,7 +50,7 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 3px 12px rgba(0,0,0,0.35);
-      min-height: 62px;
+      min-height: 68px;
       border-bottom: 3px solid var(--gold);
     }
     .topbar-left { display:flex; align-items:center; gap:14px; }
@@ -60,7 +64,7 @@
       padding: 5px 10px;
       line-height: 1;
     }
-    .topbar-brand { font-size: 17px; font-weight: 700; letter-spacing: 0.3px; line-height:1.2; }
+    .topbar-brand { font-family: var(--font-head); font-size: 17px; font-weight: 400; letter-spacing: 0.3px; line-height:1.2; }
     .topbar-brand span { color: var(--gold); }
     .topbar-tagline { font-size: 10px; color: rgba(255,253,242,0.55); letter-spacing: 0.5px; text-transform: uppercase; margin-top:2px; }
     .topbar-meta { font-size: 13px; color: rgba(255,253,242,0.7); }
@@ -86,36 +90,36 @@
     .topbar-pct { font-weight: 700; color: var(--gold); min-width: 36px; text-align: right; }
 
     /* ─── LAYOUT ────────────────────────────────────────────────────── */
-    .layout { display: flex; min-height: calc(100vh - 56px); }
+    .layout { display: flex; min-height: calc(100vh - 68px); }
 
     /* ─── SIDEBAR ───────────────────────────────────────────────────── */
     .sidebar {
-      width: 220px;
+      width: 240px;
       flex-shrink: 0;
-      background: var(--navy);
-      padding: 24px 0 40px;
+      background: #122620;
+      padding: 28px 0 48px;
       position: sticky;
-      top: 56px;
-      height: calc(100vh - 56px);
+      top: 68px;
+      height: calc(100vh - 68px);
       overflow-y: auto;
     }
     .sidebar-title {
-      padding: 0 20px 16px;
+      padding: 0 24px 18px;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1.2px;
       text-transform: uppercase;
-      color: #A8C4D8;
+      color: #FFFFFF;
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .nav-item {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 11px 20px;
+      gap: 12px;
+      padding: 12px 24px;
       cursor: pointer;
-      color: #C8D8E8;
+      color: #FFFFFF;
       font-size: 14px;
       transition: all 0.2s;
       border-left: 3px solid transparent;
@@ -128,11 +132,12 @@
       border-left-color: var(--blue);
       font-weight: 600;
     }
-    .nav-item .nav-emoji { font-size: 16px; }
+    .nav-item .nav-emoji { display: flex; align-items: center; }
+    .nav-item .nav-emoji svg { width: 16px; height: 16px; stroke: currentColor; flex-shrink: 0; }
     .nav-day-badge {
       margin-left: auto;
       background: rgba(255,255,255,0.1);
-      color: #A8C4D8;
+      color: #FFFFFF;
       border-radius: 99px;
       font-size: 10px;
       padding: 1px 7px;
@@ -152,17 +157,17 @@
     .nav-item.day-complete .nav-day-badge { display: none; }
 
     .sidebar-section {
-      padding: 16px 20px 8px;
+      padding: 20px 24px 8px;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(168,196,216,0.6);
+      color: #FFFFFF;
       margin-top: 8px;
     }
 
     /* ─── MAIN CONTENT ──────────────────────────────────────────────── */
-    .main { flex: 1; padding: 32px; max-width: 900px; }
+    .main { flex: 1; padding: 40px max(32px, calc((100% - 1096px) / 2)); }
 
     /* ─── DAY PANEL ─────────────────────────────────────────────────── */
     .day-panel { display: none; }
@@ -170,50 +175,52 @@
 
     /* ─── DAY HERO ──────────────────────────────────────────────────── */
     .day-hero {
-      background: var(--navy);
+      background: #122620;
       border-radius: var(--radius);
-      padding: 28px 32px;
-      margin-bottom: 28px;
+      padding: 36px 40px;
+      margin-bottom: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 32px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
-    .day-hero.today { background: linear-gradient(135deg, #10284D 0%, #1a3a6a 100%); }
+    .day-hero.today { background: #122620; }
     .day-hero-left .tag {
       display: inline-block;
       background: var(--gold);
-      color: var(--navy);
+      color: white;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
       padding: 3px 10px;
       border-radius: 99px;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
     }
     .day-hero-left h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: white;
+      font-family: var(--font-head);
+      font-size: 34px;
+      font-weight: 400;
+      color: #FFFFFF;
       line-height: 1.1;
     }
     .day-hero-left .date {
       font-size: 14px;
-      color: #A8C4D8;
-      margin-top: 6px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 12px;
     }
     .day-hero-left .subtitle {
       font-size: 14px;
-      color: #A8C4D8;
-      margin-top: 4px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 6px;
       font-style: italic;
     }
     .day-hero-right { text-align: center; flex-shrink: 0; }
     .day-hero-emoji { font-size: 52px; line-height: 1; }
     .day-progress-ring { position: relative; width: 72px; height: 72px; margin: 0 auto; }
     .day-progress-ring svg { transform: rotate(-90deg); }
-    .day-progress-ring .ring-bg { stroke: rgba(255,255,255,0.15); }
+    .day-progress-ring .ring-bg { stroke: #E8E3DE; }
     .day-progress-ring .ring-fill {
       stroke: var(--gold);
       stroke-linecap: round;
@@ -227,7 +234,7 @@
       justify-content: center;
       font-size: 14px;
       font-weight: 800;
-      color: white;
+      color: #FFFFFF;
     }
 
     /* ─── MODULE CARD ───────────────────────────────────────────────── */
@@ -235,23 +242,25 @@
       background: white;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 24px;
+      margin-bottom: 32px;
       overflow: hidden;
     }
     .module-header {
       background: var(--blue);
-      padding: 14px 20px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .module-header h2 {
-      font-size: 17px;
-      font-weight: 700;
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 400;
       color: white;
       flex: 1;
     }
-    .module-header .module-icon { font-size: 20px; }
+    .module-header .module-icon { display: flex; align-items: center; }
+    .module-header .module-icon svg { width: 20px; height: 20px; stroke: currentColor; flex-shrink: 0; }
     .module-complete-badge {
       background: var(--green);
       color: white;
@@ -263,27 +272,27 @@
     }
     .module-card.complete .module-complete-badge { display: block; }
     .module-card.complete .module-header { background: var(--green); }
-    .module-body { padding: 20px; }
+    .module-body { padding: 28px; }
     .module-desc {
       font-size: 14px;
       color: var(--mid);
-      line-height: 1.6;
-      margin-bottom: 16px;
+      line-height: 1.75;
+      margin-bottom: 24px;
     }
 
     /* ─── LOOM SLOT ─────────────────────────────────────────────────── */
     .loom-slot {
       background: var(--blue-lt);
       border: 2px dashed var(--blue);
-      border-radius: 8px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: flex-start;
     }
     .loom-slot.has-video {
-      background: #EBF5FB;
+      background: #FAFAFA;
       border-style: solid;
       border-color: var(--blue);
     }
@@ -303,8 +312,8 @@
       transition: transform 0.2s, background 0.2s;
     }
     .loom-play:hover { transform: scale(1.1); background: var(--navy); }
-    .loom-play.pending { background: #AAC4D0; cursor: default; }
-    .loom-play.pending:hover { transform: none; background: #AAC4D0; }
+    .loom-play.pending { background: #9BBFB3; cursor: default; }
+    .loom-play.pending:hover { transform: none; background: #9BBFB3; }
     .loom-info { flex: 1; }
     .loom-label {
       font-size: 14px;
@@ -327,19 +336,19 @@
     }
 
     /* ─── CHECKLIST ─────────────────────────────────────────────────── */
-    .checklist { list-style: none; margin: 14px 0 0; }
+    .checklist { list-style: none; margin: 20px 0 0; }
     .checklist li {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
+      gap: 12px;
+      padding: 11px 0;
       border-bottom: 1px solid #F0F0F0;
       cursor: pointer;
       user-select: none;
       transition: background 0.15s;
     }
     .checklist li:last-child { border-bottom: none; }
-    .checklist li:hover { background: #FAFAFA; margin: 0 -20px; padding: 8px 20px; }
+    .checklist li:hover { background: #FAFAFA; margin: 0 -28px; padding: 11px 28px; }
     .checklist input[type="checkbox"] {
       width: 18px;
       height: 18px;
@@ -362,28 +371,28 @@
 
     /* ─── ALERT BOXES ───────────────────────────────────────────────── */
     .alert {
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 14px 0;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 20px 0;
       font-size: 14px;
       display: flex;
-      gap: 12px;
+      gap: 14px;
       align-items: flex-start;
-      line-height: 1.5;
+      line-height: 1.65;
     }
     .alert-icon { font-size: 18px; flex-shrink: 0; }
     .alert.warning { background: var(--gold-lt); border-left: 4px solid var(--gold); color: #6B5400; }
     .alert.danger  { background: var(--red-lt);  border-left: 4px solid var(--red);  color: #8B1A1A; }
-    .alert.info    { background: #EBF5FC; border-left: 4px solid #0285CE; color: #014C7A; }
-    .alert.success { background: #E8F1E9; border-left: 4px solid #477651; color: #2F4F36; }
+    .alert.info    { background: #FAFAFA; border-left: 4px solid #C3A862; color: #1A4A36; }
+    .alert.success { background: #FAFAFA; border-left: 4px solid #C3A862; color: #1A4A36; }
     .alert strong { font-weight: 700; }
 
     /* ─── ESCALATION TABLE ──────────────────────────────────────────── */
     .escalation-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 14px 0;
+      gap: 20px;
+      margin: 20px 0;
     }
     .esc-col { border-radius: 8px; overflow: hidden; }
     .esc-header {
@@ -391,7 +400,7 @@
       font-size: 13px;
       font-weight: 700;
     }
-    .esc-header.green { background: var(--green-lt); color: #155724; }
+    .esc-header.green { background: var(--green-lt); color: #1A4A36; }
     .esc-header.red   { background: var(--red-lt);   color: #721C24; }
     .esc-list { list-style: none; padding: 0; }
     .esc-list li {
@@ -400,7 +409,7 @@
       border-bottom: 1px solid rgba(0,0,0,0.06);
       line-height: 1.4;
     }
-    .esc-list.green li { background: #F0FBF2; color: #155724; }
+    .esc-list.green li { background: #FAFAFA; color: #1A4A36; }
     .esc-list.red   li { background: #FFF5F5; color: #721C24; }
     .esc-list li:last-child { border-bottom: none; }
     .esc-list li::before { content: "• "; font-weight: 700; }
@@ -408,18 +417,19 @@
     /* ─── RULE CARDS ────────────────────────────────────────────────── */
     .rule-card {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: flex-start;
       background: var(--gray);
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 12px;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
     }
     .rule-num {
       background: var(--gold);
       color: var(--navy);
+      font-family: var(--font-head);
       font-size: 20px;
-      font-weight: 800;
+      font-weight: 400;
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -428,7 +438,7 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .rule-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .rule-body h4 { font-family: var(--font-head); font-size: 14px; font-weight: 400; margin-bottom: 4px; }
     .rule-body p { font-size: 13px; color: var(--mid); line-height: 1.4; }
 
     /* ─── TECH TABLE ────────────────────────────────────────────────── */
@@ -450,13 +460,14 @@
     .question-box {
       background: var(--gold-lt);
       border: 1.5px solid var(--gold);
-      border-radius: 8px;
-      padding: 16px 18px;
-      margin-top: 20px;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-top: 28px;
     }
     .question-box h4 {
+      font-family: var(--font-head);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 400;
       color: #856404;
       margin-bottom: 8px;
     }
@@ -479,20 +490,23 @@
       align-items: center;
     }
     .btn {
-      padding: 8px 16px;
-      border-radius: 0px;
-      border: none;
-      font-size: 13px;
-      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 99px;
+      border: 1.5px solid transparent;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
     }
-    .btn:hover { opacity: 0.85; }
-    .btn-teal  { background: var(--blue); color: white; }
-    .btn-navy  { background: var(--navy); color: white; }
-    .btn-ghost { background: transparent; border: 1.5px solid #0285CE; color: #0285CE; }
-    .btn-teal:hover { background: white; color: #0285CE; border: 1.5px solid #0285CE; }
-    .btn-navy:hover { background: transparent; color: #10284D; border: 1.5px solid #10284D; }
+    .btn-teal  { background: var(--blue); color: white; border-color: var(--blue); }
+    .btn-teal:hover { background: var(--navy); border-color: var(--gold); color: white; }
+    .btn-navy  { background: var(--navy); color: white; border-color: var(--navy); }
+    .btn-navy:hover { background: transparent; border-color: var(--gold); color: var(--navy); }
+    .btn-ghost { background: var(--navy); border-color: var(--gold); color: white; }
+    .btn-ghost:hover { background: var(--gold); border-color: var(--gold); color: white; }
     .qbox-hint { font-size: 12px; color: #AAA; margin-left: auto; }
     .q-saved-msg {
       font-size: 12px;
@@ -507,16 +521,16 @@
       background: white;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 28px;
+      margin-bottom: 32px;
     }
-    .progress-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--navy); }
+    .progress-card h3 { font-family: var(--font-head); font-size: 17px; font-weight: 400; margin-bottom: 20px; color: var(--navy); }
     .day-progress-list { list-style: none; }
     .day-progress-list li {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 0;
+      gap: 12px;
+      padding: 10px 0;
       border-bottom: 1px solid #F0F0F0;
       font-size: 14px;
     }
@@ -531,24 +545,25 @@
       background: var(--blue-lt);
       border: 2px dashed var(--blue);
       border-radius: var(--radius);
-      padding: 40px;
+      padding: 56px 48px;
       text-align: center;
     }
-    .locked-banner .lock-icon { font-size: 48px; margin-bottom: 12px; }
-    .locked-banner h2 { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .locked-banner .lock-icon { display: flex; justify-content: center; margin-bottom: 12px; }
+    .locked-banner .lock-icon svg { width: 48px; height: 48px; stroke: var(--navy); }
+    .locked-banner h2 { font-family: var(--font-head); font-size: 22px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
     .locked-banner p { font-size: 14px; color: var(--mid); max-width: 500px; margin: 0 auto; line-height: 1.6; }
 
     /* ─── WEEK OVERVIEW ─────────────────────────────────────────────── */
     .week-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin: 0 0 24px;
+      gap: 16px;
+      margin: 0 0 36px;
     }
     .week-card {
       background: white;
       border-radius: var(--radius);
-      padding: 16px;
+      padding: 20px 16px;
       box-shadow: var(--shadow);
       cursor: pointer;
       transition: transform 0.15s, box-shadow 0.15s;
@@ -557,8 +572,9 @@
     }
     .week-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
     .week-card.today-card { border-top-color: var(--gold); }
-    .week-card .wc-emoji { font-size: 26px; margin-bottom: 6px; }
-    .week-card .wc-day { font-size: 13px; font-weight: 700; color: var(--navy); }
+    .week-card .wc-emoji { display: flex; justify-content: center; margin-bottom: 6px; }
+    .week-card .wc-emoji svg { width: 26px; height: 26px; stroke: var(--navy); }
+    .week-card .wc-day { font-family: var(--font-head); font-size: 13px; font-weight: 400; color: var(--navy); }
     .week-card .wc-date { font-size: 11px; color: var(--mid); margin-bottom: 8px; }
     .week-card .wc-bar-wrap { height: 6px; background: #EEE; border-radius: 99px; overflow: hidden; }
     .week-card .wc-bar { height: 100%; background: var(--blue); border-radius: 99px; transition: width 0.4s; }
@@ -567,8 +583,8 @@
 
     /* ─── SAVE BAR ──────────────────────────────────────────────────── */
     .save-bar {
-      background: #12261F;
-      padding: 8px 32px;
+      background: #122620;
+      padding: 10px 40px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -578,18 +594,20 @@
     }
     .save-bar strong { color: var(--gold); }
     .save-btn {
-      padding: 5px 14px;
-      border-radius: 0px;
-      border: none;
-      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      border: 1.5px solid transparent;
+      font-size: 11px;
       font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
     .save-btn:hover { opacity: 0.85; }
-    .save-btn-export { background: var(--blue); color: white; }
-    .save-btn-import { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #A8C4D8; }
-    .save-btn-reset  { background: transparent; border: 1.5px solid rgba(220,53,69,0.4); color: #F09098; }
+    .save-btn-export { background: var(--gold); color: white; border-color: var(--gold); }
+    .save-btn-import { background: transparent; border-color: rgba(255,255,255,0.3); color: #8FBDB0; }
+    .save-btn-reset  { background: transparent; border-color: rgba(220,53,69,0.4); color: #F09098; }
     .save-status { margin-left: auto; font-size: 12px; color: var(--gold); font-weight: 600; opacity: 0; transition: opacity 0.5s; }
     .save-status.show { opacity: 1; }
     #importFile { display: none; }
@@ -597,7 +615,7 @@
     /* ─── RESPONSIVE ────────────────────────────────────────────────── */
     @media (max-width: 768px) {
       .sidebar { display: none; }
-      .main { padding: 16px; }
+      .main { padding: 16px; max-width: none; }
       .week-grid { grid-template-columns: 1fr 1fr; }
       .escalation-grid { grid-template-columns: 1fr; }
     }
@@ -605,7 +623,7 @@
     /* ── Fathom recording slots ───────────────────────────────────── */
     .fathom-slot {
       display: flex; align-items: center; gap: 14px;
-      padding: 12px 0; border-bottom: 1px solid #EEF3F8;
+      padding: 12px 0; border-bottom: 1px solid #EDF3EF;
     }
     .fathom-slot:last-of-type { border-bottom: none; }
     .fathom-play {
@@ -622,69 +640,72 @@
     .fathom-meta  { font-size: 12px; color: #6C5CE7; font-weight: 600; margin-top: 3px; }
 
     /* ── SOP Phase flow ───────────────────────────────────────────── */
-    .sop-flow { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .sop-flow { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0; }
     .sop-phase {
-      background: #FBF8F9; border-left: 3px solid #0285CE;
-      border-radius: 6px; padding: 8px 12px; font-size: 13px;
+      background: #FBF8F9; border-left: 3px solid #C3A862;
+      border-radius: 8px; padding: 12px 16px; font-size: 13px;
       min-width: 180px; flex: 1;
     }
-    .sop-phase-num { font-size: 10px; font-weight: 800; color: #0285CE; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sop-phase-title { font-weight: 700; color: #10284D; margin: 2px 0; font-size: 13px; }
+    .sop-phase-num { font-size: 10px; font-weight: 800; color: #C3A862; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sop-phase-title { font-weight: 700; color: #122620; margin: 2px 0; font-size: 13px; }
     .sop-phase-who { font-size: 11px; color: #666; }
-    .sop-phase.patricia { border-left-color: #BCA162; background: #FFF8F2; }
-    .sop-phase.patricia .sop-phase-num { color: #BCA162; }
+    .sop-phase.patricia { border-left-color: #C3A862; background: #FFF8F2; }
+    .sop-phase.patricia .sop-phase-num { color: #C3A862; }
 
     /* ── Role ownership table ─────────────────────────────────────── */
     .role-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14px; }
-    .role-table th { background: #10284D; color: white; padding: 9px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .role-table td { padding: 9px 12px; border-bottom: 1px solid #EEF3F8; vertical-align: top; }
-    .role-table tr:nth-child(even) td { background: #F9FBFD; }
+    .role-table th { background: #122620; color: white; padding: 9px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .role-table td { padding: 9px 12px; border-bottom: 1px solid #EDF3EF; vertical-align: top; }
+    .role-table tr:nth-child(even) td { background: #F8FBF9; }
     .role-badge { display: inline-block; border-radius: 99px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
-    .role-badge.yes { background: #B6D1BB; color: #155724; }
+    .role-badge.yes { background: #FBF8F9; color: #1A4A36; }
     .role-badge.no  { background: #FDEAEA; color: #721C24; }
-    .role-badge.ref { background: #FFF7EE; color: #856404; }
+    .role-badge.ref { background: #FFF7ED; color: #856404; }
 
     /* ── Dropbox path ─────────────────────────────────────────────── */
     .dropbox-path {
-      background: #FBF8F9; border: 1px solid #DDE3EC; border-radius: 8px;
+      background: #FBF8F9; border: 1px solid #D5E3DE; border-radius: 8px;
       padding: 14px 18px; font-family: 'Courier New', monospace;
-      font-size: 13px; color: #10284D; margin: 14px 0; line-height: 1.8;
+      font-size: 13px; color: #122620; margin: 14px 0; line-height: 1.8;
     }
-    .dropbox-path .db-arrow { color: #0285CE; font-weight: 700; }
-    .dropbox-path .db-final { color: #BCA162; font-weight: 800; }
+    .dropbox-path .db-arrow { color: #C3A862; font-weight: 700; }
+    .dropbox-path .db-final { color: #C3A862; font-weight: 800; }
 
     /* ── Link button ──────────────────────────────────────────────── */
     .link-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #10284D; color: white;
-      padding: 10px 18px; border-radius: 8px;
-      font-size: 14px; font-weight: 600; text-decoration: none;
-      margin: 6px 6px 6px 0; transition: background 0.2s;
+      background: #122620; color: white;
+      padding: 10px 22px; border-radius: 99px;
+      border: 1.5px solid transparent;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none;
+      margin: 6px 6px 6px 0; transition: background 0.2s, border-color 0.2s;
     }
-    .link-btn:hover { background: #0285CE; color: white; }
-    .link-btn.gold { background: #BCA162; color: #10284D; }
-    .link-btn.gold:hover { background: #e0894a; color: #10284D; }
-    .link-btn.teal { background: #0285CE; color: white; }
-    .link-btn.teal:hover { background: #246e8e; }
+    .link-btn:hover { background: #122620; border-color: var(--gold); color: white; }
+    .link-btn.gold { background: #C3A862; color: white; border-color: #C3A862; }
+    .link-btn.gold:hover { background: #122620; border-color: var(--gold); color: white; }
+    .link-btn.teal { background: #C3A862; color: white; border-color: #C3A862; }
+    .link-btn.teal:hover { background: #1A4A36; }
 
 /* ── Email scenario cards ─────────────────────────────────────────────── */
 .scenario-card {
-  border: 1px solid #DDE3EC;
-  border-radius: 10px;
+  border: 1px solid #D5E3DE;
+  border-radius: 12px;
   overflow: hidden;
-  margin: 20px 0;
+  margin: 28px 0;
 }
 .scenario-header {
-  background: #10284D;
+  background: #122620;
   color: white;
-  padding: 12px 18px;
+  padding: 16px 22px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
 .scenario-num {
-  background: #BCA162;
-  color: #10284D;
+  background: #C3A862;
+  color: #122620;
   font-weight: 900;
   font-size: 12px;
   padding: 3px 9px;
@@ -695,7 +716,7 @@
 }
 .scenario-title-block { flex: 1; }
 .scenario-title { font-weight: 700; font-size: 15px; }
-.scenario-client { font-size: 12px; color: #A8C4D8; margin-top: 2px; }
+.scenario-client { font-size: 12px; color: #8FBDB0; margin-top: 2px; }
 .scenario-badge {
   font-size: 10px;
   font-weight: 700;
@@ -706,15 +727,15 @@
   display: inline-block;
 }
 .scenario-badge.live    { background: #DF3131; color: white; }
-.scenario-badge.great   { background: #477651; color: white; }
-.scenario-badge.caution { background: #BCA162; color: #10284D; }
+.scenario-badge.great   { background: #C3A862; color: white; }
+.scenario-badge.caution { background: #C3A862; color: #122620; }
 .scenario-badge.internal{ background: #6C5CE7; color: white; }
 
 .email-preview {
-  background: #F9FBFD;
-  border: 1px solid #EEF3F8;
-  border-radius: 8px;
-  margin: 12px 16px;
+  background: #F8FBF9;
+  border: 1px solid #EDF3EF;
+  border-radius: 10px;
+  margin: 16px 22px;
   overflow: hidden;
 }
 .email-preview-header {
@@ -722,32 +743,32 @@
   padding: 8px 14px;
   font-size: 12px;
   color: #666;
-  border-bottom: 1px solid #DDE3EC;
+  border-bottom: 1px solid #D5E3DE;
   line-height: 1.6;
 }
-.email-preview-header strong { color: #10284D; }
+.email-preview-header strong { color: #122620; }
 .email-preview-body {
   padding: 12px 14px;
   font-size: 13px;
   color: #1A1A1A;
   line-height: 1.7;
   white-space: pre-wrap;
-  font-family: 'Source Sans 3', 'myriad-pro', 'Liberation Sans', Arial, sans-serif;
+  font-family: 'Questrial', Arial, sans-serif;
 }
-.email-preview-body.sent { background: #F0F7FF; }
+.email-preview-body.sent { background: #EDF5F0; }
 
-.scenario-body { padding: 4px 16px 16px; }
+.scenario-body { padding: 8px 22px 22px; }
 .analysis-block {
-  border-radius: 8px;
-  padding: 13px 16px;
-  margin: 10px 0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
   font-size: 13px;
   line-height: 1.7;
 }
-.analysis-block.green  { background: #B6D1BB; border-left: 4px solid #477651; }
-.analysis-block.amber  { background: #FFF7EE; border-left: 4px solid #BCA162; }
+.analysis-block.green  { background: #FBF8F9; border-left: 4px solid #C3A862; }
+.analysis-block.amber  { background: #FFF7ED; border-left: 4px solid #C3A862; }
 .analysis-block.red    { background: #FDEAEA; border-left: 4px solid #DF3131; }
-.analysis-block.teal   { background: #A0D2EF; border-left: 4px solid #0285CE; }
+.analysis-block.teal   { background: #FBF8F9; border-left: 4px solid #C3A862; }
 .analysis-block strong { display: block; margin-bottom: 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 .analysis-block ul { padding-left: 18px; margin: 4px 0 0; }
 .analysis-block li { margin-bottom: 3px; }
@@ -757,40 +778,40 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin: 16px 0;
-  border: 1px solid #DDE3EC;
+  margin: 22px 0;
+  border: 1px solid #D5E3DE;
   border-radius: 10px;
   overflow: hidden;
 }
 .time-row {
   display: flex;
   align-items: stretch;
-  border-bottom: 1px solid #EEF3F8;
+  border-bottom: 1px solid #EDF3EF;
   font-size: 13px;
 }
 .time-row:last-child { border-bottom: none; }
 .time-label {
-  background: #10284D;
-  color: #A8C4D8;
+  background: #122620;
+  color: #8FBDB0;
   font-size: 11px;
   font-weight: 700;
-  padding: 10px 14px;
-  min-width: 90px;
+  padding: 12px 16px;
+  min-width: 100px;
   display: flex;
   align-items: center;
   letter-spacing: 0.3px;
 }
 .time-content {
-  padding: 10px 16px;
+  padding: 12px 18px;
   flex: 1;
   color: #1A1A1A;
   line-height: 1.6;
 }
-.time-content strong { color: #10284D; }
-.time-row.focus    .time-label { background: #0285CE; color: white; }
-.time-row.priority .time-label { background: #BCA162; color: #10284D; }
+.time-content strong { color: #122620; }
+.time-row.focus    .time-label { background: #C3A862; color: white; }
+.time-row.priority .time-label { background: #C3A862; color: #122620; }
 .time-row.huddle   .time-label { background: #6C5CE7; color: white; }
-.time-row.wrap     .time-label { background: #477651; color: white; }
+.time-row.wrap     .time-label { background: #C3A862; color: white; }
 .time-tag {
   display: inline-block;
   font-size: 10px;
@@ -800,16 +821,16 @@
   margin-left: 6px;
   vertical-align: middle;
 }
-.time-tag.email  { background: #A0D2EF; color: #10284D; }
-.time-tag.slack  { background: #FFF7EE; color: #856404; }
-.time-tag.asana  { background: #B6D1BB; color: #155724; }
+.time-tag.email  { background: #FBF8F9; color: #122620; }
+.time-tag.slack  { background: #FFF7ED; color: #856404; }
+.time-tag.asana  { background: #FBF8F9; color: #1A4A36; }
 .time-tag.kelli  { background: #FDEAEA; color: #721C24; }
 
 /* ── 3-channel monitor ────────────────────────────────────────────────── */
 .channel-grid {
   display: flex;
-  gap: 12px;
-  margin: 16px 0;
+  gap: 16px;
+  margin: 22px 0;
   flex-wrap: wrap;
 }
 .channel-card {
@@ -817,7 +838,7 @@
   min-width: 200px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #DDE3EC;
+  border: 1px solid #D5E3DE;
 }
 .channel-card-header {
   padding: 12px 16px;
@@ -825,7 +846,7 @@
   font-size: 14px;
   color: white;
 }
-.channel-card-header.email  { background: #10284D; }
+.channel-card-header.email  { background: #122620; }
 .channel-card-header.slack  { background: #4A154B; }
 .channel-card-header.asana  { background: #F06A6A; }
 .channel-card-body {
@@ -842,7 +863,7 @@
   color: #DF3131;
   margin-top: 8px;
   padding-top: 8px;
-  border-top: 1px solid #EEF3F8;
+  border-top: 1px solid #EDF3EF;
 }
 
 /* ── Slack-to-Asana steps ─────────────────────────────────────────────── */
@@ -856,13 +877,13 @@
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  background: #F9FBFD;
-  border: 1px solid #DDE3EC;
+  background: #F8FBF9;
+  border: 1px solid #D5E3DE;
   border-radius: 10px;
   padding: 14px 16px;
 }
 .sas-num {
-  background: #0285CE;
+  background: #C3A862;
   color: white;
   font-weight: 900;
   font-size: 13px;
@@ -875,10 +896,10 @@
   flex-shrink: 0;
 }
 .sas-content { flex: 1; font-size: 13px; line-height: 1.7; }
-.sas-content strong { color: #10284D; display: block; margin-bottom: 2px; }
+.sas-content strong { color: #122620; display: block; margin-bottom: 2px; }
 .reminder-box {
-  background: #FFF7EE;
-  border: 1px solid #BCA162;
+  background: #FFF7ED;
+  border: 1px solid #C3A862;
   border-radius: 8px;
   padding: 14px 18px;
   font-size: 13px;
@@ -888,7 +909,9 @@
 .reminder-box strong { color: #856404; }
 
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Questrial&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Questrial&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -903,7 +926,7 @@
   </div>
   <div class="topbar-meta">Patricia Montan &nbsp;·&nbsp; Accounting Operations Liaison &nbsp;·&nbsp; Start: April 14, 2026</div>
   <div class="topbar-progress">
-    <span style="color:#A8C4D8; font-size:12px;">Overall</span>
+    <span style="color:#8FBDB0; font-size:12px;">Overall</span>
     <div class="topbar-progress-bar"><div class="topbar-progress-fill" id="topProgressFill" style="width:0%"></div></div>
     <span class="topbar-pct" id="topProgressPct">0%</span>
   </div>
@@ -930,42 +953,42 @@
   <nav class="sidebar">
     <div class="sidebar-title">Week 1 Training</div>
     <a class="nav-item active" onclick="showDay('overview')" href="#">
-      <span class="nav-emoji">🏠</span> Overview
+      <span class="nav-emoji"><i data-lucide="layout-dashboard"></i></span> Overview
     </a>
     <a class="nav-item" onclick="showDay('mon')" href="#">
-      <span class="nav-emoji">🌟</span> Monday
+      <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
       <span class="nav-day-badge">Apr 14</span>
       <span class="nav-check">✓</span>
     </a>
     <a class="nav-item" onclick="showDay('tue')" href="#">
-      <span class="nav-emoji">💬</span> Tuesday
+      <span class="nav-emoji"><i data-lucide="message-circle"></i></span> Tuesday
       <span class="nav-day-badge">Apr 15</span>
       <span class="nav-check">✓</span>
     </a>
     <a class="nav-item" onclick="showDay('wed')" href="#">
-      <span class="nav-emoji">📊</span> Wednesday
+      <span class="nav-emoji"><i data-lucide="bar-chart-2"></i></span> Wednesday
       <span class="nav-day-badge">Apr 16</span>
       <span class="nav-check">✓</span>
     </a>
     <a class="nav-item" onclick="showDay('thu')" href="#">
-      <span class="nav-emoji">💰</span> Thursday
+      <span class="nav-emoji"><i data-lucide="banknote"></i></span> Thursday
       <span class="nav-day-badge">Apr 17</span>
       <span class="nav-check">✓</span>
     </a>
     <a class="nav-item" onclick="showDay('fri')" href="#">
-      <span class="nav-emoji">🏛️</span> Friday
+      <span class="nav-emoji"><i data-lucide="landmark"></i></span> Friday
       <span class="nav-day-badge">Apr 18</span>
       <span class="nav-check">✓</span>
     </a>
     <div class="sidebar-section">Coming Up</div>
     <a class="nav-item" onclick="showDay('week2')" href="#">
-      <span class="nav-emoji">🗄️</span> Week 2
+      <span class="nav-emoji"><i data-lucide="database"></i></span> Week 2
       <span class="nav-day-badge">Apr 21+</span>
     </a>
     <div style="padding: 24px 20px 0; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 16px;">
-      <div style="font-size:11px; color:#A8C4D8; margin-bottom:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Quick Links</div>
-      <a href="mailto:kelli@kelliworks.com" style="display:block; color:#A8C4D8; font-size:13px; padding:4px 0; text-decoration:none;">📧 Email Kelli</a>
-      <a href="#" style="display:block; color:#A8C4D8; font-size:13px; padding:4px 0; text-decoration:none;">💬 Slack Kelli</a>
+      <div style="font-size:11px; color:#8FBDB0; margin-bottom:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Quick Links</div>
+      <a href="mailto:kelli@kelliworks.com" style="display:flex; align-items:center; gap:6px; color:#FFFFFF; font-size:13px; padding:4px 0; text-decoration:none;"><i data-lucide="mail" style="width:14px;height:14px;"></i> Email Kelli</a>
+      <a href="#" style="display:flex; align-items:center; gap:6px; color:#FFFFFF; font-size:13px; padding:4px 0; text-decoration:none;"><i data-lucide="message-square" style="width:14px;height:14px;"></i> Slack Kelli</a>
     </div>
   </nav>
 
@@ -983,14 +1006,14 @@
           <div class="subtitle">Your complete training roadmap for your first week at KelliWorks</div>
         </div>
         <div class="day-hero-right">
-          <div style="font-size:48px;">🚀</div>
+          <div style="display:flex; align-items:center; justify-content:center;"><i data-lucide="rocket" style="width:48px;height:48px;stroke:var(--navy);"></i></div>
         </div>
       </div>
 
       <!-- MEET THE TEAM -->
       <div class="module-card" style="margin-bottom:24px;">
         <div class="module-header" style="background: var(--navy);">
-          <span class="module-icon">🤝</span>
+          <span class="module-icon"><i data-lucide="users"></i></span>
           <h2>Meet the Team You'll Work With Daily</h2>
         </div>
         <div class="module-body">
@@ -1019,7 +1042,7 @@
             </div>
 
             <div style="background:#FBF8F9; border-radius:8px; padding:16px; border-left:4px solid var(--green);">
-              <div style="font-size:22px; margin-bottom:6px;">📊</div>
+              <div style="display:flex; justify-content:center; margin-bottom:6px;"><i data-lucide="bar-chart-2" style="width:22px;height:22px;stroke:var(--navy);"></i></div>
               <div style="font-weight:700; font-size:15px; color:var(--navy);">Sagar (Bookkeeping Team)</div>
               <div style="font-size:12px; color:var(--green); font-weight:600; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">Bookkeeping Team</div>
               <div style="font-size:13px; color:#555; line-height:1.5;">Supports bookkeeping and client communication alongside Rangan. If you have QBO questions that need a second set of eyes, he's a resource. For client-facing communications — those route through you and Kelli.</div>
@@ -1037,35 +1060,35 @@
       <!-- WEEK GRID -->
       <div class="week-grid">
         <div class="week-card today-card" onclick="showDay('mon')">
-          <div class="wc-emoji">🌟</div>
+          <div class="wc-emoji"><i data-lucide="sun"></i></div>
           <div class="wc-day">Monday ★</div>
           <div class="wc-date">April 14</div>
           <div class="wc-bar-wrap"><div class="wc-bar" id="wc-mon" style="width:0%"></div></div>
           <div class="wc-pct" id="wc-mon-pct">0%</div>
         </div>
         <div class="week-card" onclick="showDay('tue')">
-          <div class="wc-emoji">💬</div>
+          <div class="wc-emoji"><i data-lucide="message-circle"></i></div>
           <div class="wc-day">Tuesday</div>
           <div class="wc-date">April 15</div>
           <div class="wc-bar-wrap"><div class="wc-bar" id="wc-tue" style="width:0%"></div></div>
           <div class="wc-pct" id="wc-tue-pct">0%</div>
         </div>
         <div class="week-card" onclick="showDay('wed')">
-          <div class="wc-emoji">📊</div>
+          <div class="wc-emoji"><i data-lucide="bar-chart-2"></i></div>
           <div class="wc-day">Wednesday</div>
           <div class="wc-date">April 16</div>
           <div class="wc-bar-wrap"><div class="wc-bar" id="wc-wed" style="width:0%"></div></div>
           <div class="wc-pct" id="wc-wed-pct">0%</div>
         </div>
         <div class="week-card" onclick="showDay('thu')">
-          <div class="wc-emoji">💰</div>
+          <div class="wc-emoji"><i data-lucide="banknote"></i></div>
           <div class="wc-day">Thursday</div>
           <div class="wc-date">April 17</div>
           <div class="wc-bar-wrap"><div class="wc-bar" id="wc-thu" style="width:0%"></div></div>
           <div class="wc-pct" id="wc-thu-pct">0%</div>
         </div>
         <div class="week-card" onclick="showDay('fri')">
-          <div class="wc-emoji">🏛️</div>
+          <div class="wc-emoji"><i data-lucide="landmark"></i></div>
           <div class="wc-day">Friday</div>
           <div class="wc-date">April 18</div>
           <div class="wc-bar-wrap"><div class="wc-bar" id="wc-fri" style="width:0%"></div></div>
@@ -1076,7 +1099,7 @@
       <!-- THE 5 NON-NEGOTIABLES -->
       <div class="module-card">
         <div class="module-header">
-          <span class="module-icon">⚡</span>
+          <span class="module-icon"><i data-lucide="zap"></i></span>
           <h2>The 5 Core Commitments — How We Do Things at KelliWorks</h2>
         </div>
         <div class="module-body">
@@ -1143,7 +1166,7 @@
       <!-- Module 1A: Welcome -->
       <div class="module-card" id="mod-mon-welcome">
         <div class="module-header">
-          <span class="module-icon">👋</span>
+          <span class="module-icon"><i data-lucide="hand"></i></span>
           <h2>1A — Welcome to KelliWorks</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1187,7 +1210,7 @@
       <!-- Module 1B: Client Roster -->
       <div class="module-card" id="mod-mon-roster">
         <div class="module-header">
-          <span class="module-icon">👥</span>
+          <span class="module-icon"><i data-lucide="users-2"></i></span>
           <h2>1B — Client Roster Review (Live with Kelli)</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1216,7 +1239,7 @@
       <!-- Module 1C: Email -->
       <div class="module-card" id="mod-mon-email">
         <div class="module-header">
-          <span class="module-icon">📧</span>
+          <span class="module-icon"><i data-lucide="mail"></i></span>
           <h2>1C — Managing Email & Client Communication</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1344,7 +1367,7 @@
       <!-- Module 1D: Tech Stack -->
       <div class="module-card" id="mod-mon-tech">
         <div class="module-header">
-          <span class="module-icon">💻</span>
+          <span class="module-icon"><i data-lucide="laptop"></i></span>
           <h2>1D — Tech Stack Setup</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1409,7 +1432,7 @@
       <!-- Module 1E: Document Sharing & Notes -->
       <div class="module-card" id="mod-mon-docs">
         <div class="module-header">
-          <span class="module-icon">📁</span>
+          <span class="module-icon"><i data-lucide="folder"></i></span>
           <h2>1E — Document Sharing & Notes Protocol</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1510,7 +1533,7 @@
       <!-- ── MODULE 2A — ASANA & DAILY WORKFLOW ─────────────────────── -->
       <div class="module-card" id="mod-tue-asana">
         <div class="module-header">
-          <span class="module-icon">📋</span>
+          <span class="module-icon"><i data-lucide="clipboard-list"></i></span>
           <h2>2A — Asana &amp; Daily Workflow</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1576,7 +1599,7 @@
       <!-- ── MODULE 2B — KEEPER: CLIENT FINANCIAL DELIVERY ─────────── -->
       <div class="module-card" id="mod-tue-keeper">
         <div class="module-header">
-          <span class="module-icon">💰</span>
+          <span class="module-icon"><i data-lucide="banknote"></i></span>
           <h2>2B — Keeper: Client Financial Delivery</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1604,8 +1627,8 @@
           </div>
 
           <div style="
-            background: #FFF7EE;
-            border-left: 4px solid #BCA162;
+            background: #FFF7ED;
+            border-left: 4px solid #C3A862;
             border-radius: 8px;
             padding: 14px 18px;
             margin: 16px 0;
@@ -1613,7 +1636,7 @@
             color: #1A1A1A;
           ">
             <strong>📌 Keeper Site:</strong>&nbsp;
-            <a href="https://app.trykeeper.com" target="_blank" style="color:#10284D; font-weight:600;">
+            <a href="https://app.trykeeper.com" target="_blank" style="color:#122620; font-weight:600;">
               app.trykeeper.com
             </a>
             — Kelli will walk you through your login and the client-facing view.
@@ -1640,7 +1663,7 @@
       <!-- ── MODULE 2C — ESCALATION GUIDE ──────────────────────────── -->
       <div class="module-card" id="mod-tue-escalation">
         <div class="module-header">
-          <span class="module-icon">🚦</span>
+          <span class="module-icon"><i data-lucide="alert-triangle"></i></span>
           <h2>2C — Escalation Guide</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1713,7 +1736,7 @@
       <!-- ══ MODULE 3A — TAX CONSULTATION CONTEXT ═══════════════════════ -->
       <div class="module-card" id="mod-wed-context">
         <div class="module-header">
-          <span class="module-icon">🎓</span>
+          <span class="module-icon"><i data-lucide="book-open"></i></span>
           <h2>3A — Tax Consultation Context</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1748,7 +1771,7 @@
             </div>
           </div>
 
-          <div style="margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: #10284D; text-transform: uppercase; letter-spacing: 0.5px;">
+          <div style="margin: 18px 0 8px; font-size: 13px; font-weight: 700; color: #122620; text-transform: uppercase; letter-spacing: 0.5px;">
             🎬 Real Consultation Recordings
           </div>
           <p style="font-size:13px; color:#666; margin-bottom:12px;">
@@ -1807,7 +1830,7 @@
       <!-- ══ MODULE 3B — THE CLIENT ORGANIZER EXPERIENCE ════════════════ -->
       <div class="module-card" id="mod-wed-organizer">
         <div class="module-header">
-          <span class="module-icon">📋</span>
+          <span class="module-icon"><i data-lucide="clipboard"></i></span>
           <h2>3B — The Client Organizer Experience</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1828,7 +1851,7 @@
             </div>
           </div>
 
-          <div style="margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 18px 0 10px; font-size: 13px; font-weight: 700; color: #122620;">
             Step 1 — Complete the Personal Tax Organizer
           </div>
           <p style="font-size:13px; color:#555; margin-bottom: 10px;">
@@ -1838,7 +1861,7 @@
             📋 Open Personal Tax Organizer
           </a>
 
-          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #122620;">
             Step 2 — Complete the Business Tax Organizer
           </div>
           <p style="font-size:13px; color:#555; margin-bottom: 10px;">
@@ -1878,7 +1901,7 @@
       <!-- ══ MODULE 3C — PIPELINE: THE ADMIN BACK END ═══════════════════ -->
       <div class="module-card" id="mod-wed-pipeline">
         <div class="module-header">
-          <span class="module-icon">⚙️</span>
+          <span class="module-icon"><i data-lucide="settings"></i></span>
           <h2>3C — Pipeline: The Admin Back End</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1898,7 +1921,7 @@
             </div>
           </div>
 
-          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #122620;">
             Log in &amp; Explore Pipeline
           </div>
           <a class="link-btn" href="https://kelliworks.pipelineapp.io/logon/default.aspx" target="_blank">
@@ -1908,7 +1931,7 @@
             Once logged in: navigate to <strong>Requests → All</strong> and find the <strong>2025 Individual Organizers</strong> bundle. This is where all client organizers live.
           </p>
 
-          <div style="margin: 20px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 20px 0 8px; font-size: 13px; font-weight: 700; color: #122620;">
             Watch: Workflow &amp; Pipeline Meetings
           </div>
           <p style="font-size:13px; color:#555; margin-bottom:12px;">
@@ -1959,7 +1982,7 @@
       <!-- ══ MODULE 3D — DROPBOX: DOCUMENT MANAGEMENT ═══════════════════ -->
       <div class="module-card" id="mod-wed-dropbox">
         <div class="module-header">
-          <span class="module-icon">📁</span>
+          <span class="module-icon"><i data-lucide="folder-open"></i></span>
           <h2>3D — Dropbox: Document Management</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -1971,7 +1994,7 @@
             over to Jay. Use the Taxes identity to log into Dropbox.
           </p>
 
-          <div style="margin: 14px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 14px 0 8px; font-size: 13px; font-weight: 700; color: #122620;">
             📍 Dropbox Path to KelliWorks Tax Clients
           </div>
           <div class="dropbox-path">
@@ -1984,10 +2007,10 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="db-arrow">→</span> <span class="db-final">📂 KelliWorks Tax Clients</span> ← Everyone is here
           </div>
 
-          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #122620;">
             Your Document Confirmation Process
           </div>
-          <div style="background:#B6D1BB; border-left: 4px solid #477651; border-radius:8px; padding:14px 18px; font-size:13px; color:#155724; margin-bottom:14px; line-height:1.8;">
+          <div style="background:#FBF8F9; border-left: 4px solid #C3A862; border-radius:8px; padding:14px 18px; font-size:13px; color:#1A4A36; margin-bottom:14px; line-height:1.8;">
             <strong>When a client completes their organizer in Pipeline:</strong><br/>
             1️⃣ &nbsp;Go to their folder in Dropbox (path above)<br/>
             2️⃣ &nbsp;Cross-reference their organizer answers against documents uploaded<br/>
@@ -2022,7 +2045,7 @@
       <!-- ══ MODULE 3E — TAX PROCESSING SOP ════════════════════════════ -->
       <div class="module-card" id="mod-wed-sop">
         <div class="module-header">
-          <span class="module-icon">📄</span>
+          <span class="module-icon"><i data-lucide="file-text"></i></span>
           <h2>3E — Tax Processing SOP: The 10-Phase Workflow</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -2030,7 +2053,7 @@
           <p class="module-desc">
             This is the official KelliWorks Tax Processing SOP. Read it fully and understand where
             <strong>you</strong> fit inside the 10-phase workflow. The phases highlighted in
-            <span style="color:#BCA162; font-weight:700;">gold</span> are where your role is most active.
+            <span style="color:#C3A862; font-weight:700;">gold</span> are where your role is most active.
             Download the full PDF for your records.
           </p>
 
@@ -2038,7 +2061,7 @@
             📄 Download Full Tax Processing SOP (PDF)
           </a>
 
-          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #10284D;">
+          <div style="margin: 20px 0 10px; font-size: 13px; font-weight: 700; color: #122620;">
             The 10 Phases — At a Glance
           </div>
           <div class="sop-flow">
@@ -2094,7 +2117,7 @@
             </div>
           </div>
 
-          <div style="background:#FFF7EE; border-left:4px solid #BCA162; border-radius:8px; padding:14px 18px; font-size:13px; margin:16px 0;">
+          <div style="background:#FFF7ED; border-left:4px solid #C3A862; border-radius:8px; padding:14px 18px; font-size:13px; margin:16px 0;">
             <strong>⭐ The Golden Rule from the SOP:</strong><br/>
             Never file without: payment received, signed authorization forms (8879), and all internal reviews complete.
             Only move a client to the next step when fully done — <strong>never skip stages.</strong>
@@ -2120,7 +2143,7 @@
       <!-- ══ MODULE 3F — PATRICIA'S ROLE IN TAX SEASON ════════════════ -->
       <div class="module-card" id="mod-wed-role">
         <div class="module-header">
-          <span class="module-icon">🎯</span>
+          <span class="module-icon"><i data-lucide="target"></i></span>
           <h2>3F — Your Role in Tax Season</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -2197,7 +2220,7 @@
             </tbody>
           </table>
 
-          <div style="background:#A0D2EF; border-left:4px solid #0285CE; border-radius:8px; padding:14px 18px; font-size:13px; color:#10284D; margin:16px 0;">
+          <div style="background:#FBF8F9; border-left:4px solid #C3A862; border-radius:8px; padding:14px 18px; font-size:13px; color:#122620; margin:16px 0;">
             <strong>🔑 The One Sentence That Defines Your Tax Role:</strong><br/>
             <em>"I make sure the client's documents are complete, the file is ready for Jay,
             and the client knows where they stand — then I get out of the way and let the
@@ -2245,7 +2268,7 @@
       <!-- ── MODULE 4A — REAL EMAIL SCENARIOS ──────────────────────────── -->
       <div class="module-card" id="mod-thu-scenarios">
         <div class="module-header">
-          <span class="module-icon">📬</span>
+          <span class="module-icon"><i data-lucide="inbox"></i></span>
           <h2>4A — 20 Real Client Email Scenarios</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -3335,7 +3358,7 @@ KelliWorks</div>
       <!-- ── MODULE 4B — 3-CHANNEL MONITORING SYSTEM ───────────────────── -->
       <div class="module-card" id="mod-thu-channels">
         <div class="module-header">
-          <span class="module-icon">📡</span>
+          <span class="module-icon"><i data-lucide="radio"></i></span>
           <h2>4B — The 3-Channel Monitoring System</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -3347,7 +3370,7 @@ KelliWorks</div>
 
           <div class="channel-grid">
             <div class="channel-card">
-              <div class="channel-card-header email">📧 reports@kelliworks.com</div>
+              <div class="channel-card-header email" style="display:flex;align-items:center;gap:8px;"><i data-lucide="mail" style="width:15px;height:15px;flex-shrink:0;"></i> reports@kelliworks.com</div>
               <div class="channel-card-body">
                 <ul>
                   <li>Check first at 9:00 AM — before anything else</li>
@@ -3361,7 +3384,7 @@ KelliWorks</div>
               </div>
             </div>
             <div class="channel-card">
-              <div class="channel-card-header slack">💬 Slack #activity</div>
+              <div class="channel-card-header slack" style="display:flex;align-items:center;gap:8px;"><i data-lucide="message-square" style="width:15px;height:15px;flex-shrink:0;"></i> Slack #activity</div>
               <div class="channel-card-body">
                 <ul>
                   <li>Monitor throughout the day — this is real-time client activity</li>
@@ -3411,7 +3434,7 @@ KelliWorks</div>
       <!-- ── MODULE 4C — DAILY TIME BLOCK ─────────────────────────────── -->
       <div class="module-card" id="mod-thu-timeblock">
         <div class="module-header">
-          <span class="module-icon">⏰</span>
+          <span class="module-icon"><i data-lucide="clock"></i></span>
           <h2>4C — Your Daily Time Block (9 AM – 4 PM)</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -3521,7 +3544,7 @@ KelliWorks</div>
       <!-- ── MODULE 4D — SLACK TO ASANA ────────────────────────────────── -->
       <div class="module-card" id="mod-thu-slackasana">
         <div class="module-header">
-          <span class="module-icon">🔁</span>
+          <span class="module-icon"><i data-lucide="repeat"></i></span>
           <h2>4D — Turning Slack Conversations into Asana Tasks &amp; Reminders</h2>
           <span class="module-complete-badge">✓ Done</span>
         </div>
@@ -3577,8 +3600,8 @@ KelliWorks</div>
             <strong>Asana Due Time</strong> — best for time-critical items (e.g., "send report by 5 PM")
           </div>
 
-          <div style="background: #F0F7FF; border: 1px solid #0285CE; border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 14px 0; line-height: 1.7;">
-            <strong style="color: #10284D;">🔄 Real Example — Baycos Scenario Applied:</strong><br>
+          <div style="background: #EDF5F0; border: 1px solid #C3A862; border-radius: 8px; padding: 14px 18px; font-size: 13px; margin: 14px 0; line-height: 1.7;">
+            <strong style="color: #122620;">🔄 Real Example — Baycos Scenario Applied:</strong><br>
             Kelli says in Slack: "Patricia — can you check in on the ADP status for Baycos? Tomasz is waiting."<br><br>
             ✅ You react to the message in Slack.<br>
             ✅ You open Asana → New Task: "Check ADP status for Baycos / update Tomasz" → Due: Today 2:00 PM<br>
@@ -3630,7 +3653,7 @@ KelliWorks</div>
       </div>
 
       <div class="module-card" id="mod-fri-state">
-        <div class="module-header"><span class="module-icon">🏛️</span><h2>5A — State Inquiries & Sales Tax Filing</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-header"><span class="module-icon"><i data-lucide="landmark"></i></span><h2>5A — State Inquiries & Sales Tax Filing</h2><span class="module-complete-badge">✓ Done</span></div>
         <div class="module-body">
           <div class="alert warning"><span class="alert-icon">✍️</span><div><strong>Core Commitment #3 — Draft → Share → Send:</strong> Any IRS or state notice = forward to Kelli immediately via Slack. Draft any response for her eyes first. This protects the client relationship and ensures nothing goes out unreviewed.</div></div>
           <div class="loom-slot">
@@ -3658,7 +3681,7 @@ KelliWorks</div>
       </div>
 
       <div class="module-card" id="mod-fri-taxmgmt">
-        <div class="module-header"><span class="module-icon">📋</span><h2>5B — Tax Client Management</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-header"><span class="module-icon"><i data-lucide="clipboard"></i></span><h2>5B — Tax Client Management</h2><span class="module-complete-badge">✓ Done</span></div>
         <div class="module-body">
           <p class="module-desc">Support Kelli on tax client management including document collection, email support, and working alongside Jay on status and billing.</p>
           <div class="loom-slot">
@@ -3682,7 +3705,7 @@ KelliWorks</div>
       </div>
 
       <div class="module-card" id="mod-fri-wrapup">
-        <div class="module-header" style="background: var(--gold);"><span class="module-icon">🎉</span><h2>5C — Week 1 Wrap-Up Call with Kelli</h2><span class="module-complete-badge">✓ Done</span></div>
+        <div class="module-header" style="background: var(--gold);"><span class="module-icon"><i data-lucide="award"></i></span><h2>5C — Week 1 Wrap-Up Call with Kelli</h2><span class="module-complete-badge">✓ Done</span></div>
         <div class="module-body">
           <p class="module-desc">This afternoon debrief with Kelli closes out your first week. Be ready to share what you've learned, what's still unclear, and what you want more depth on in Week 2.</p>
           <ul class="checklist" data-day="fri">
@@ -3710,7 +3733,7 @@ KelliWorks</div>
         <div class="day-hero-right"><div style="font-size:48px;">🔒</div></div>
       </div>
       <div class="locked-banner">
-        <div class="lock-icon">🗄️</div>
+        <div class="lock-icon"><i data-lucide="lock"></i></div>
         <h2>Database Training Unlocks Week 2</h2>
         <p>Kelli will train you on the KelliWorks Client Intelligence Portal once it is fully live. This session will cover the full dashboard, client data management, and how to use the portal in your daily workflow. A Loom video will be added here when ready.</p>
         <br/>
@@ -3725,7 +3748,7 @@ KelliWorks</div>
       </div>
       <div style="margin-top:24px;">
         <div class="module-card">
-          <div class="module-header"><span class="module-icon">📌</span><h2>Week 2 Topics Preview</h2></div>
+          <div class="module-header"><span class="module-icon"><i data-lucide="pin"></i></span><h2>Week 2 Topics Preview</h2></div>
           <div class="module-body">
             <ul class="checklist">
               <li><input type="checkbox" id="w2-1" disabled><label for="w2-1" style="color:#AAA;">KelliWorks Client Intelligence Portal — dashboard walkthrough</label></li>
@@ -3998,6 +4021,8 @@ KelliWorks</div>
 
 
 </script>
+
+<script>lucide.createIcons();</script>
 
 </body>
 </html>
