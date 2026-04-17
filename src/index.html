@@ -908,6 +908,105 @@
 }
 .reminder-box strong { color: #856404; }
 
+/* ── Week 1 wrap checklist ────────────────────────────────────────────── */
+.wrap-day-block {
+  margin: 14px 0;
+  border: 1px solid #DDE3EC;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.wrap-day-header {
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wrap-day-header.mon { background: #1B2A4A; }
+.wrap-day-header.tue { background: #2E86AB; }
+.wrap-day-header.wed { background: #6C5CE7; }
+.wrap-day-header.thu { background: #F4A261; color: #1B2A4A; }
+.wrap-day-header.fri { background: #28A745; }
+.wrap-day-body {
+  padding: 10px 16px 14px;
+  font-size: 13px;
+  color: #2C2C2C;
+  line-height: 1.8;
+}
+.wrap-day-body ul { padding-left: 18px; margin: 0; }
+.wrap-day-body li { margin-bottom: 2px; }
+
+/* ── Week 2 preview cards ─────────────────────────────────────────────── */
+.week2-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.week2-card {
+  flex: 1;
+  min-width: 180px;
+  border-radius: 10px;
+  border: 1px solid #DDE3EC;
+  overflow: hidden;
+}
+.week2-card-header {
+  background: #1B2A4A;
+  color: #F4A261;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 14px;
+}
+.week2-card-body {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #2C2C2C;
+  line-height: 1.8;
+}
+.week2-card-body ul { padding-left: 16px; margin: 0; }
+.week2-card-body li { margin-bottom: 2px; }
+
+/* ── Frequency badge ──────────────────────────────────────────────────── */
+.freq-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 99px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background: #D5E8F0;
+  color: #1B2A4A;
+}
+.freq-badge.annual  { background: #D4EDDA; color: #155724; }
+.freq-badge.monthly { background: #FFF3CD; color: #856404; }
+.freq-badge.quarterly { background: #D5E8F0; color: #1B2A4A; }
+.freq-badge.recurring { background: #F8D7DA; color: #721C24; }
+
+/* ── Congrats banner ──────────────────────────────────────────────────── */
+.congrats-banner {
+  background: linear-gradient(135deg, #1B2A4A 0%, #2E86AB 100%);
+  border-radius: 12px;
+  padding: 28px 24px;
+  color: white;
+  text-align: center;
+  margin: 8px 0 24px;
+}
+.congrats-banner h3 {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 0 8px;
+  color: #F4A261;
+}
+.congrats-banner p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+  opacity: 0.92;
+}
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3637,8 +3736,8 @@ KelliWorks</div>
     <div class="day-panel" id="panel-fri">
       <div class="day-hero">
         <div class="day-hero-left">
-          <h1>🏛️ Friday, April 18</h1>
-          <div class="subtitle">State Filings, Sales Tax & Week 1 Wrap-Up</div>
+          <h1>🎯 Friday, April 18</h1>
+          <div class="subtitle">Sales Tax, Workers Comp, Payroll, 1099s &amp; Week 1 Wrap</div>
         </div>
         <div class="day-hero-right">
           <div class="day-progress-ring">
@@ -3652,75 +3751,439 @@ KelliWorks</div>
         </div>
       </div>
 
-      <div class="module-card" id="mod-fri-state">
-        <div class="module-header"><span class="module-icon"><i data-lucide="landmark"></i></span><h2>5A — State Inquiries & Sales Tax Filing</h2><span class="module-complete-badge">✓ Done</span></div>
+      <!-- ── MODULE 5A — SALES TAX ─────────────────────────────────────── -->
+      <div class="module-card" id="mod-fri-salestax">
+        <div class="module-header">
+          <span class="module-icon">🧾</span>
+          <h2>5A — Sales Tax Filing <span class="freq-badge quarterly">Quarterly</span></h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
         <div class="module-body">
-          <div class="alert warning"><span class="alert-icon">✍️</span><div><strong>Core Commitment #3 — Draft → Share → Send:</strong> Any IRS or state notice = forward to Kelli immediately via Slack. Draft any response for her eyes first. This protects the client relationship and ensures nothing goes out unreviewed.</div></div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-statetax-link" target="_blank">▶</a>
+          <p class="module-desc">
+            Sales tax is a quarterly responsibility — Patricia gathers the numbers, pulls the reports,
+            and files directly. Each state (NY, NJ) has its own portal and process.
+            Shopify clients have an additional layer since sales tax is collected through the platform.
+            These three videos walk through each workflow.
+          </p>
+
+          <!-- Video 1: Paying NY State Sales Tax -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/54719c0d43144994ad1fc64de62fb7c8" id="loom-fri-nysalestax-link" target="_blank">▶</a>
             <div class="loom-info">
-              <div class="loom-label">State Sales Tax Filing Process — Deadlines & Submissions</div>
-              <div class="loom-status pending" id="loom-statetax-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+              <div class="loom-label">Paying NY State Sales Tax</div>
+              <div class="loom-status" id="loom-fri-nysalestax-status">▶ Click to watch</div>
             </div>
           </div>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-stategov-link" target="_blank">▶</a>
+
+          <!-- Video 2: Paying NJ Sales Tax -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/b2b37cfc9edc4e218262cd343e4620da" id="loom-fri-njsalestax-link" target="_blank">▶</a>
             <div class="loom-info">
-              <div class="loom-label">Handling State & Government Correspondence</div>
-              <div class="loom-status pending" id="loom-stategov-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+              <div class="loom-label">Paying NJ Sales Tax</div>
+              <div class="loom-status" id="loom-fri-njsalestax-status">▶ Click to watch</div>
             </div>
           </div>
+
+          <!-- Video 3: Shopify Sales Tax Training -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/e4c6a9e0823e48d58825ade6121105ec" id="loom-fri-shopifytax-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Shopify Sales Tax Training</div>
+              <div class="loom-status" id="loom-fri-shopifytax-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <div style="background:#F9FBFD; border:1px solid #DDE3EC; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7;">
+            <strong style="color:#1B2A4A;">📋 Patricia's Sales Tax Role:</strong><br>
+            Gather numbers from QBO/reports → pull the relevant sales figures for the quarter → log into the state portal (NY: <em>tax.ny.gov</em> / NJ: <em>njbusinessgateway.gov</em>) → file and confirm → save confirmation to Dropbox → create Asana task marked complete with confirmation number. If a filing ever looks off — Slack Kelli before submitting.
+          </div>
+
           <ul class="checklist" data-day="fri">
-            <li><input type="checkbox" id="fri-1"><label for="fri-1">Watch state sales tax filing video</label></li>
-            <li><input type="checkbox" id="fri-2"><label for="fri-2">Watch government correspondence video</label></li>
-            <li><input type="checkbox" id="fri-3"><label for="fri-3">Know the escalation rule for all state/IRS notices</label></li>
+            <li><input type="checkbox" id="fri-1"><label for="fri-1">Watch Paying NY State Sales Tax</label></li>
+            <li><input type="checkbox" id="fri-2"><label for="fri-2">Watch Paying NJ Sales Tax</label></li>
+            <li><input type="checkbox" id="fri-3"><label for="fri-3">Watch Shopify Sales Tax Training</label></li>
+            <li><input type="checkbox" id="fri-4"><label for="fri-4">Know the quarterly filing calendar (when each state is due)</label></li>
+            <li><input type="checkbox" id="fri-5"><label for="fri-5">Know where to pull the sales numbers from before filing</label></li>
+            <li><input type="checkbox" id="fri-6"><label for="fri-6">Know to Slack Kelli if anything looks off before submitting</label></li>
           </ul>
+
+          <div class="question-box">
+            <h4>❓ Sales tax questions → Slack Kelli: "Sales Tax Question"</h4>
+            <textarea id="q-fri-salestax" placeholder="Questions about the filing process, portals, or Shopify sales tax?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('fri-salestax')">Send</button>
+              <span class="q-saved-msg" id="saved-fri-salestax">✓ Sent to Slack</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="module-card" id="mod-fri-taxmgmt">
-        <div class="module-header"><span class="module-icon"><i data-lucide="clipboard"></i></span><h2>5B — Tax Client Management</h2><span class="module-complete-badge">✓ Done</span></div>
+      <!-- ── MODULE 5B — WORKERS COMP AUDITS ───────────────────────────── -->
+      <div class="module-card" id="mod-fri-workerscomp">
+        <div class="module-header">
+          <span class="module-icon">🦺</span>
+          <h2>5B — Workers Comp Audits <span class="freq-badge annual">Annual</span></h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
         <div class="module-body">
-          <p class="module-desc">Support Kelli on tax client management including document collection, email support, and working alongside Jay on status and billing.</p>
-          <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-taxmgmt-link" target="_blank">▶</a>
+          <p class="module-desc">
+            Workers comp audits are an annual task Patricia owns end to end. This video walks through
+            exactly how to complete one — from the audit notice through pulling the payroll and
+            classification data to submitting the response to the insurance carrier.
+          </p>
+
+          <!-- Video 1: How to Complete the Workers Comp Audit -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/6a52539c8da146ebab359e9364ad9045" id="loom-fri-workerscomp-link" target="_blank">▶</a>
             <div class="loom-info">
-              <div class="loom-label">Tax Client Mgmt — Docs, Email Support & Status Updates</div>
-              <div class="loom-status pending" id="loom-taxmgmt-status">📹 Video coming soon</div>
-              <div class="loom-edit-hint"><!-- LOOM_URL: replace with https://www.loom.com/share/YOUR_ID --></div>
+              <div class="loom-label">How to Complete the Workers Comp Audit</div>
+              <div class="loom-status" id="loom-fri-workerscomp-status">▶ Click to watch</div>
             </div>
           </div>
+
           <ul class="checklist" data-day="fri">
-            <li><input type="checkbox" id="fri-4"><label for="fri-4">Watch tax client management video</label></li>
-            <li><input type="checkbox" id="fri-5"><label for="fri-5">Understand the Jay coordination workflow for billing & status</label></li>
+            <li><input type="checkbox" id="fri-7"><label for="fri-7">Watch How to Complete the Workers Comp Audit</label></li>
+            <li><input type="checkbox" id="fri-8"><label for="fri-8">Know what payroll and classification data the carrier needs</label></li>
+            <li><input type="checkbox" id="fri-9"><label for="fri-9">Understand the full process from audit notice to submission</label></li>
           </ul>
+
           <div class="question-box">
-            <h4>❓ State filing / tax questions → Slack Kelli: "State Filing Question"</h4>
-            <textarea id="q-fri-state" placeholder="Any questions about state filings or tax client management?"></textarea>
-            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('fri-state')">Send</button><span class="q-saved-msg" id="saved-fri-state">✓ Sent to Slack</span></div>
+            <h4>❓ Workers comp questions → Slack Kelli: "Workers Comp Question"</h4>
+            <textarea id="q-fri-workerscomp" placeholder="Questions about the audit process or what data gets pulled?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('fri-workerscomp')">Send</button>
+              <span class="q-saved-msg" id="saved-fri-workerscomp">✓ Sent to Slack</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="module-card" id="mod-fri-wrapup">
-        <div class="module-header" style="background: var(--gold);"><span class="module-icon"><i data-lucide="award"></i></span><h2>5C — Week 1 Wrap-Up Call with Kelli</h2><span class="module-complete-badge">✓ Done</span></div>
+      <!-- ── MODULE 5C — PAYROLL ────────────────────────────────────────── -->
+      <div class="module-card" id="mod-fri-payroll">
+        <div class="module-header">
+          <span class="module-icon">💵</span>
+          <h2>5C — Payroll Processing <span class="freq-badge recurring">Recurring</span></h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
         <div class="module-body">
-          <p class="module-desc">This afternoon debrief with Kelli closes out your first week. Be ready to share what you've learned, what's still unclear, and what you want more depth on in Week 2.</p>
+          <p class="module-desc">
+            Payroll runs through two workflows at KelliWorks: processing in patches (for batch or off-cycle runs)
+            and the standard ADP processing workflow. Payroll is time-sensitive — errors that go through have real
+            consequences for employees and clients. Watch both videos and flag any questions before you run payroll live.
+          </p>
+
+          <!-- Video 1: Process Payroll in Patches -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/92ebb324ef004b759318072280fca18f" id="loom-fri-payroll-patches-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Process Payroll in Patches</div>
+              <div class="loom-status" id="loom-fri-payroll-patches-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <!-- Video 2: How to Process Payroll in ADP -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/ac91a92927034663a3fcbf6881a8950e" id="loom-fri-payroll-adp-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">How to Process Payroll in ADP</div>
+              <div class="loom-status" id="loom-fri-payroll-adp-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <div style="background:#F8D7DA; border-left:4px solid #DC3545; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7;">
+            <strong style="color:#721C24;">🚨 Payroll Rule — Never Submit Without Confirmation</strong><br>
+            Always confirm payroll figures with Kelli before processing. A submitted payroll run cannot be undone without consequences. If hours, rates, or deductions look unusual — stop and Slack Kelli before hitting submit. This applies every single run until Kelli explicitly clears you to process independently.
+          </div>
+
           <ul class="checklist" data-day="fri">
-            <li><input type="checkbox" id="fri-6"><label for="fri-6">What are your 3 biggest takeaways from Week 1?</label></li>
-            <li><input type="checkbox" id="fri-7"><label for="fri-7">What are you still unclear on?</label></li>
-            <li><input type="checkbox" id="fri-8"><label for="fri-8">What topics do you want more depth on in Week 2?</label></li>
-            <li><input type="checkbox" id="fri-9"><label for="fri-9">Complete Week 1 debrief call with Kelli</label></li>
+            <li><input type="checkbox" id="fri-10"><label for="fri-10">Watch Process Payroll in Patches</label></li>
+            <li><input type="checkbox" id="fri-11"><label for="fri-11">Watch How to Process Payroll in ADP</label></li>
+            <li><input type="checkbox" id="fri-12"><label for="fri-12">Know the difference between patched payroll and a standard ADP run</label></li>
+            <li><input type="checkbox" id="fri-13"><label for="fri-13">Understand the confirm-with-Kelli rule before any live payroll submission</label></li>
           </ul>
+
           <div class="question-box">
-            <h4>📝 Week 1 Reflection — use this to prep for your debrief call</h4>
-            <textarea id="q-fri-wrapup" placeholder="Write your takeaways, questions, and Week 2 topics here..."></textarea>
-            <div class="qbox-actions"><button class="btn btn-teal" onclick="saveQuestion('fri-wrapup')">Send</button><span class="q-saved-msg" id="saved-fri-wrapup">✓ Sent to Slack</span></div>
+            <h4>❓ Payroll questions → Slack Kelli: "Payroll Question"</h4>
+            <textarea id="q-fri-payroll" placeholder="Questions about payroll processing, patches, or ADP workflow?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('fri-payroll')">Send</button>
+              <span class="q-saved-msg" id="saved-fri-payroll">✓ Sent to Slack</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ── MODULE 5D — 1099 PREP ──────────────────────────────────────── -->
+      <div class="module-card" id="mod-fri-1099">
+        <div class="module-header">
+          <span class="module-icon">📄</span>
+          <h2>5D — 1099 Preparation <span class="freq-badge annual">Annual</span></h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            1099 prep happens once a year (January season) and spans three platforms at KelliWorks:
+            Keeper, QuickBooks Online, and Track1099 software. You'll use all three — each plays a different role
+            in identifying contractors, pulling payment totals, and filing with the IRS. Watch all three in order.
+          </p>
+
+          <!-- Video 1: 1099 in Keeper -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/a3f44f76ff5342dcaa56e9b6e36d99f9" id="loom-fri-1099-keeper-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">1099 Prep in Keeper</div>
+              <div class="loom-status" id="loom-fri-1099-keeper-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <!-- Video 2: 1099 in QBO -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/f5fb259dd52a43c892e6a4a1b0976051" id="loom-fri-1099-qbo-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">1099 Prep in QuickBooks Online</div>
+              <div class="loom-status" id="loom-fri-1099-qbo-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <!-- Video 3: 1099 in Track1099 -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/0f360085f07d4c3e965f54d53b121fda" id="loom-fri-1099-track-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">1099 Filing in Track1099 Software</div>
+              <div class="loom-status" id="loom-fri-1099-track-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <div style="background:#F9FBFD; border:1px solid #DDE3EC; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.8;">
+            <strong style="color:#1B2A4A;">📅 How the 1099 Workflow Flows:</strong><br>
+            <strong>Keeper</strong> → identify which contractors were paid $600+ during the year<br>
+            <strong>QBO</strong> → verify payment totals, confirm vendor info (name, TIN, address)<br>
+            <strong>Track1099</strong> → enter contractor details → e-file with IRS → send recipient copies<br><br>
+            The January 31 deadline is firm. Clients get very anxious about 1099s — communicate proactively on timeline.
+          </div>
+
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-14"><label for="fri-14">Watch 1099 Prep in Keeper</label></li>
+            <li><input type="checkbox" id="fri-15"><label for="fri-15">Watch 1099 Prep in QuickBooks Online</label></li>
+            <li><input type="checkbox" id="fri-16"><label for="fri-16">Watch 1099 Filing in Track1099 Software</label></li>
+            <li><input type="checkbox" id="fri-17"><label for="fri-17">Understand the flow: Keeper → QBO → Track1099</label></li>
+            <li><input type="checkbox" id="fri-18"><label for="fri-18">Know the January 31 filing deadline</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ 1099 questions → Slack Kelli: "1099 Question"</h4>
+            <textarea id="q-fri-1099" placeholder="Questions about 1099 prep, the three platforms, or the January timeline?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('fri-1099')">Send</button>
+              <span class="q-saved-msg" id="saved-fri-1099">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE 5E — MISC TASKS ─────────────────────────────────────── -->
+      <div class="module-card" id="mod-fri-misc">
+        <div class="module-header">
+          <span class="module-icon">🔧</span>
+          <h2>5E — Misc Tasks &amp; Tools</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            A few workflows that don't fit neatly into one category but come up regularly.
+            RPM Garage is a specific client workflow. The Keeper delivery video shows how financials
+            get pushed to clients — and walks through how Kelli herself approaches a client review conversation.
+          </p>
+
+          <!-- Video 1: Running RPM Garage -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/1af98c4fc9734c479595182e3f3b4234" id="loom-fri-rpm-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Running RPM Garage</div>
+              <div class="loom-status" id="loom-fri-rpm-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <!-- Video 2: Delivering Financials from Keeper -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/a6eb997c5b77493dbbf380293b7d5f86" id="loom-fri-keeper-delivery-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Delivering Financials from Keeper / Double</div>
+              <div class="loom-status" id="loom-fri-keeper-delivery-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <!-- Video 3: How I Would Do a Client Review -->
+          <div class="loom-slot has-video">
+            <a class="loom-play" href="https://www.loom.com/share/0336129d368b4f56b172cb6c7f806607" id="loom-fri-client-review-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">How I Would Explain or Do a Client Review</div>
+              <div class="loom-status" id="loom-fri-client-review-status">▶ Click to watch</div>
+            </div>
+          </div>
+
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-19"><label for="fri-19">Watch Running RPM Garage</label></li>
+            <li><input type="checkbox" id="fri-20"><label for="fri-20">Watch Delivering Financials from Keeper / Double</label></li>
+            <li><input type="checkbox" id="fri-20b"><label for="fri-20b">Watch How I Would Explain or Do a Client Review</label></li>
+            <li><input type="checkbox" id="fri-22"><label for="fri-22">Understand how Kelli communicates financial results to clients (tone, format, cadence)</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ Misc task questions → Slack Kelli: "Task Question"</h4>
+            <textarea id="q-fri-misc" placeholder="Questions about RPM Garage, Keeper delivery, or the client review process?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('fri-misc')">Send</button>
+              <span class="q-saved-msg" id="saved-fri-misc">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE 5F — WEEK 1 WRAP + WEEK 2 PREVIEW ──────────────────── -->
+      <div class="module-card" id="mod-fri-wrap">
+        <div class="module-header">
+          <span class="module-icon">🏁</span>
+          <h2>5F — Week 1 Wrap &amp; Week 2 Preview</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+
+          <div class="congrats-banner">
+            <h3>🎉 You Did It, Patricia!</h3>
+            <p>Five days. Every tool, every workflow, every real client scenario — you showed up, engaged, and brought great energy all week. The feedback has been outstanding. Week 2 is where it all comes to life. You're ready.</p>
+          </div>
+
+          <!-- Week 1 checklist by day -->
+          <p style="font-size:14px; font-weight:700; color:#1B2A4A; margin:20px 0 12px;">✅ What You Covered This Week</p>
+
+          <div class="wrap-day-block">
+            <div class="wrap-day-header mon">📘 Monday — Orientation &amp; KelliWorks Foundation</div>
+            <div class="wrap-day-body">
+              <ul>
+                <li>KelliWorks firm overview, services, and client types</li>
+                <li>Tool setup: Slack, Asana, Keeper, Dropbox, Pipeline</li>
+                <li>Team structure and communication expectations</li>
+                <li>reports@kelliworks.com — your primary inbox</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wrap-day-block">
+            <div class="wrap-day-header tue">📋 Tuesday — Asana, Daily Workflow &amp; Keeper</div>
+            <div class="wrap-day-body">
+              <ul>
+                <li>Asana project navigation, task management, and KW email workflow</li>
+                <li>Slack → Asana → Email daily rhythm</li>
+                <li>Keeper: how financials are delivered to clients</li>
+                <li>Escalation guide: handle yourself vs. always escalate to Kelli</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wrap-day-block">
+            <div class="wrap-day-header wed">🗂 Wednesday — Tax Season Deep Dive</div>
+            <div class="wrap-day-body">
+              <ul>
+                <li>Tax consultation context — what clients experience and expect</li>
+                <li>Client organizers: personal and business, test as "Patricia 🌴"</li>
+                <li>Pipeline back-end: the admin view of the tax workflow</li>
+                <li>Dropbox document management and the full folder path</li>
+                <li>Tax Processing SOP: all 10 phases, Patricia's primary role in Phases 1 &amp; 5</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wrap-day-block">
+            <div class="wrap-day-header thu">📬 Thursday — Real Scenarios &amp; Daily Rhythm</div>
+            <div class="wrap-day-body">
+              <ul>
+                <li>20 real KelliWorks client email scenarios — what went right, what to fix, and the lesson</li>
+                <li>The 3-Channel Monitoring System: reports@, Slack #activity, Asana</li>
+                <li>Daily time block: 9 AM – 4 PM with 11:30 AM daily huddle</li>
+                <li>Slack → Asana task conversion: the full 5-step action loop</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wrap-day-block">
+            <div class="wrap-day-header fri">🎯 Friday — Recurring Tasks &amp; Annual Workflows</div>
+            <div class="wrap-day-body">
+              <ul>
+                <li>Sales tax: quarterly filing for NY, NJ, and Shopify clients</li>
+                <li>Workers comp audits: completing the full audit process end to end</li>
+                <li>Payroll: patches workflow and ADP processing</li>
+                <li>1099 prep: Keeper → QBO → Track1099 annual flow</li>
+                <li>Misc: RPM Garage, financial delivery, client review walkthrough</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Week 2 Preview -->
+          <p style="font-size:14px; font-weight:700; color:#1B2A4A; margin:28px 0 12px;">🔭 Week 2 — What's Coming</p>
+          <p style="font-size:13px; color:#444; line-height:1.7; margin-bottom:16px;">
+            Week 2 is where the training becomes real. You'll move from watching and learning to doing alongside the team.
+            Expect lighter structure and more live action.
+          </p>
+
+          <div class="week2-grid">
+            <div class="week2-card">
+              <div class="week2-card-header">👁 Shadowing Kelli</div>
+              <div class="week2-card-body">
+                <ul>
+                  <li>Sit in on client calls and meetings</li>
+                  <li>Watch how Kelli handles questions in real time</li>
+                  <li>Observe the tone and approach for different client types</li>
+                </ul>
+              </div>
+            </div>
+            <div class="week2-card">
+              <div class="week2-card-header">👥 Group Sessions with Kelli &amp; Tim</div>
+              <div class="week2-card-body">
+                <ul>
+                  <li>Work sessions with the full team</li>
+                  <li>Q&amp;A on anything from Week 1</li>
+                  <li>Process walkthroughs done together</li>
+                </ul>
+              </div>
+            </div>
+            <div class="week2-card">
+              <div class="week2-card-header">🤝 Light Live Actions</div>
+              <div class="week2-card-body">
+                <ul>
+                  <li>Handling client info gathering with guidance</li>
+                  <li>Processing documents with Kelli watching</li>
+                  <li>Drafting client emails for Kelli to review before sending</li>
+                </ul>
+              </div>
+            </div>
+            <div class="week2-card">
+              <div class="week2-card-header">🗂 Client Onboarding</div>
+              <div class="week2-card-body">
+                <ul>
+                  <li>Full client onboarding workflow</li>
+                  <li>What happens from contract signed → first deliverable</li>
+                  <li>Setting up new clients across tools</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#D4EDDA; border-left:4px solid #28A745; border-radius:8px; padding:14px 18px; margin:20px 0; font-size:13px; line-height:1.7;">
+            <strong style="color:#155724;">💚 One Thing to Remember Going Into Week 2:</strong><br>
+            You don't need to have everything memorized. Week 1 was about exposure — building the mental map. Week 2 is about application with support. Ask questions early, confirm before acting, and trust the systems you've learned. You've got this.
+          </div>
+
+          <ul class="checklist" data-day="fri">
+            <li><input type="checkbox" id="fri-23"><label for="fri-23">Reviewed all five days of Week 1 coverage above</label></li>
+            <li><input type="checkbox" id="fri-24"><label for="fri-24">Know what Week 2 will look like (shadowing, group sessions, light actions)</label></li>
+            <li><input type="checkbox" id="fri-25"><label for="fri-25">Any open questions from the week have been saved in the question boxes or Slacked to Kelli</label></li>
+            <li><input type="checkbox" id="fri-26"><label for="fri-26">Ready for Week 2 — tools set up, daily rhythm understood, escalation rules memorized</label></li>
+          </ul>
+
+        </div>
+      </div>
+
     </div>
 
     <!-- ═══════════════════════════════════════════════════ WEEK 2 -->
@@ -3801,7 +4264,7 @@ KelliWorks</div>
     tue: { ids: ['tue-1','tue-2','tue-3','tue-4','tue-5','tue-6','tue-7','tue-8','tue-9','tue-10','tue-11','tue-12','tue-13'] },
     wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9','wed-10','wed-11','wed-12','wed-13','wed-14','wed-15','wed-16','wed-17','wed-18','wed-19','wed-20','wed-21','wed-22','wed-23','wed-24','wed-25','wed-26','wed-27','wed-28','wed-29'] },
     thu: { ids: ['thu-s1','thu-s2','thu-s3','thu-s4','thu-s5','thu-s6','thu-s7','thu-s8','thu-s9','thu-s10','thu-s11','thu-s12','thu-s13','thu-s14','thu-s15','thu-s16','thu-s17','thu-s18','thu-s19','thu-s20','thu-21','thu-22','thu-23','thu-24','thu-25','thu-26','thu-27','thu-28','thu-29','thu-30','thu-31','thu-32','thu-33','thu-34'] },
-    fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9'] },
+    fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9','fri-10','fri-11','fri-12','fri-13','fri-14','fri-15','fri-16','fri-17','fri-18','fri-19','fri-20','fri-20b','fri-22','fri-23','fri-24','fri-25','fri-26'] },
   };
 
   // ── STORAGE ───────────────────────────────────────────────────────
