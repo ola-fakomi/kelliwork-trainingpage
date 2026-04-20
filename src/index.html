@@ -97,11 +97,40 @@
       width: 240px;
       flex-shrink: 0;
       background: #122620;
-      padding: 28px 0 48px;
+      padding: 16px 0 0;
       position: sticky;
       top: 68px;
       height: calc(100vh - 68px);
-      overflow-y: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-scroll {
+      flex: 1;
+      overflow: hidden;
+      padding-bottom: 8px;
+    }
+    .sidebar-quicklinks {
+      flex-shrink: 0;
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-quicklinks-label {
+      font-size: 11px;
+      color: #8FBDB0;
+      margin-bottom: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .sidebar-quicklinks a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #FFFFFF;
+      font-size: 13px;
+      padding: 4px 0;
+      text-decoration: none;
     }
     .sidebar-title {
       padding: 0 24px 18px;
@@ -157,6 +186,9 @@
     .nav-item.day-complete .nav-day-badge { display: none; }
 
     .sidebar-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 20px 24px 8px;
       font-size: 11px;
       font-weight: 700;
@@ -164,7 +196,20 @@
       text-transform: uppercase;
       color: #FFFFFF;
       margin-top: 8px;
+      cursor: pointer;
+      user-select: none;
     }
+    .sidebar-section:hover { color: #C3A862; }
+    .sidebar-section .section-chevron {
+      transition: transform 0.2s;
+      opacity: 0.6;
+    }
+    .sidebar-section.collapsed .section-chevron { transform: rotate(-90deg); }
+    .nav-week-items {
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+    .nav-week-items.collapsed { max-height: 0 !important; }
 
     /* ─── MAIN CONTENT ──────────────────────────────────────────────── */
     .main { flex: 1; padding: 40px max(32px, calc((100% - 1096px) / 2)); }
@@ -1007,6 +1052,47 @@
   opacity: 0.92;
 }
 
+
+/* ── Step-by-step process blocks ─────────────────────────────────────── */
+.process-steps { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+.process-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: #F9FBFD; border: 1px solid #DDE3EC;
+  border-radius: 10px; padding: 13px 16px; font-size: 13px; line-height: 1.7;
+}
+.process-step-num {
+  background: var(--navy); color: var(--gold); font-weight: 900; font-size: 12px;
+  min-width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.process-step-content { flex: 1; color: #2C2C2C; }
+.process-step-content strong { color: var(--navy); display: block; margin-bottom: 2px; }
+
+/* ── Special case callout ─────────────────────────────────────────────── */
+.special-case {
+  background: #EDE7FF; border-left: 4px solid #6C5CE7;
+  border-radius: 8px; padding: 14px 18px; font-size: 13px; line-height: 1.7; margin: 14px 0;
+}
+.special-case strong { color: #4527A0; }
+
+/* ── Resource link buttons ────────────────────────────────────────────── */
+.resource-links { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+.resource-link-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--navy); color: white; font-size: 12px; font-weight: 700;
+  padding: 9px 16px; border-radius: 8px; text-decoration: none; transition: background 0.15s;
+}
+.resource-link-btn:hover { background: #0285CE; color: white; }
+.resource-link-btn.teal { background: #0285CE; }
+.resource-link-btn.gold { background: var(--gold); color: var(--navy); }
+
+/* ── Action flag ──────────────────────────────────────────────────────── */
+.action-flag {
+  background: #D4EDDA; border-left: 4px solid #28A745;
+  border-radius: 8px; padding: 13px 18px; font-size: 13px; line-height: 1.7; margin: 14px 0;
+}
+.action-flag strong { color: #155724; }
+
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1050,44 +1136,60 @@
 
   <!-- SIDEBAR -->
   <nav class="sidebar">
-    <div class="sidebar-title">Week 1 Training</div>
-    <a class="nav-item active" onclick="showDay('overview')" href="#">
-      <span class="nav-emoji"><i data-lucide="layout-dashboard"></i></span> Overview
-    </a>
-    <a class="nav-item" onclick="showDay('mon')" href="#">
-      <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
-      <span class="nav-day-badge">Apr 14</span>
-      <span class="nav-check">✓</span>
-    </a>
-    <a class="nav-item" onclick="showDay('tue')" href="#">
-      <span class="nav-emoji"><i data-lucide="message-circle"></i></span> Tuesday
-      <span class="nav-day-badge">Apr 15</span>
-      <span class="nav-check">✓</span>
-    </a>
-    <a class="nav-item" onclick="showDay('wed')" href="#">
-      <span class="nav-emoji"><i data-lucide="bar-chart-2"></i></span> Wednesday
-      <span class="nav-day-badge">Apr 16</span>
-      <span class="nav-check">✓</span>
-    </a>
-    <a class="nav-item" onclick="showDay('thu')" href="#">
-      <span class="nav-emoji"><i data-lucide="banknote"></i></span> Thursday
-      <span class="nav-day-badge">Apr 17</span>
-      <span class="nav-check">✓</span>
-    </a>
-    <a class="nav-item" onclick="showDay('fri')" href="#">
-      <span class="nav-emoji"><i data-lucide="landmark"></i></span> Friday
-      <span class="nav-day-badge">Apr 18</span>
-      <span class="nav-check">✓</span>
-    </a>
-    <div class="sidebar-section">Coming Up</div>
-    <a class="nav-item" onclick="showDay('week2')" href="#">
-      <span class="nav-emoji"><i data-lucide="database"></i></span> Week 2
-      <span class="nav-day-badge">Apr 21+</span>
-    </a>
-    <div style="padding: 24px 20px 0; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 16px;">
-      <div style="font-size:11px; color:#8FBDB0; margin-bottom:8px; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Quick Links</div>
-      <a href="mailto:kelli@kelliworks.com" style="display:flex; align-items:center; gap:6px; color:#FFFFFF; font-size:13px; padding:4px 0; text-decoration:none;"><i data-lucide="mail" style="width:14px;height:14px;"></i> Email Kelli</a>
-      <a href="#" style="display:flex; align-items:center; gap:6px; color:#FFFFFF; font-size:13px; padding:4px 0; text-decoration:none;"><i data-lucide="message-square" style="width:14px;height:14px;"></i> Slack Kelli</a>
+    <div class="sidebar-scroll">
+      <a class="nav-item active" onclick="showDay('overview')" href="#">
+        <span class="nav-emoji"><i data-lucide="layout-dashboard"></i></span> Overview
+      </a>
+      <div class="sidebar-section" onclick="toggleNavSection('week1')" id="section-week1">
+        Week 1
+        <svg class="section-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="nav-week-items" id="items-week1">
+        <a class="nav-item" onclick="showDay('mon')" href="#">
+          <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
+          <span class="nav-day-badge">Apr 14</span>
+          <span class="nav-check">✓</span>
+        </a>
+        <a class="nav-item" onclick="showDay('tue')" href="#">
+          <span class="nav-emoji"><i data-lucide="message-circle"></i></span> Tuesday
+          <span class="nav-day-badge">Apr 15</span>
+          <span class="nav-check">✓</span>
+        </a>
+        <a class="nav-item" onclick="showDay('wed')" href="#">
+          <span class="nav-emoji"><i data-lucide="bar-chart-2"></i></span> Wednesday
+          <span class="nav-day-badge">Apr 16</span>
+          <span class="nav-check">✓</span>
+        </a>
+        <a class="nav-item" onclick="showDay('thu')" href="#">
+          <span class="nav-emoji"><i data-lucide="banknote"></i></span> Thursday
+          <span class="nav-day-badge">Apr 17</span>
+          <span class="nav-check">✓</span>
+        </a>
+        <a class="nav-item" onclick="showDay('fri')" href="#">
+          <span class="nav-emoji"><i data-lucide="landmark"></i></span> Friday
+          <span class="nav-day-badge">Apr 18</span>
+          <span class="nav-check">✓</span>
+        </a>
+      </div>
+      <div class="sidebar-section" onclick="toggleNavSection('week2')" id="section-week2">
+        Week 2
+        <svg class="section-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="nav-week-items" id="items-week2">
+        <a class="nav-item" onclick="showDay('week2')" href="#">
+          <span class="nav-emoji"><i data-lucide="layout-dashboard"></i></span> Overview
+          <span class="nav-day-badge">Apr 21+</span>
+        </a>
+        <a class="nav-item" onclick="showDay('mon2')" href="#">
+          <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
+          <span class="nav-day-badge">Apr 21</span>
+        </a>
+      </div>
+    </div>
+    <div class="sidebar-quicklinks">
+      <div class="sidebar-quicklinks-label">Quick Links</div>
+      <a href="mailto:kelli@kelliworks.com"><i data-lucide="mail" style="width:14px;height:14px;"></i> Email Kelli</a>
+      <a href="#"><i data-lucide="message-square" style="width:14px;height:14px;"></i> Slack Kelli</a>
     </div>
   </nav>
 
@@ -4224,6 +4326,283 @@ KelliWorks</div>
       </div>
     </div>
 
+    <!-- ═══════════════════════════════════════ MONDAY WEEK 2 -->
+    <div class="day-panel" id="panel-mon2">
+      <div class="day-hero">
+        <div class="day-hero-left">
+          <h1>🚀 Monday, April 21 — Week 2</h1>
+          <div class="subtitle">Delivering Financials in Keeper &amp; Tax Return Delivery via Pipeline</div>
+        </div>
+        <div class="day-hero-right">
+          <div class="day-progress-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+              <circle class="ring-bg" cx="36" cy="36" r="30" fill="none" stroke-width="7"/>
+              <circle class="ring-fill" id="ring-mon2" cx="36" cy="36" r="30" fill="none" stroke-width="7"
+                stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+            </svg>
+            <div class="ring-pct" id="ring-mon2-pct">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE 6A — DELIVERING FINANCIALS IN KEEPER ───────────────── -->
+      <div class="module-card" id="mod-mon2-keeper">
+        <div class="module-header">
+          <span class="module-icon">📊</span>
+          <h2>6A — Delivering Financials in Keeper &amp; Double</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            Today's first task is sending out financials for the clients on the backlog list —
+            all clients marked <strong>done for March</strong> (and February where applicable).
+            Watch the video first for the updated Keeper steps, then use the client list to work through each one.
+          </p>
+
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-mon2-keeper-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Delivering Financials from Keeper — Updated Walkthrough</div>
+              <div class="loom-status pending" id="loom-mon2-keeper-status">📹 Video coming soon</div>
+            </div>
+          </div>
+
+          <div class="resource-links">
+            <a class="resource-link-btn teal" href="https://docs.google.com/spreadsheets/d/1eSpTRHwy5ZHgZk2Vde0_SA9sPs5IzdoK/edit?gid=330632209#gid=330632209" target="_blank">
+              📋 Open Client Status List
+            </a>
+          </div>
+          <p style="font-size:12px; color:#666; margin:-8px 0 16px;">This Google Sheet is the most up-to-date log showing every client and their current status. Work from this list — send financials for all clients marked done for March (and February where applicable).</p>
+
+          <p style="font-size:13px; font-weight:700; color:var(--navy); margin:18px 0 10px;">📋 Keeper Configuration — Do This for Each Client:</p>
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step-num">1</div>
+              <div class="process-step-content">
+                <strong>Set the Date Range</strong>
+                In the Reporting section, move the date range to <strong>March</strong> (or February if the client is ready through February). Only proceed if the client shows as ready — if it's not there, they're not ready.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">2</div>
+              <div class="process-step-content">
+                <strong>Set Branding to "Practice"</strong>
+                On the first page, make sure branding is set to <strong>Practice</strong> — this pulls in the KelliWorks logo at the bottom. Settings: small, date small, branding practice.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">3</div>
+              <div class="process-step-content">
+                <strong>Add Table of Contents</strong>
+                Turn on the Table of Contents. This gives the client a clean, navigable report.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">4</div>
+              <div class="process-step-content">
+                <strong>Add Profit &amp; Loss for the Month</strong>
+                The system will likely default to a year-to-date P&amp;L — that's fine, keep it. But also add a <strong>Profit &amp; Loss for the month</strong> separately. Select: Profit and Loss → set the correct month timeframe.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">5</div>
+              <div class="process-step-content">
+                <strong>Add Top 10 Vendors &amp; Customers</strong>
+                Go to <strong>Configure Page</strong> → select <strong>Customers and Vendors</strong>. This shows clients who they spent the most with and who spent the most with them — adds real value. Set to <strong>Top Spend</strong>.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">6</div>
+              <div class="process-step-content">
+                <strong>Confirm Executive Summary Is Included</strong>
+                Check that the Executive Summary is in the report. It should be included by default — just verify it's there before publishing.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">7</div>
+              <div class="process-step-content">
+                <strong>Publish &amp; Notify</strong>
+                Click <strong>Publish</strong> → turn on <strong>Notify the client by email</strong> → enable <strong>Interactive videos</strong> → publish. The client will receive an email from reports@kelliworks.com with their financials.
+              </div>
+            </div>
+          </div>
+
+          <div class="special-case">
+            <strong>🔷 Special Case — Creative Forge (Multiple Companies)</strong><br>
+            Creative Forge has multiple companies under their account. Deliver each company's financials through Keeper as normal — then <strong>also send a consolidated email separately from Claude</strong>, combining all entities into one summary message. This goes from the reports@ email. Kelli will walk you through the consolidated email format.
+          </div>
+
+          <div class="action-flag">
+            <strong>✅ All financial delivery emails go out from reports@kelliworks.com.</strong><br>
+            This is where all client communication lives. Do not send from any personal or other address.
+          </div>
+
+          <ul class="checklist" data-day="mon2">
+            <li><input type="checkbox" id="mon2-1"><label for="mon2-1">Watch the updated Keeper financials delivery walkthrough</label></li>
+            <li><input type="checkbox" id="mon2-2"><label for="mon2-2">Open the client status list and identify all clients ready for March delivery</label></li>
+            <li><input type="checkbox" id="mon2-3"><label for="mon2-3">Set branding to Practice (logo), add Table of Contents, monthly P&amp;L, and Top 10 Vendors/Customers for each</label></li>
+            <li><input type="checkbox" id="mon2-4"><label for="mon2-4">Publish with client email notification + interactive videos enabled</label></li>
+            <li><input type="checkbox" id="mon2-5"><label for="mon2-5">Handle Creative Forge separately — Keeper delivery + consolidated Claude email</label></li>
+            <li><input type="checkbox" id="mon2-6"><label for="mon2-6">All emails confirmed going out from reports@kelliworks.com</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ Keeper delivery questions → Slack Kelli: "Keeper Question"</h4>
+            <textarea id="q-mon2-keeper" placeholder="Questions about Keeper configuration, the client list, or Creative Forge?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon2-keeper')">Send</button>
+              <span class="q-saved-msg" id="saved-mon2-keeper">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE 6B — TAX RETURN DELIVERY VIA PIPELINE ─────────────── -->
+      <div class="module-card" id="mod-mon2-pipeline">
+        <div class="module-header">
+          <span class="module-icon">📁</span>
+          <h2>6B — Tax Return Delivery via Pipeline &amp; Dropbox</h2>
+          <span class="module-complete-badge">✓ Done</span>
+        </div>
+        <div class="module-body">
+          <p class="module-desc">
+            ACP will upload completed tax returns and extensions to the KelliWorks Dropbox folder.
+            Once they're there, your job is to go into Pipeline, locate each client,
+            upload their return at Step 33, and trigger the e-file notification email.
+            You'll also save a copy of each return to the client's TY2025 folder in Dropbox —
+            so KelliWorks always has the document on file if a client needs it or help is needed.
+            For extension clients, you'll send the extension acceptance email using a pre-built template.
+          </p>
+
+          <div class="loom-slot">
+            <a class="loom-play pending" href="#" id="loom-mon2-pipeline-link" target="_blank">▶</a>
+            <div class="loom-info">
+              <div class="loom-label">Tax Return Delivery — Pipeline Walkthrough</div>
+              <div class="loom-status pending" id="loom-mon2-pipeline-status">📹 Video coming soon</div>
+            </div>
+          </div>
+
+          <div class="resource-links">
+            <a class="resource-link-btn" href="https://www.dropbox.com/request/uphdjnqkmur63p6gfkzi" target="_blank">
+              📂 Open Tax Dropbox Folder
+            </a>
+            <a class="resource-link-btn teal" href="https://kelliworks.pipelineapp.io/logon/default.aspx" target="_blank">
+              ⚙️ Log Into Pipeline
+            </a>
+          </div>
+          <p style="font-size:12px; color:#666; margin:-8px 0 16px;">Log into Pipeline using your <strong>Taxes Google account</strong>. Log into Dropbox using the <strong>Taxes Google login</strong> as well.</p>
+
+          <p style="font-size:13px; font-weight:700; color:var(--navy); margin:18px 0 10px;">✅ For Clients With a Completed Tax Return:</p>
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step-num">1</div>
+              <div class="process-step-content">
+                <strong>Open Pipeline &amp; Clear Filters</strong>
+                Log in → Remove all filters → click <strong>Clear Filters</strong> → select <strong>All</strong>. Then search for the client's name from the list.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">2</div>
+              <div class="process-step-content">
+                <strong>Handle Duplicates</strong>
+                Some clients may have duplicate pipeline entries — this is a known internal issue. Close the one with fewer steps and work from the one with <strong>the most steps completed</strong>.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">3</div>
+              <div class="process-step-content">
+                <strong>Skip the Payment Step If Needed</strong>
+                If the client got stuck at the payment section and never moved past it, click <strong>Skip This Step</strong> to advance their pipeline past it. The back end of the portal shows all uploaded files, the engagement letter, questionnaire, and any messages.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">4</div>
+              <div class="process-step-content">
+                <strong>Navigate to Step 33 — Submit E-File</strong>
+                Scroll to <strong>Step 33: Submit E-File</strong>. This is where ACP's completed tax return gets uploaded. Go to Dropbox, locate the client's completed return, and upload it here.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">5</div>
+              <div class="process-step-content">
+                <strong>Complete the Step → Email Sends Automatically</strong>
+                Once you upload and complete Step 33, the system automatically sends the client a notification email. The return is delivered.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">6</div>
+              <div class="process-step-content">
+                <strong>Save a Copy to the Client's TY2025 Dropbox Folder</strong>
+                After uploading in Pipeline, save the completed return to KelliWorks' own records in Dropbox.<br><br>
+                Path: <span style="font-family:monospace; font-size:12px; background:#EEF3F8; padding:2px 6px; border-radius:4px;">KelliWorks Bookkeeping → Business Dock → Division → Tax Division → KelliWorks Tax Prep Services → Taxes To Go → KelliWorks Tax Clients → [Client Name] → <strong>TY2025</strong></span><br><br>
+                This is how KelliWorks keeps its own copy on file — so if a client ever needs their return again, or if help is needed, the document is in our records.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">7</div>
+              <div class="process-step-content">
+                <strong>Confirm With Kelli After Your First One</strong>
+                After completing the first client — Pipeline upload, Dropbox filing, and email sent — <strong>Slack Kelli</strong> so she can confirm the email was received correctly before you continue with the rest of the list.
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size:13px; font-weight:700; color:var(--navy); margin:22px 0 10px;">📋 For Clients Under Extension:</p>
+          <div class="process-steps">
+            <div class="process-step">
+              <div class="process-step-num">1</div>
+              <div class="process-step-content">
+                <strong>Compose a New Email in Pipeline</strong>
+                Open the client's pipeline → click <strong>Compose Email</strong> → add the client as the recipient.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">2</div>
+              <div class="process-step-content">
+                <strong>Use the Extension Template</strong>
+                Scroll to the bottom of the compose window → click the <strong>three dots (···)</strong> → select <strong>More Options</strong> → go to <strong>Templates</strong> → select <strong>2025 Extension Acceptance</strong>. The template will populate automatically.
+              </div>
+            </div>
+            <div class="process-step">
+              <div class="process-step-num">3</div>
+              <div class="process-step-content">
+                <strong>Attach the Extension Confirmation</strong>
+                Before sending, attach the client's <strong>extension confirmation document</strong> (uploaded by ACP to Dropbox). Then send.
+              </div>
+            </div>
+          </div>
+
+          <div style="background:#FFF3CD; border-left:4px solid var(--gold); border-radius:8px; padding:14px 18px; margin:16px 0; font-size:13px; line-height:1.7;">
+            <strong>⚠ Dropbox Dependency:</strong><br>
+            You can only complete Step 33 once ACP has uploaded the completed return to the Dropbox folder. If a client's return isn't there yet — skip them for now, move to the next name on the list, and circle back once ACP uploads. Don't hold up the whole list waiting on one return.
+          </div>
+
+          <ul class="checklist" data-day="mon2">
+            <li><input type="checkbox" id="mon2-7"><label for="mon2-7">Watch the Pipeline tax return delivery walkthrough</label></li>
+            <li><input type="checkbox" id="mon2-8"><label for="mon2-8">Log into Dropbox (Taxes Google login) and confirm ACP uploads are visible</label></li>
+            <li><input type="checkbox" id="mon2-9"><label for="mon2-9">Log into Pipeline (Taxes Google login) and clear all filters</label></li>
+            <li><input type="checkbox" id="mon2-10"><label for="mon2-10">Handle duplicates: close the one with fewer steps, work from the most complete</label></li>
+            <li><input type="checkbox" id="mon2-11"><label for="mon2-11">Navigate to Step 33, upload the return, complete the step</label></li>
+            <li><input type="checkbox" id="mon2-12"><label for="mon2-12">Save completed return to client's TY2025 Dropbox folder (KelliWorks Tax Clients → [Client] → TY2025)</label></li>
+            <li><input type="checkbox" id="mon2-12b"><label for="mon2-12b">Slack Kelli after completing the first client (Pipeline + Dropbox + email) to confirm delivery</label></li>
+            <li><input type="checkbox" id="mon2-13"><label for="mon2-13">For extension clients: use the "2025 Extension Acceptance" template + attach confirmation</label></li>
+            <li><input type="checkbox" id="mon2-14"><label for="mon2-14">Skip any client whose return isn't in Dropbox yet — circle back when ACP uploads</label></li>
+          </ul>
+
+          <div class="question-box">
+            <h4>❓ Pipeline questions → Slack Kelli: "Pipeline Question"</h4>
+            <textarea id="q-mon2-pipeline" placeholder="Questions about Pipeline steps, Dropbox uploads, or extension clients?"></textarea>
+            <div class="qbox-actions">
+              <button class="btn btn-teal" onclick="saveQuestion('mon2-pipeline')">Send</button>
+              <span class="q-saved-msg" id="saved-mon2-pipeline">✓ Sent to Slack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ══════════════════════════════════════ END MONDAY WEEK 2 -->
+
   </main>
 </div>
 
@@ -4265,6 +4644,7 @@ KelliWorks</div>
     wed: { ids: ['wed-1','wed-2','wed-3','wed-4','wed-5','wed-6','wed-7','wed-8','wed-9','wed-10','wed-11','wed-12','wed-13','wed-14','wed-15','wed-16','wed-17','wed-18','wed-19','wed-20','wed-21','wed-22','wed-23','wed-24','wed-25','wed-26','wed-27','wed-28','wed-29'] },
     thu: { ids: ['thu-s1','thu-s2','thu-s3','thu-s4','thu-s5','thu-s6','thu-s7','thu-s8','thu-s9','thu-s10','thu-s11','thu-s12','thu-s13','thu-s14','thu-s15','thu-s16','thu-s17','thu-s18','thu-s19','thu-s20','thu-21','thu-22','thu-23','thu-24','thu-25','thu-26','thu-27','thu-28','thu-29','thu-30','thu-31','thu-32','thu-33','thu-34'] },
     fri: { ids: ['fri-1','fri-2','fri-3','fri-4','fri-5','fri-6','fri-7','fri-8','fri-9','fri-10','fri-11','fri-12','fri-13','fri-14','fri-15','fri-16','fri-17','fri-18','fri-19','fri-20','fri-20b','fri-22','fri-23','fri-24','fri-25','fri-26'] },
+    mon2: { ids: ['mon2-1','mon2-2','mon2-3','mon2-4','mon2-5','mon2-6','mon2-7','mon2-8','mon2-9','mon2-10','mon2-11','mon2-12','mon2-12b','mon2-13','mon2-14'] },
   };
 
   // ── STORAGE ───────────────────────────────────────────────────────
@@ -4342,6 +4722,36 @@ KelliWorks</div>
     if (pctEl) pctEl.textContent = overallPct + '%';
   }
 
+  // ── NAV SECTIONS ──────────────────────────────────────────────────
+  function toggleNavSection(week) {
+    const header = document.getElementById('section-' + week);
+    const items  = document.getElementById('items-' + week);
+    const isCollapsed = items.classList.contains('collapsed');
+    if (isCollapsed) {
+      items.style.maxHeight = items.scrollHeight + 'px';
+      items.classList.remove('collapsed');
+      header.classList.remove('collapsed');
+      // after transition, allow natural height
+      items.addEventListener('transitionend', function h() {
+        items.style.maxHeight = 'none';
+        items.removeEventListener('transitionend', h);
+      });
+    } else {
+      // lock height before collapsing so transition works
+      items.style.maxHeight = items.scrollHeight + 'px';
+      requestAnimationFrame(() => items.classList.add('collapsed'));
+      header.classList.add('collapsed');
+    }
+  }
+
+  // initialise heights
+  document.addEventListener('DOMContentLoaded', function() {
+    ['week1','week2'].forEach(function(week) {
+      const items = document.getElementById('items-' + week);
+      if (items) items.style.maxHeight = 'none';
+    });
+  });
+
   // ── NAV ───────────────────────────────────────────────────────────
   function showDay(day) {
     document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
@@ -4386,7 +4796,9 @@ KelliWorks</div>
         'thu-qbo':        'Thursday — QuickBooks Online',
         'fri-state':      'Friday — State Filings',
         'fri-wrapup':     'Friday — Week 1 Wrap-Up',
-        'fri-filings':    'Friday — State Filings & Wrap-Up'
+        'fri-filings':    'Friday — State Filings & Wrap-Up',
+        'mon2-keeper':    'Week 2 Monday — Keeper Financial Delivery',
+        'mon2-pipeline':  'Week 2 Monday — Tax Return Delivery via Pipeline'
       };
       const label = moduleLabels[key] || key;
       fetch('/api/notify', {
