@@ -317,6 +317,35 @@
     }
     .module-card.complete .module-complete-badge { display: block; }
     .module-card.complete .module-header { background: var(--green); }
+
+    /* ── Section-complete checkbox ───────────────────────────────────── */
+    .section-complete-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-left: auto;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .section-complete-wrap input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #ffffff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .section-complete-wrap label {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .section-complete-wrap input[type="checkbox"]:checked + label {
+      color: #ffffff;
+    }
     .module-body { padding: 28px; }
     .module-desc {
       font-size: 14px;
@@ -4822,8 +4851,63 @@ KelliWorks</div>
 
 
 
+  // ── SECTION-COMPLETE CHECKBOXES ───────────────────────────────────
+  function initSectionComplete() {
+    let sectionIdx = 0;
+    document.querySelectorAll('.module-card').forEach(function(card) {
+      const header   = card.querySelector('.module-header');
+      const checklist = card.querySelector('.checklist');
+      if (!header || !checklist) return;
+
+      // Get only non-disabled checkboxes
+      function getBoxes() {
+        return Array.from(checklist.querySelectorAll('input[type="checkbox"]:not([disabled])'));
+      }
+      if (!getBoxes().length) return;
+
+      // Build the control
+      const uid   = 'sec-complete-' + (sectionIdx++);
+      const wrap  = document.createElement('span');
+      wrap.className = 'section-complete-wrap';
+      wrap.innerHTML =
+        '<input type="checkbox" id="' + uid + '">' +
+        '<label for="' + uid + '">Section complete</label>';
+      header.appendChild(wrap);
+
+      const master = wrap.querySelector('input');
+
+      // Master → check/uncheck all
+      master.addEventListener('change', function() {
+        const boxes = getBoxes();
+        const d = load();
+        boxes.forEach(function(cb) {
+          cb.checked = master.checked;
+          d[cb.id] = master.checked;
+        });
+        save(d);
+        updateProgress();
+      });
+
+      // Individual box → sync master state + persist
+      function syncMaster() {
+        const boxes = getBoxes();
+        master.checked = boxes.length > 0 && boxes.every(function(cb) { return cb.checked; });
+      }
+
+      // Attach to existing boxes (after initCheckboxes wires them)
+      function attachSync() {
+        getBoxes().forEach(function(cb) {
+          cb.addEventListener('change', syncMaster);
+        });
+      }
+      // Run after a tick so initCheckboxes finishes first
+      setTimeout(function() { attachSync(); syncMaster(); }, 0);
+    });
+  }
+
   // ── BOOT ──────────────────────────────────────────────────────────
   initCheckboxes();
+  initSectionComplete();
   updateProgress();
   syncFromSupabase().then(() => {
     // Restore DOM state from merged Supabase data without re-adding event listeners
@@ -4837,6 +4921,13 @@ KelliWorks</div>
     document.querySelectorAll('.question-box textarea').forEach(ta => {
       const key = 'q_' + ta.id;
       if (data[key]) ta.value = data[key];
+    });
+    // Sync section-complete master checkboxes after Supabase restore
+    document.querySelectorAll('.section-complete-wrap input').forEach(function(master) {
+      const card = master.closest('.module-card');
+      if (!card) return;
+      const boxes = Array.from(card.querySelectorAll('.checklist input[type="checkbox"]:not([disabled])'));
+      if (boxes.length) master.checked = boxes.every(function(cb) { return cb.checked; });
     });
     updateProgress();
   }).catch(() => {});
