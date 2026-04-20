@@ -1118,7 +1118,7 @@
 </div>
 
 <!-- SAVE BAR -->
-<div class="save-bar">
+<div class="save-bar" style="display:none">
   <strong>Progress Tracker</strong>
   <span>·</span>
   <span>Save your progress as a backup file and reload it on any device or browser.</span>
@@ -1147,27 +1147,27 @@
       <div class="nav-week-items" id="items-week1">
         <a class="nav-item" onclick="showDay('mon')" href="#">
           <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
-          <span class="nav-day-badge">Apr 14</span>
+          <span class="nav-day-badge">Apr 13</span>
           <span class="nav-check">✓</span>
         </a>
         <a class="nav-item" onclick="showDay('tue')" href="#">
           <span class="nav-emoji"><i data-lucide="message-circle"></i></span> Tuesday
-          <span class="nav-day-badge">Apr 15</span>
+          <span class="nav-day-badge">Apr 14</span>
           <span class="nav-check">✓</span>
         </a>
         <a class="nav-item" onclick="showDay('wed')" href="#">
           <span class="nav-emoji"><i data-lucide="bar-chart-2"></i></span> Wednesday
-          <span class="nav-day-badge">Apr 16</span>
+          <span class="nav-day-badge">Apr 15</span>
           <span class="nav-check">✓</span>
         </a>
         <a class="nav-item" onclick="showDay('thu')" href="#">
           <span class="nav-emoji"><i data-lucide="banknote"></i></span> Thursday
-          <span class="nav-day-badge">Apr 17</span>
+          <span class="nav-day-badge">Apr 16</span>
           <span class="nav-check">✓</span>
         </a>
         <a class="nav-item" onclick="showDay('fri')" href="#">
           <span class="nav-emoji"><i data-lucide="landmark"></i></span> Friday
-          <span class="nav-day-badge">Apr 18</span>
+          <span class="nav-day-badge">Apr 17</span>
           <span class="nav-check">✓</span>
         </a>
       </div>
@@ -1176,13 +1176,9 @@
         <svg class="section-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
       <div class="nav-week-items" id="items-week2">
-        <a class="nav-item" onclick="showDay('week2')" href="#">
-          <span class="nav-emoji"><i data-lucide="layout-dashboard"></i></span> Overview
-          <span class="nav-day-badge">Apr 21+</span>
-        </a>
         <a class="nav-item" onclick="showDay('mon2')" href="#">
           <span class="nav-emoji"><i data-lucide="sun"></i></span> Monday
-          <span class="nav-day-badge">Apr 21</span>
+          <span class="nav-day-badge">Apr 20</span>
         </a>
       </div>
     </div>
@@ -1199,22 +1195,72 @@
     <!-- ═══════════════════════════════════════════════════ OVERVIEW -->
     <div class="day-panel active" id="panel-overview">
 
-      <div class="day-hero today">
+      <div class="day-hero">
         <div class="day-hero-left">
-          <div class="tag">★ Week 1 Starts Today</div>
           <h1>Welcome, Patricia! 👋</h1>
-          <div class="date">April 14–18, 2026 · Remote · 9AM–5PM EST</div>
-          <div class="subtitle">Your complete training roadmap for your first week at KelliWorks</div>
+          <div class="subtitle">Your complete training roadmap for your training weeks at KelliWorks</div>
         </div>
         <div class="day-hero-right">
           <div style="display:flex; align-items:center; justify-content:center;"><i data-lucide="rocket" style="width:48px;height:48px;stroke:var(--navy);"></i></div>
         </div>
       </div>
 
+      <!-- WEEK 1 PROGRESS TRACKER -->
+      <div style="margin-bottom:8px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--mid);">Week 1 Progress</div>
+      <div class="week-grid">
+        <div class="week-card" onclick="showDay('mon')">
+          <div class="wc-emoji"><i data-lucide="sun"></i></div>
+          <div class="wc-day">Monday</div>
+          <div class="wc-date">April 13</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-mon" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-mon-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('tue')">
+          <div class="wc-emoji"><i data-lucide="message-circle"></i></div>
+          <div class="wc-day">Tuesday</div>
+          <div class="wc-date">April 14</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-tue" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-tue-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('wed')">
+          <div class="wc-emoji"><i data-lucide="bar-chart-2"></i></div>
+          <div class="wc-day">Wednesday</div>
+          <div class="wc-date">April 15</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-wed" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-wed-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('thu')">
+          <div class="wc-emoji"><i data-lucide="banknote"></i></div>
+          <div class="wc-day">Thursday</div>
+          <div class="wc-date">April 16</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-thu" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-thu-pct">0%</div>
+        </div>
+        <div class="week-card" onclick="showDay('fri')">
+          <div class="wc-emoji"><i data-lucide="landmark"></i></div>
+          <div class="wc-day">Friday</div>
+          <div class="wc-date">April 17</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-fri" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-fri-pct">0%</div>
+        </div>
+      </div>
+
+      <!-- WEEK 2 PROGRESS TRACKER -->
+      <div style="margin:24px 0 8px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--mid);">Week 2 Progress</div>
+      <div class="week-grid">
+        <div class="week-card" onclick="showDay('mon2')">
+          <div class="wc-emoji"><i data-lucide="sun"></i></div>
+          <div class="wc-day">Monday</div>
+          <div class="wc-date">April 20</div>
+          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-mon2" style="width:0%"></div></div>
+          <div class="wc-pct" id="wc-mon2-pct">0%</div>
+        </div>
+      </div>
+
       <!-- MEET THE TEAM -->
-      <div class="module-card" style="margin-bottom:24px;">
+      <div class="module-card" style="margin-top:24px; margin-bottom:24px;">
         <div class="module-header" style="background: var(--navy);">
-          <span class="module-icon"><i data-lucide="users"></i></span>
+          <span class="module-icon"><i data-lucide="users" style="stroke:#FFFFFF;"></i></span>
           <h2>Meet the Team You'll Work With Daily</h2>
         </div>
         <div class="module-body">
@@ -1258,46 +1304,7 @@
         </div>
       </div>
 
-      <!-- WEEK GRID -->
-      <div class="week-grid">
-        <div class="week-card today-card" onclick="showDay('mon')">
-          <div class="wc-emoji"><i data-lucide="sun"></i></div>
-          <div class="wc-day">Monday ★</div>
-          <div class="wc-date">April 14</div>
-          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-mon" style="width:0%"></div></div>
-          <div class="wc-pct" id="wc-mon-pct">0%</div>
-        </div>
-        <div class="week-card" onclick="showDay('tue')">
-          <div class="wc-emoji"><i data-lucide="message-circle"></i></div>
-          <div class="wc-day">Tuesday</div>
-          <div class="wc-date">April 15</div>
-          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-tue" style="width:0%"></div></div>
-          <div class="wc-pct" id="wc-tue-pct">0%</div>
-        </div>
-        <div class="week-card" onclick="showDay('wed')">
-          <div class="wc-emoji"><i data-lucide="bar-chart-2"></i></div>
-          <div class="wc-day">Wednesday</div>
-          <div class="wc-date">April 16</div>
-          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-wed" style="width:0%"></div></div>
-          <div class="wc-pct" id="wc-wed-pct">0%</div>
-        </div>
-        <div class="week-card" onclick="showDay('thu')">
-          <div class="wc-emoji"><i data-lucide="banknote"></i></div>
-          <div class="wc-day">Thursday</div>
-          <div class="wc-date">April 17</div>
-          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-thu" style="width:0%"></div></div>
-          <div class="wc-pct" id="wc-thu-pct">0%</div>
-        </div>
-        <div class="week-card" onclick="showDay('fri')">
-          <div class="wc-emoji"><i data-lucide="landmark"></i></div>
-          <div class="wc-day">Friday</div>
-          <div class="wc-date">April 18</div>
-          <div class="wc-bar-wrap"><div class="wc-bar" id="wc-fri" style="width:0%"></div></div>
-          <div class="wc-pct" id="wc-fri-pct">0%</div>
-        </div>
-      </div>
-
-      <!-- THE 5 NON-NEGOTIABLES -->
+      <!-- THE 5 CORE COMMITMENTS -->
       <div class="module-card">
         <div class="module-header">
           <span class="module-icon"><i data-lucide="zap"></i></span>
@@ -1346,10 +1353,9 @@
 
     <!-- ═══════════════════════════════════════════════════ MONDAY -->
     <div class="day-panel" id="panel-mon">
-      <div class="day-hero today">
+      <div class="day-hero">
         <div class="day-hero-left">
-          <div class="tag">★ Today — Day 1</div>
-          <h1>🌟 Monday, April 14</h1>
+          <h1>🌟 Monday, April 13</h1>
           <div class="subtitle">Welcome · Client Roster · Email Management · Tech Stack Setup</div>
         </div>
         <div class="day-hero-right">
@@ -4289,10 +4295,10 @@ KelliWorks</div>
     </div>
 
     <!-- ═══════════════════════════════════════════════════ WEEK 2 -->
-    <div class="day-panel" id="panel-week2">
+    <div class="day-panel" id="panel-week2" style="display:none">
       <div class="day-hero">
         <div class="day-hero-left">
-          <h1>🗄️ Week 2 — Coming April 21+</h1>
+          <h1>🗄️ Week 2 — Coming April 20+</h1>
           <div class="subtitle">KelliWorks Client Intelligence Portal — Database Training</div>
         </div>
         <div class="day-hero-right"><div style="font-size:48px;">🔒</div></div>
@@ -4330,7 +4336,7 @@ KelliWorks</div>
     <div class="day-panel" id="panel-mon2">
       <div class="day-hero">
         <div class="day-hero-left">
-          <h1>🚀 Monday, April 21 — Week 2</h1>
+          <h1>🚀 Monday, April 20 — Week 2</h1>
           <div class="subtitle">Delivering Financials in Keeper &amp; Tax Return Delivery via Pipeline</div>
         </div>
         <div class="day-hero-right">
@@ -4360,10 +4366,10 @@ KelliWorks</div>
           </p>
 
           <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-mon2-keeper-link" target="_blank">▶</a>
+            <a class="loom-play" href="https://www.loom.com/share/3674965ad6224e40b1d31d51e7a6b7e7" id="loom-mon2-keeper-link" target="_blank">▶</a>
             <div class="loom-info">
               <div class="loom-label">Delivering Financials from Keeper — Updated Walkthrough</div>
-              <div class="loom-status pending" id="loom-mon2-keeper-status">📹 Video coming soon</div>
+              <div class="loom-status" id="loom-mon2-keeper-status">▶ Click to watch</div>
             </div>
           </div>
 
@@ -4475,10 +4481,10 @@ KelliWorks</div>
           </p>
 
           <div class="loom-slot">
-            <a class="loom-play pending" href="#" id="loom-mon2-pipeline-link" target="_blank">▶</a>
+            <a class="loom-play" href="https://www.loom.com/share/014e0b1d92a5497ab9c7832d0a2f8395" id="loom-mon2-pipeline-link" target="_blank">▶</a>
             <div class="loom-info">
               <div class="loom-label">Tax Return Delivery — Pipeline Walkthrough</div>
-              <div class="loom-status pending" id="loom-mon2-pipeline-status">📹 Video coming soon</div>
+              <div class="loom-status" id="loom-mon2-pipeline-status">▶ Click to watch</div>
             </div>
           </div>
 
