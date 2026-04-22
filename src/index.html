@@ -1122,12 +1122,77 @@
 }
 .action-flag strong { color: #155724; }
 
+
+    /* ─── MOBILE WALL ───────────────────────────────────────────────── */
+    #mobile-wall {
+      display: none;
+    }
+    @media (max-width: 1023px) {
+      #mobile-wall {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #122620;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 32px;
+        text-align: center;
+        gap: 24px;
+      }
+      #mobile-wall .mw-badge {
+        background: var(--gold);
+        color: #122620;
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border-radius: 6px;
+        padding: 5px 12px;
+        line-height: 1;
+      }
+      #mobile-wall .mw-icon {
+        color: var(--gold);
+        opacity: 0.9;
+      }
+      #mobile-wall h1 {
+        font-family: 'Marcellus', Georgia, serif;
+        font-size: 26px;
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 1.3;
+      }
+      #mobile-wall p {
+        font-family: 'Questrial', Arial, sans-serif;
+        font-size: 15px;
+        color: rgba(255, 253, 242, 0.65);
+        line-height: 1.7;
+        max-width: 320px;
+      }
+      #mobile-wall .mw-divider {
+        width: 40px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        opacity: 0.5;
+      }
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Questrial&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- MOBILE WALL -->
+<div id="mobile-wall">
+  <div class="mw-badge">KelliWorks</div>
+  <i data-lucide="monitor" class="mw-icon" style="width:48px;height:48px;stroke-width:1.5;"></i>
+  <h1>Best viewed on desktop</h1>
+  <div class="mw-divider"></div>
+  <p>This training hub is designed for desktop use. For the best experience, please open this site on a laptop or computer.</p>
+</div>
 
 <!-- TOP BAR -->
 <div class="topbar">
